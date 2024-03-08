@@ -1,3 +1,3 @@
-Team Amethsyt
-Sophie Fry
+Team Amethyst
 Brody Gustin
+Sophie Fry
