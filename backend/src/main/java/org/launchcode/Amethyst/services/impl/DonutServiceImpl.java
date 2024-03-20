@@ -8,6 +8,10 @@ import org.launchcode.Amethyst.services.DonutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class DonutServiceImpl implements DonutService {
 
@@ -30,5 +34,12 @@ public class DonutServiceImpl implements DonutService {
     public DonutDto getAccountById(int id) {
         Donut donut = donutRepository.findById(id).orElseThrow(() -> new RuntimeException("Donut does not exist"));
         return DonutMapper.mapToDonutDto(donut);
+    }
+
+    @Override
+    public List<DonutDto> getAllDonuts() {
+        List<Donut> donuts = new ArrayList<>();
+        donutRepository.findAll().forEach(donuts::add);
+        return donuts.stream().map(DonutMapper::mapToDonutDto).collect(Collectors.toList());
     }
 }

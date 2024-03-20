@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/donuts")
 public class DonutController {
@@ -24,4 +26,11 @@ public class DonutController {
         DonutDto donutDto = donutService.getAccountById(id);
         return ResponseEntity.ok(donutDto);
     }
+
+    @GetMapping("/")
+    public ResponseEntity<List<DonutDto>> getAllDonuts(){
+        List<DonutDto> donuts = donutService.getAllDonuts();
+        return ResponseEntity.ok(donuts);
+    }
+
 }
