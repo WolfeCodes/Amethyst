@@ -20,13 +20,13 @@ const ListDonutComponent = () => {
 
       <h2 className='text-center'>List of Donuts</h2>
       <table className='table table-striped table-bordered'>
-        <thread>
+        <thead>
           <tr>
             <th>Donut Id</th>
             <th>Donut Name</th>
             <th>Donut Price</th>
           </tr>
-        </thread>
+        </thead>
         <tbody>
           {
             donuts.map(donut => 
