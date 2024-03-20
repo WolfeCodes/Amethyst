@@ -25,4 +25,10 @@ public class DonutServiceImpl implements DonutService {
         Donut savedDonut = donutRepository.save(donut);
         return DonutMapper.mapToDonutDto(savedDonut);
     }
+
+    @Override
+    public DonutDto getAccountById(int id) {
+        Donut donut = donutRepository.findById(id).orElseThrow(() -> new RuntimeException("Donut does not exist"));
+        return DonutMapper.mapToDonutDto(donut);
+    }
 }

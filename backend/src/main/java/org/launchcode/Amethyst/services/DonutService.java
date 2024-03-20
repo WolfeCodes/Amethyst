@@ -7,4 +7,5 @@ public interface DonutService {
 
     DonutDto createDonut(DonutDto donutDto);
 
+    DonutDto getAccountById(int id);
 }
