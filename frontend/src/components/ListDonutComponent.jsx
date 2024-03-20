@@ -18,26 +18,23 @@ const ListDonutComponent = () => {
   return (
     <div className='container'>
 
-      <h2 className='text-center'>List of Donuts</h2>
-      <table className='table table-striped table-bordered'>
-        <thead>
-          <tr>
-            <th>Donut Id</th>
-            <th>Donut Name</th>
-            <th>Donut Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            donuts.map(donut => 
-            <tr key={donut.id}>
-              <td>{donut.id}</td>
-              <td>{donut.name}</td>
-              <td>{donut.price}</td>
-            </tr>)
-          }
-        </tbody>
-      </table>
+        <div className='row row-cols-1 row-cols-md-3 g-4'>
+          {donuts.map(donut =>
+          <div className='col'>
+            <div className="card" key={donut.id}>
+              <img src={donut.imageUrl} className="card-img-top" alt="..."></img>
+              <div className="card-body">
+                <h5 className="card-title">{donut.name}</h5>
+                <p className="card-text">{donut.description}</p>
+                <p>Price: ${donut.price}</p>
+                <a href="#" className="btn btn-primary">Add to cart</a>
+              </div>
+            </div>
+          </div>
+        )
+      }
+      </div>
+
     </div>
   )
 }
