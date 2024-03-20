@@ -9,7 +9,10 @@ public class DonutMapper {
         Donut donut = new Donut(
                 donutDto.getId(),
                 donutDto.getName(),
-                donutDto.getPrice()
+                donutDto.getPrice(),
+                donutDto.getDescription(),
+                donutDto.getImageUrl(),
+                donutDto.getRating()
         );
 
         return donut;
@@ -19,7 +22,10 @@ public class DonutMapper {
         DonutDto donutDto = new DonutDto(
                 donut.getId(),
                 donut.getName(),
-                donut.getPrice()
+                donut.getPrice(),
+                donut.getDescription(),
+                donut.getImageUrl(),
+                donut.getRating()
         );
 
         return donutDto;
