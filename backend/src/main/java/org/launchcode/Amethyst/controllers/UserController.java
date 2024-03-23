@@ -22,12 +22,12 @@ public class UserController {
         return new ResponseEntity<>(userService.createUser(userDto), HttpStatus.CREATED);
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     public ResponseEntity<UserDto> getUserById(@PathVariable int id){
         UserDto userDto = userService.getUserById(id);
         return ResponseEntity.ok(userDto);
     }
-
+    @GetMapping("/")
     public ResponseEntity<List<UserDto>> getAllUsers(){
         List<UserDto> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
