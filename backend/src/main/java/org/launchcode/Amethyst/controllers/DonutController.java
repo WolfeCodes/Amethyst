@@ -22,12 +22,14 @@ public class DonutController {
         return new ResponseEntity<>(donutService.createDonut(donutDto), HttpStatus.CREATED);
     }
 
+
     @GetMapping("/{id}")
     public ResponseEntity<DonutDto> getAccountById(@PathVariable int id){
-        DonutDto donutDto = donutService.getAccountById(id);
+        DonutDto donutDto = donutService.getDonutById(id);
         return ResponseEntity.ok(donutDto);
     }
 
+    //GET Mapping to display donuts
     @GetMapping("/")
     public ResponseEntity<List<DonutDto>> getAllDonuts(){
         List<DonutDto> donuts = donutService.getAllDonuts();

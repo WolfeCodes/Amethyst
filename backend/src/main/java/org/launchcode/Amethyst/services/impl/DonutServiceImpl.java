@@ -31,7 +31,7 @@ public class DonutServiceImpl implements DonutService {
     }
 
     @Override
-    public DonutDto getAccountById(int id) {
+    public DonutDto getDonutById(int id) {
         Donut donut = donutRepository.findById(id).orElseThrow(() -> new RuntimeException("Donut does not exist"));
         return DonutMapper.mapToDonutDto(donut);
     }
