@@ -1,0 +1,34 @@
+.homepage-picture {
+  width: 100%;
+  object-fit: cover;
+}
+
+.btn.btn-order {
+  margin: 20px;
+  color: white;
+  background-color: #FC942D;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn.btn-order:hover {
+  background-color: #f87e00;
+}
+
+.btn.btn-order:active {
+  background-color: #f76800;
+}
+
+.btn.btn-learn-more {
+  color: #FC942D;
+  font-size: 18px;
+  padding: 10px 20px;
+  border: none;
+  text-decoration: none;
+  margin: 40px;
+}
+
+.btn.btn-learn-more:hover {
+  color: #f76800;
+}

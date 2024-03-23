@@ -1,6 +1,3 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import ListDonutComponent from './components/ListDonutComponent'
 import HeaderComponent from './components/HeaderComponent'
@@ -14,8 +11,8 @@ function App() {
       <BrowserRouter>
         <HeaderComponent />
         <Routes>
-          <Route path='/' element = { <HomeComponent /> }></Route>
-          <Route path='/menu' element = { <ListDonutComponent />}></Route>
+          <Route path='/' element={<HomeComponent />}></Route>
+          <Route path='/menu' element={<ListDonutComponent />}></Route>
         </Routes>
       </BrowserRouter>
     </>
