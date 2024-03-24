@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../../styles/frontend/Header.css'
 
 const Header = () => {
@@ -13,13 +13,13 @@ const Header = () => {
                             Donut Delights</a>
                         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <div className="navbar-nav">
-                                <NavLink to="/" className="nav-link active" aria-current="page">Home</NavLink>
-                                <NavLink to="/menu" className="nav-link">Menu</NavLink>
+                                <Link to="/" className="nav-link active" aria-current="page">Home</Link>
+                                <Link to="/menu" className="nav-link">Menu</Link>
                             </div>
                             <div className="navbar-nav ms-auto">
                                 <a className="nav-link active" aria-current="page" href="#">My Order</a>
                                 <a className="nav-link" href="#">Cart</a>
-                                <NavLink to="/backstage/home" className="nav-link btn btn-outline-primary">BackStage</NavLink>
+                                <Link to="/backstage" className="nav-link btn btn-outline-primary">BackStage</Link>
                                 <button type="button" className="btn btn-success">Sign up</button>
                             </div>
                         </div>
