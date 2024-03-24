@@ -8,17 +8,17 @@ export const SidebarData = [
   {
     title: "Home",
     icon: <HomeIcon />,
-    link: "/backstage/home"
+    link: "/backstage/backhome"
   },
   {
     title: "DonutHub",
     icon: <CookieIcon />,
-    link: "/backstage/donuts"
+    link: "/backstage/backdonuts"
   },
   {
     title: "OrderManagement",
     icon: <ListAltIcon />,
-    link: "/ordermanagement"
+    link: "/backstage/orderManagement"
   },
   {
     title: "UserManagement",

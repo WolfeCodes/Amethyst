@@ -2,10 +2,11 @@ import React from 'react'
 
 function BackHome() {
   return (
-    <div>
-      <h2>Welcome to the Home Page</h2>
+    <div className='content'>
+      WELCOME!
     </div>
   )
 }
 
-export default BackHome
+
+export default BackHome;

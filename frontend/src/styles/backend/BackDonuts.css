@@ -1,0 +1,28 @@
+.table-responsive {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+
+.table table {
+  width: auto !important;
+}
+
+.table th,
+.table td {
+  text-align: left;
+}
+
+.row {
+  padding: 15px;
+}
+
+.container {
+  max-width: auto;
+  margin-right: 0 !important;
+}
+
+.table-img {
+  width: 30px;
+  height: 30px;
+}
