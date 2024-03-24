@@ -7,12 +7,15 @@ import java.util.List;
 public class CartDto {
 
     private int id;
+
     private int userId;
     private double total;
     private List<Integer> donutIds;
 
+
     public CartDto() {
     }
+
 
     public CartDto(int id, int userId, double total, List<Integer> donutIds) {
         this.id = id;
@@ -31,6 +34,7 @@ public class CartDto {
 
     public void setUserId(int userId) {
         this.userId = userId;
+
     }
 
     public double getTotal() {
@@ -47,5 +51,6 @@ public class CartDto {
 
     public void setDonutIds(List<Integer> donutIds) {
         this.donutIds = donutIds;
+
     }
 }

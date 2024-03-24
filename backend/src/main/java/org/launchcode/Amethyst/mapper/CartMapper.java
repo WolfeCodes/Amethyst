@@ -2,8 +2,7 @@ package org.launchcode.Amethyst.mapper;
 
 import org.launchcode.Amethyst.dto.CartDto;
 import org.launchcode.Amethyst.entity.Cart;
-import org.launchcode.Amethyst.services.DonutService;
-import org.launchcode.Amethyst.services.UserService;
+
 
 
 import java.util.List;
@@ -11,7 +10,8 @@ import java.util.stream.Collectors;
 
 public class CartMapper {
 
-    DonutService donutService;
+
+
 
 //    public static Cart mapToCart(CartDto cartDto){
 //        //System.out.println("mapping " + cartDto + " to cart");
@@ -38,5 +38,6 @@ public class CartMapper {
 //
 //        return cartDto;
 //    }
+
 
 }
