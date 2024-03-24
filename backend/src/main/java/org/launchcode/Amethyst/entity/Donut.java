@@ -27,7 +27,7 @@ public class Donut {
         this.rating = rating;
     }
 
-    public Donut() {
+    private Donut() {
     }
 
     public int getId() {

@@ -7,30 +7,30 @@ import java.util.List;
 public class CartDto {
 
     private int id;
-    private User user;
+    private int userId;
     private double total;
-    private List<DonutDto> donuts;
+    private List<Integer> donutIds;
 
     public CartDto() {
     }
 
-    public CartDto(int id, User user, double total, List<DonutDto> donuts) {
+    public CartDto(int id, int userId, double total, List<Integer> donutIds) {
         this.id = id;
-        this.user = user;
+        this.userId = userId;
         this.total = total;
-        this.donuts = donuts;
+        this.donutIds = donutIds;
     }
 
     public int getId() {
         return id;
     }
 
-    public User getUser() {
-        return user;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public double getTotal() {
@@ -41,11 +41,11 @@ public class CartDto {
         this.total = total;
     }
 
-    public List<DonutDto> getDonuts() {
-        return donuts;
+    public List<Integer> getDonutIds() {
+        return donutIds;
     }
 
-    public void setDonuts(List<DonutDto> donuts) {
-        this.donuts = donuts;
+    public void setDonutIds(List<Integer> donutIds) {
+        this.donutIds = donutIds;
     }
 }
