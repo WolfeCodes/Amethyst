@@ -7,9 +7,8 @@ import java.util.List;
 public class CartDto {
 
     private int id;
-
     private int userId;
-    private double total;
+    private double total; //might not need this in the future
     private List<Integer> donutIds;
 
 

@@ -42,4 +42,11 @@ public class DonutServiceImpl implements DonutService {
         donutRepository.findAll().forEach(donuts::add);
         return donuts.stream().map(DonutMapper::mapToDonutDto).collect(Collectors.toList());
     }
+
+    @Override
+    public List<Donut> findByIds(List<Integer> donutIds) {
+        List<Donut> donuts = new ArrayList<>();
+        donutRepository.findAllById(donutIds).forEach(donuts::add);
+        return donuts;
+    }
 }
