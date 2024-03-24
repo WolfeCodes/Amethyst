@@ -1,7 +1,8 @@
 import React from 'react';
-import '../styles/HeaderComponent.css'
+import { NavLink } from 'react-router-dom';
+import '../../styles/frontend/Header.css'
 
-const HeaderComponent = () => {
+const Header = () => {
     return (
         <div>
             <header>
@@ -10,18 +11,15 @@ const HeaderComponent = () => {
                         <a className='navbar-brand' href='/'>
                             <img src="https://donutbank.com/cdn/shop/products/WhiteIcingCakewithSprinkles.png?v=1695916793" alt="Logo" width="50" height="40"></img>
                             Donut Delights</a>
-                        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
                         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <div className="navbar-nav">
-                                <a className="nav-link active" aria-current="page" href="/">Home</a>
-                                <a className="nav-link" href="/menu">Menu</a>
+                                <NavLink to="/" className="nav-link active" aria-current="page">Home</NavLink>
+                                <NavLink to="/menu" className="nav-link">Menu</NavLink>
                             </div>
                             <div className="navbar-nav ms-auto">
                                 <a className="nav-link active" aria-current="page" href="#">My Order</a>
                                 <a className="nav-link" href="#">Cart</a>
-                                <button type="button" class="btn btn-outline-primary">BackStage</button>
+                                <NavLink to="/backstage/home" className="nav-link btn btn-outline-primary">BackStage</NavLink>
                                 <button type="button" className="btn btn-success">Sign up</button>
                             </div>
                         </div>
@@ -32,4 +30,4 @@ const HeaderComponent = () => {
     );
 };
 
-export default HeaderComponent;
+export default Header;

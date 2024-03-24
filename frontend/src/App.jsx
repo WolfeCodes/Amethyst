@@ -1,22 +1,50 @@
-import './App.css'
-import ListDonutComponent from './components/ListDonutComponent'
-import HeaderComponent from './components/HeaderComponent'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import HomeComponent from './components/HomeComponent'
+import './App.css';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Header from './components/frontend/Header';
+import Home from './components/frontend/Home';
+import ListDonut from './components/frontend/ListDonut';
+import BackDonuts from './components/backend/BackDonuts';
+import BackSidebar from './components/backend/BackSidebar';
+import BackHome from './components/backend/BackHome';
 
-function App() {
-
+function FrontendApp() {
   return (
     <>
-      <BrowserRouter>
-        <HeaderComponent />
-        <Routes>
-          <Route path='/' element={<HomeComponent />}></Route>
-          <Route path='/menu' element={<ListDonutComponent />}></Route>
-        </Routes>
-      </BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/menu" element={<ListDonut />} />
+      </Routes>
     </>
-  )
+  );
 }
 
-export default App
+function BackendApp() {
+  return (
+    <>
+      <BackSidebar />
+      <Routes>
+        <Route path="/backstage/home" element={<BackHome />} />
+        <Route path="/backstage/donuts" element={<BackDonuts />} />
+      </Routes>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <div>
+        <Routes>
+          {/* Render FrontendApp for all routes except /backstage/* */}
+          <Route path="/*" element={<FrontendApp />} />
+          {/* Render BackendApp for /backstage/* routes */}
+          <Route path="/backstage/*" element={<BackendApp />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
+}
+
+export default App;
