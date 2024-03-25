@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import '../../styles/backend/BackDonuts.css';
 import { listDonuts } from '../../services/DonutService';
+import AddDonutsModal from './AddDonutsModal'
 
 
 function BackDonuts() {
 
   const [donuts, setDonuts] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   // useEffect hook to fetch the list of donuts when the component mounts
   useEffect(() => {
@@ -18,8 +20,9 @@ function BackDonuts() {
       })
   })
 
+
   return (
-    <div className="container">
+    <div className="backcontainer">
       <div className="row">
         <div className="col-md-6">
           <div className="input-group mb-3">
@@ -36,9 +39,10 @@ function BackDonuts() {
           </div>
         </div>
         <div className="col-md-6">
-          <button type="button" className="btn btn-primary float-end">
+          <button type="button" className="btn btn-primary" id="adddonuts" onClick={() => setShowModal(true)}>
             Add Donuts
           </button>
+          {showModal && <AddDonutsModal closeModal={setShowModal} />}
         </div>
       </div>
 
@@ -60,7 +64,7 @@ function BackDonuts() {
                 <td>{donut.name}</td>
                 <td><img src={donut.imageUrl} className='table-img' /></td>
                 <td>{donut.description}</td>
-                <td>Edit delete</td>
+                <td color='#0A58CA'>Edit delete</td>
               </tr>
 
             ))}
