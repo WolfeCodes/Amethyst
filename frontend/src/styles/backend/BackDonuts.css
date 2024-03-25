@@ -13,16 +13,27 @@
   text-align: left;
 }
 
-.row {
+/* .row {
   padding: 15px;
-}
 
-.container {
+} */
+
+.backcontainer {
   max-width: auto;
-  margin-right: 0 !important;
+  margin-right: 0;
 }
 
 .table-img {
   width: 30px;
   height: 30px;
+}
+
+.input-group .btn {
+  z-index: 0 !important;
+}
+
+#adddonuts {
+  float: right;
+  display: block;
+  flex-direction: column;
 }
