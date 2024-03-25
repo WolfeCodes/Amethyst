@@ -16,26 +16,27 @@ import java.util.stream.Collectors;
 public class Order_ItemsServiceImpl implements Order_ItemsService {
 
     @Autowired
-    private Order_ItemsRepository orderItemsRepository;
+    private Order_ItemsRepository order_ItemsRepository;
 
     @Override
-    public Order_ItemsDto createOrder_ItemsById(Order_ItemsDto order_ItemsDto){
-        Order_Items orderItems = Order_ItemsMapper.mapToOrder_Items(order_ItemsDto);
-        Order_Items savedOrder_Items = Order_ItemsRepository.save(orderItems);
+    public Order_ItemsDto createOrder_Items(Order_ItemsDto order_ItemsDto){
+        Order_Items order_Items = Order_ItemsMapper.mapToOrder_Items(order_ItemsDto);
+        Order_Items savedOrder_Items = order_ItemsRepository.save(order_Items);
         return Order_ItemsMapper.mapToOrder_ItemsDTO(savedOrder_Items);
     }
     @Override
     public Order_ItemsDto getOrder_ItemsById(int id) {
-        Order_Items orderItems = Order_ItemsRepository.findById(id).orElseThrow(()
+        Order_Items order_Items = order_ItemsRepository.findById(id).orElseThrow(()
                                 -> new RuntimeException("Order does not exist"));
-        return Order_ItemsMapper.mapToOrder_ItemsDTO(orderItems);
+        return Order_ItemsMapper.mapToOrder_ItemsDTO(order_Items);
     }
 
     @Override
-    public List<Order_ItemsDto> getAllDonuts() {
-        List<Order_Items> donuts = new ArrayList<>();
-        Order_ItemsRepository.findAll().forEach(donuts::add);
-        return donuts.stream().map(Order_ItemsMapper::mapToOrder_ItemsDTO).collect(Collectors.toList());
+    public List<Order_ItemsDto> getAllOrder_Items() {
+        List<Order_Items> order_Items = new ArrayList<>();
+        order_ItemsRepository.findAll().forEach(order_Items::add);
+        return order_Items.stream().map(Order_ItemsMapper::mapToOrder_ItemsDTO)
+                .collect(Collectors.toList());
     }
 
 }

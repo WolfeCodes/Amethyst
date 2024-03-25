@@ -1,7 +1,7 @@
 package org.launchcode.Amethyst.controllers;
 
 import org.launchcode.Amethyst.dto.Order_ItemsDto;
-import org.launchcode.Amethyst.dto.UserDto;
+import org.launchcode.Amethyst.services.Order_ItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,21 +17,21 @@ import java.util.List;
 public class Order_ItemsController {
 
     @Autowired
-    private Order_ItemsService order_ItemServices;
+    private Order_ItemsService order_ItemsServices;
 
     @PostMapping
-    public ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto){
-        return new ResponseEntity<>(order_ItemsServices.createOrder_Items(userDto), HttpStatus.CREATED);
+    public ResponseEntity<Order_ItemsDto> addUser(@RequestBody Order_ItemsDto order_ItemsDto){
+        return new ResponseEntity<>(order_ItemsServices.createOrder_Items(order_ItemsDto), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable int id){
-        UserDto userDto = order_ItemServices.getOrder_ItemsById(id);
-        return ResponseEntity.ok(userDto);
+    public ResponseEntity<Order_ItemsDto> getOrder_ItemsById(@PathVariable int id){
+        Order_ItemsDto order_ItemsDto = order_ItemsServices.getOrder_ItemsById(id);
+        return ResponseEntity.ok(order_ItemsDto);
     }
     @GetMapping("/")
-    public ResponseEntity<List<UserDto>> getAllUsers(){
-        List<UserDto> order_Items = order_ItemsServices.getAllUsers();
+    public ResponseEntity<List<Order_ItemsDto>> getAllUsers(){
+        List<Order_ItemsDto> order_Items = order_ItemsServices.getAllOrder_Items();
         return ResponseEntity.ok(order_Items);
     }
 
