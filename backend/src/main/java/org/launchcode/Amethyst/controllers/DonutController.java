@@ -24,7 +24,7 @@ public class DonutController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<DonutDto> getAccountById(@PathVariable int id){
+    public ResponseEntity<DonutDto> getDonutById(@PathVariable int id){
         DonutDto donutDto = donutService.getDonutById(id);
         return ResponseEntity.ok(donutDto);
     }

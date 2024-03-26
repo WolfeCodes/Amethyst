@@ -15,9 +15,8 @@ public class Cart {
     @OneToOne
     private User user;
     private double total;
-    @JsonIgnore
-    @OneToMany
-    @JoinColumn(name = "cart_id")
+    @ManyToMany
+    @JoinTable(name = "cart_list", joinColumns = @JoinColumn(name = "cart_id"), inverseJoinColumns = @JoinColumn(name = "donut_id"))
     private List<Donut> donuts = new ArrayList<>();
 
     public Cart() {

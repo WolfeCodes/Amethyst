@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 import java.sql.Time;
 
-@Entity
+//@Entity
 public class CartItem {
 
     @GeneratedValue

@@ -6,10 +6,13 @@ import org.launchcode.Amethyst.entity.Donut;
 import org.launchcode.Amethyst.entity.User;
 import org.launchcode.Amethyst.mapper.DonutMapper;
 import org.launchcode.Amethyst.mapper.UserMapper;
+import org.launchcode.Amethyst.services.CartService;
 import org.launchcode.Amethyst.services.DonutService;
 import org.launchcode.Amethyst.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,18 +25,9 @@ import java.util.stream.Collectors;
 public class CartController {
 
     @Autowired
-    private DonutService donutService;
-    @Autowired
-    private UserService userService;
+    private CartService cartService;
 
-    CartDto toDto(Cart cart) {
-        List<Integer> donutIds = cart.getDonuts().stream().map(Donut::getId).toList();
-        return new CartDto(cart.getId(), cart.getUser().getId(), cart.getTotal(), donutIds);
-    }
+    public ResponseEntity<CartDto> addCart(@RequestBody CartDto cartDto){
 
-    Cart toCart(CartDto cartDto) {
-        User user = UserMapper.mapToUser(userService.getUserById(cartDto.getId()));
-        List<Donut> donuts = donutService.findByIds(cartDto.getDonutIds());
-        return new Cart(cartDto.getId(), user, cartDto.getTotal(), donuts);
     }
 }
