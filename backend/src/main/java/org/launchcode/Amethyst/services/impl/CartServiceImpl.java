@@ -43,7 +43,7 @@ public class CartServiceImpl implements CartService {
     }
 
     Cart toCart(CartDto cartDto) {
-        User user = UserMapper.mapToUser(userService.getUserById(cartDto.getId()));
+        User user = UserMapper.mapToUser(userService.getUserById(cartDto.getUserId()));
         List<Donut> donuts = donutService.findByIds(cartDto.getDonutIds());
         return new Cart(cartDto.getId(), user, cartDto.getTotal(), donuts);
     }
