@@ -1,9 +1,9 @@
 package org.launchcode.Amethyst.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,7 +17,9 @@ public class Donut {
     private String description;
     private String imageUrl;
     private double rating;
-
+    @ManyToMany(mappedBy = "donuts")
+    @JsonIgnore
+    private List<Cart> carts;
     public Donut(int id, String name, double price, String description, String imageUrl, double rating) {
         this.id = id;
         this.name = name;
@@ -27,7 +29,7 @@ public class Donut {
         this.rating = rating;
     }
 
-    public Donut() {
+    private Donut() {
     }
 
     public int getId() {
