@@ -8,6 +8,7 @@ import BackDonuts from './components/backend/BackDonuts';
 import BackSidebar from './components/backend/BackSidebar';
 import BackHome from './components/backend/BackHome';
 import BackHeader from './components/backend/BackHeader';
+import CartComponent from './components/frontend/CartComponent';
 
 function FrontendApp() {
   return (
@@ -16,6 +17,7 @@ function FrontendApp() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/menu" element={<ListDonut />} />
+        <Route path='/cart' element={<CartComponent />} />
       </Routes>
     </>
   );
