@@ -1,0 +1,39 @@
+.table-responsive {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+
+.table table {
+  width: auto !important;
+}
+
+.table th,
+.table td {
+  text-align: left;
+}
+
+/* .row {
+  padding: 15px;
+
+} */
+
+.backcontainer {
+  max-width: auto;
+  margin-right: 0;
+}
+
+.table-img {
+  width: 30px;
+  height: 30px;
+}
+
+.input-group .btn {
+  z-index: 0 !important;
+}
+
+#adddonuts {
+  float: right;
+  display: block;
+  flex-direction: column;
+}

@@ -1,0 +1,53 @@
+.Sidebar {
+  height: 100vh;
+  width: 250px;
+  background-color: #2f4050;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+  float: left;
+  /* Float the sidebar to the left */
+}
+
+.SidebarList {
+  padding: 0;
+  width: 100%;
+}
+
+/* Override default style for .row children */
+.SidebarList .row>* {
+  flex-shrink: 0;
+  width: 0%;
+}
+
+.SidebarList .row {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 50px;
+  border: 1px solid black;
+  margin: 0;
+  padding: 0 10px;
+  color: white;
+}
+
+
+.SidebarList .row:hover {
+  cursor: pointer;
+  background-color: #293846;
+}
+
+.icon {
+  flex: 30%;
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  flex: 70%;
+  text-align: left;
+  margin-left: 15px;
+}

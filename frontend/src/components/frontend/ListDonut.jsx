@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { listDonuts } from '../services/DonutService';
+import { listDonuts } from '../../services/DonutService';
 
 // fetches a list of donuts from a service and displays them as cards
-const ListDonutComponent = ({ numberOfDonuts }) => {
+const ListDonut = ({ numberOfDonuts }) => {
 
   const [donuts, setDonuts] = useState([]);
 
@@ -40,4 +40,4 @@ const ListDonutComponent = ({ numberOfDonuts }) => {
   )
 }
 
-export default ListDonutComponent;
+export default ListDonut;
