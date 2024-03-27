@@ -2,6 +2,7 @@ package org.launchcode.Amethyst.dto;
 
 import org.launchcode.Amethyst.entity.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CartDto {
@@ -9,7 +10,7 @@ public class CartDto {
     private int id;
     private int userId;
     private double total; //might not need this in the future
-    private List<Integer> donutIds;
+    private List<Integer> donutIds = new ArrayList<>();
 
 
     public CartDto() {
@@ -50,6 +51,5 @@ public class CartDto {
 
     public void setDonutIds(List<Integer> donutIds) {
         this.donutIds = donutIds;
-
     }
 }

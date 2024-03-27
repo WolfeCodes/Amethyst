@@ -37,6 +37,7 @@ public class CartServiceImpl implements CartService {
         return toDto(cart);
     }
 
+
     CartDto toDto(Cart cart) {
         List<Integer> donutIds = cart.getDonuts().stream().map(Donut::getId).toList();
         return new CartDto(cart.getId(), cart.getUser().getId(), cart.getTotal(), donutIds);
@@ -47,4 +48,6 @@ public class CartServiceImpl implements CartService {
         List<Donut> donuts = donutService.findByIds(cartDto.getDonutIds());
         return new Cart(cartDto.getId(), user, cartDto.getTotal(), donuts);
     }
+
+
 }
