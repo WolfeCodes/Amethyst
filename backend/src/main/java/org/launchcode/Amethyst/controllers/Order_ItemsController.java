@@ -13,7 +13,7 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-//@RequestMapping("/api/donuts")
+@RequestMapping("/api/orderItems") //changed endpoint because it originally mapped to donuts
 public class Order_ItemsController {
 
     @Autowired
