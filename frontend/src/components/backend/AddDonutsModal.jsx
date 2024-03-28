@@ -2,7 +2,6 @@ import React from 'react'
 import '../../styles/backend/Modal.css'
 
 function AddDonutsModal({ closeModal }) {
-
   return (
     <div>
       <div className='modal-container'>
@@ -16,6 +15,14 @@ function AddDonutsModal({ closeModal }) {
               <form>
                 <div className="mb-3">
                   <label htmlFor="recipient-name" className="col-form-label">Name:</label>
+                  <input type="text" className="form-control" id="recipient-name" />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="recipient-name" className="col-form-label">Price:</label>
+                  <input type="text" className="form-control" id="recipient-name" />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="recipient-name" className="col-form-label">image:</label>
                   <input type="text" className="form-control" id="recipient-name" />
                 </div>
                 <div className="mb-3">
