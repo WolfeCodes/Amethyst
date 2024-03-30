@@ -17,7 +17,7 @@ public class DonutController {
     @Autowired
     private DonutService donutService;
 
-    @PostMapping
+    @PostMapping("/")
     public ResponseEntity<DonutDto> addDonut(@RequestBody DonutDto donutDto){
         return new ResponseEntity<>(donutService.createDonut(donutDto), HttpStatus.CREATED);
     }
