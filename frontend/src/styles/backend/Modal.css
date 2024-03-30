@@ -1,4 +1,44 @@
 .modal-container {
+  /* --bs-modal-zindex: 1055;
+  --bs-modal-width: 500px;
+  --bs-modal-padding: 1rem;
+
+  --bs-body-bg: #fff;
+  --bs-modal-bg: var(--bs-body-bg);
+
+  --bs-border-color-translucent: rgba(0, 0, 0, 0.175);
+  --bs-modal-border-color: var(--bs-border-color-translucent);
+
+  --bs-border-width: 1px;
+  --bs-modal-border-width: var(--bs-border-width);
+
+  --bs-border-radius-lg: 0.5rem;
+  --bs-modal-border-radius: var(--bs-border-radius-lg);
+  --bs-modal-inner-border-radius: calc(var(--bs-border-radius-lg) -(var(--bs-border-width)));
+
+  --bs-modal-header-padding-x: 1rem;
+  --bs-modal-header-padding-y: 1rem;
+  --bs-modal-header-padding: 1rem 1rem;
+
+  --bs-border-color: #dee2e6;
+  --bs-modal-header-border-color: var(--bs-border-color);
+
+  --bs-modal-header-border-width: var(--bs-border-width);
+  --bs-modal-title-line-height: 1.5;
+  --bs-modal-footer-gap: 0.5rem;
+  --bs-modal-footer-border-color: var(--bs-border-color);
+  --bs-modal-footer-border-width: var(--bs-border-width);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--bs-modal-zindex);
+  display: none;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0; */
+
   position: fixed;
   left: 0;
   top: 0;
@@ -7,15 +47,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgb(0, 0, 0, 0.5);
+  overflow-y: hidden;
+  overflow-x: auto;
+  background-color: rgba(0, 0, 0, 0.175);
 }
 
 .modal-dialog {
   border-radius: 5px;
-  padding: 20px;
-  width: 580px !important;
+  /* padding: 15px; */
   background-color: white;
+  --bs-modal-width: 1024px;
+  max-width: var(--bs-modal-width);
 
+  --bs-modal-margin: 580px;
+  margin: var(--bs-modal-margin);
+
+  width: 580px !important;
 }
 
 /* .modal-content {
@@ -24,17 +71,29 @@
 
 .modal-header {
   display: flex;
-  justify-content: space-between;
+  flex-shrink: 0;
   /* Align items to the start and end edges */
   align-items: center;
-  background-color: #F8F9FA;
-  padding: 10px 20px;
-  /* Add padding to adjust spacing */
+  --bs-modal-header-padding: 1rem 1rem;
+  padding: var(--bs-modal-header-padding);
+
+  --bs-modal-header-border-width: 1px;
+  --bs-modal-header-border-color: #dee2e6;
+  border-bottom: var(--bs-modal-header-border-width) solid var(--bs-modal-header-border-color);
+
+  --bs-modal-inner-border-radius: calc(0.5rem - (1px));
+  border-top-left-radius: var(--bs-modal-inner-border-radius);
+
+  border-top-right-radius: var(--bs-modal-inner-border-radius);
+
 }
 
-.btn-close {
-  margin-left: auto;
+.modal-header .btn-close {
   /* Pushes the button to the right */
+  --bs-modal-header-padding-y: 1rem;
+  --bs-modal-header-padding-x: 1rem;
+  --bs-modal-header-padding-y: 1rem;
+  margin: calc(-.5* var(--bs-modal-header-padding-y)) calc(-.5* var(--bs-modal-header-padding-x)) calc(-.5* var(--bs-modal-header-padding-y)) auto;
 }
 
 .mb-3 {
@@ -42,4 +101,20 @@
   justify-content: space-between;
   padding: 10px;
   margin: 10px;
+}
+
+.modal-footer {
+  --bs-modal-padding: 1rem;
+  --bs-modal-footer-gap: 0.5rem;
+  padding: calc(var(--bs-modal-padding) - var(--bs-modal-footer-gap)* .5);
+
+  --bs-modal-footer-border-width: 1px;
+  --bs-modal-footer-border-color: #dee2e6;
+  border-top: var(--bs-modal-footer-border-width) solid var(--bs-modal-footer-border-color);
+
+
+  --bs-modal-inner-border-radius: calc(0.5rem - (1px));
+  border-bottom-right-radius: var(--bs-modal-inner-border-radius);
+  border-bottom-left-radius: var(--bs-modal-inner-border-radius);
+
 }

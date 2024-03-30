@@ -4,7 +4,7 @@ import { listDonuts } from '../../services/DonutService';
 import AddDonutsModal from './AddDonutsModal'
 
 
-function BackDonuts() {
+const BackDonuts = () => {
 
   const [donuts, setDonuts] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -54,6 +54,8 @@ function BackDonuts() {
               <th>Name</th>
               <th>Image</th>
               <th>Description</th>
+              <th>Price</th>
+              <th>rating</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -64,6 +66,8 @@ function BackDonuts() {
                 <td>{donut.name}</td>
                 <td><img src={donut.imageUrl} className='table-img' /></td>
                 <td>{donut.description}</td>
+                <td>{donut.price}</td>
+                <td>{donut.rating}</td>
                 <td color='#0A58CA'>Edit delete</td>
               </tr>
 
