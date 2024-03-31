@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../../styles/backend/BackDonuts.css';
-import { listDonuts } from '../../services/DonutService';
+import { deleteDonutById, listDonuts } from '../../services/DonutService';
 import AddDonutsModal from './AddDonutsModal'
 
 
@@ -19,6 +19,17 @@ const BackDonuts = () => {
         console.error(error)
       })
   })
+
+  function removeDonut(id) {
+    const confirmed = window.confirm("Are you sure you want to delete this donut?")
+    if (confirmed) {
+      deleteDonutById(id).then((response) =>{
+
+      }).catch(error => {
+        console.error(error);
+      })
+    }
+  }
 
 
   return (
@@ -68,7 +79,10 @@ const BackDonuts = () => {
                 <td>{donut.description}</td>
                 <td>{donut.price}</td>
                 <td>{donut.rating}</td>
-                <td color='#0A58CA'>Edit delete</td>
+                <td>
+                  <button className='btn btn-info'>Update</button>
+                  <button className='btn btn-danger' onClick={() => removeDonut(donut.id)}>Delete</button>
+                </td>
               </tr>
 
             ))}

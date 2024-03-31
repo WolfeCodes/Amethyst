@@ -12,3 +12,6 @@ export const createDonuts = (donut) => axios.post(REST_API_BASE_URL, donut);
 
 // Function to fetch a single donut from the REST API based on its ID
 export const getSingleDonut = (donutId) => axios.get(REST_API_BASE_URL + donutId);
+
+// Function to delete a single donut from the Database based on its ID
+export const deleteDonutById = (donutId) => axios.delete(REST_API_BASE_URL + donutId);
