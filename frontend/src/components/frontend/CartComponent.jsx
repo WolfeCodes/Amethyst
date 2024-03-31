@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { getUserCart } from '../../services/CartService'
 import { getSingleDonut } from '../../services/DonutService';
+import { getCartItemById } from '../../services/CartItemService';
 import map from '../../assets/map.png'
 import '../../styles/frontend/Cart.css'
+import { DonutLarge } from '@mui/icons-material';
 
 
 const CartComponent = () => {
 
   const [userCart, setUserCart] = useState([]);
   const [donuts, setDonuts] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+  const [donutData, setDonutData] = useState([])
+  
 
   //useEffect hook to fetch userCart data, then extracts donutIds, and fetches donut object information from getById mapping
   useEffect(() => {
@@ -16,11 +21,12 @@ const CartComponent = () => {
     if (id) {
       getUserCart(id).then((response) => {
         setUserCart(response.data);
-        const uniqueDonutIds = [...new Set(response.data.donutIds)];
-        Promise.all(
-          uniqueDonutIds.map((donutId) => getSingleDonut(donutId))
+        const uniqueCartItemIds = [...new Set(response.data.cartItemIds)];
+        console.log(uniqueCartItemIds);
+        Promise.all( 
+          uniqueCartItemIds.map((cartItemId) => getCartItemById(cartItemId)) 
         ).then((donutResponses) => {
-          setDonuts(donutResponses.map((res) => res.data));
+          setCartItems(donutResponses.map((res) => res.data));
         }).catch(error => {
           console.error(error);
         })
@@ -30,6 +36,12 @@ const CartComponent = () => {
     }
   }, []) //will need the id in the array at the end of this function
 
+  useEffect(() => {
+    console.log(cartItems);
+  }, [cartItems]);
+
+
+  
   const increaseQuantity = (index) => {
     const updatedDonuts = [...donuts];
     updatedDonuts[index].quantity += 1;
@@ -44,6 +56,15 @@ const CartComponent = () => {
     setDonuts(updatedDonuts);
   };
 
+  async function getDonutData (donutId) {
+    let donut;
+    try{
+      donut = await getSingleDonut(donutId);
+      setDonutData(donut);
+    } catch (e){
+      console.log(e);
+    }
+  }
 
   //reusing backstage table list for the moment
   return (
@@ -70,12 +91,13 @@ const CartComponent = () => {
           </div>
 
           <div className='items'>
-            {donuts.map((donut, index) => (
-              <div key={index} className='donut-item'>
-                <img src={donut.imageUrl} alt={donut.name} className='donut-image' />
+            {cartItems.map((cartItem) => (
+              <div key={cartItem.id} className='donut-item'>
+                {console.log(getSingleDonut(cartItem.donutId))}
+                <img src={getSingleDonut(cartItem.donutId).imageUrl} alt={getSingleDonut(cartItem.donutId).name} className='donut-image' />
                 <div className='donut-content'>
-                  <span className='donut-name'>{donut.name}</span>
-                  <span className='donut-price'>${donut.price}</span>
+                  <span className='donut-name'>{getSingleDonut(cartItem.donutId).name}</span>
+                  <span className='donut-price'>${getSingleDonut(cartItem.donutId).price}</span>
                 </div>
                 <div className='quantity-container'>
                   <button className='quantity-bt' onClick={() => decreaseQuantity(index)}>-</button>
