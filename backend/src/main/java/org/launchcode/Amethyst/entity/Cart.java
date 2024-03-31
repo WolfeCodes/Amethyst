@@ -17,16 +17,16 @@ public class Cart {
     private double total;
     @ManyToMany
     @JoinTable(name = "cart_list", joinColumns = @JoinColumn(name = "cart_id"), inverseJoinColumns = @JoinColumn(name = "donut_id"))
-    private List<Donut> donuts = new ArrayList<>();
+    private List<CartItem> cartItems = new ArrayList<>();
 
     public Cart() {
     }
 
-    public Cart(int id, User user, double total, List<Donut> donuts) {
+    public Cart(int id, User user, double total, List<CartItem> cartItems) {
         this.id = id;
         this.user = user;
         this.total = total;
-        this.donuts = donuts;
+        this.cartItems = cartItems;
     }
 
     public int getId() {
@@ -49,7 +49,8 @@ public class Cart {
         this.total = total;
     }
 
-    public List<Donut> getDonuts() {
-        return donuts;
+
+    public List<CartItem> getCartItems() {
+        return cartItems;
     }
 }

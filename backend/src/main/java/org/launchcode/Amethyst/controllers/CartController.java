@@ -33,7 +33,8 @@ public class CartController {
     @PutMapping("/{cartId}/donut/{donutId}")
     public ResponseEntity<CartDto> addDonutToCart(@PathVariable int cartId, @PathVariable Integer donutId){
         CartDto cartDto = cartService.getCartById(cartId);
-        List<Integer> donutIds = new ArrayList<>(cartDto.getDonutIds());
+        //cartService.convertToCartItem(donutId) TODO add convertToCartItem method to CartService
+        List<Integer> donutIds = new ArrayList<>(cartDto.getDonutIds()); //TODO refactor to a list of
         donutIds.add(donutId);
         cartDto.setDonutIds(donutIds);
         return new ResponseEntity<>(cartService.createCart(cartDto), HttpStatus.CREATED);

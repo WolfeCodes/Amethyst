@@ -6,9 +6,9 @@ import org.launchcode.Amethyst.entity.Donut;
 public class CartItemDto {
 
     private int id;
+    private int quantity;
     private Cart cart;
     private Donut donut;
-    private int quantity;
 
     public CartItemDto() {
     }
