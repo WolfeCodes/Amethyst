@@ -81,7 +81,7 @@ const BackDonuts = () => {
                 <td style={{ width: '40px' }}>{donut.rating}</td>
                 <td >
                   <button className="btn btn-link">Edit</button>
-                  <button className="btn btn-link">Delete</button>
+                  <button className="btn btn-link" onClick={() => removeDonut(donut.id)}>Delete</button>
                 </td>
                 {/* <td><span style={{ color: '#0D6EFD' }}>Edit delete</span></td> */}
 
