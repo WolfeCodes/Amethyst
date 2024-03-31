@@ -11,5 +11,5 @@ public interface CartItemService {
 
     CartItem createCartItem(CartItem cartItem);
 
-    CartItemDto findById(int id);
+    CartItemDto getCartItemById(int id);
 }
