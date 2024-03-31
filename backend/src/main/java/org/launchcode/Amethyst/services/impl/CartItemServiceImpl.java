@@ -1,5 +1,6 @@
 package org.launchcode.Amethyst.services.impl;
 
+import org.launchcode.Amethyst.dto.CartItemDto;
 import org.launchcode.Amethyst.entity.CartItem;
 import org.launchcode.Amethyst.entity.Donut;
 import org.launchcode.Amethyst.models.data.CartItemRepository;
@@ -22,4 +23,16 @@ public class CartItemServiceImpl implements CartItemService {
         cartItemRepository.findAllById(cartItemIds).forEach(cartItems::add);
         return cartItems;
     }
+
+    @Override
+    public CartItem createCartItem(CartItem cartItem) {
+        return cartItemRepository.save(cartItem);
+    }
+
+    @Override
+    public CartItemDto findById(int id) {
+        return null;
+    }
+
+
 }

@@ -16,7 +16,7 @@ public class Cart {
     private User user;
     private double total;
     @ManyToMany
-    @JoinTable(name = "cart_list", joinColumns = @JoinColumn(name = "cart_id"), inverseJoinColumns = @JoinColumn(name = "donut_id"))
+    @JoinTable(name = "cart_list", joinColumns = @JoinColumn(name = "cart_id"), inverseJoinColumns = @JoinColumn(name = "cartItem_Id"))
     private List<CartItem> cartItems = new ArrayList<>();
 
     public Cart() {
