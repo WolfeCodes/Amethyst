@@ -7,6 +7,7 @@ import org.launchcode.Amethyst.models.data.DonutRepository;
 import org.launchcode.Amethyst.services.DonutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.ResourceAccessException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,21 @@ public class DonutServiceImpl implements DonutService {
         List<Donut> donuts = new ArrayList<>();
         donutRepository.findAll().forEach(donuts::add);
         return donuts.stream().map(DonutMapper::mapToDonutDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public DonutDto updateDonut(int id, DonutDto updatedDonut) {
+        Donut donut = donutRepository.findById(id).orElseThrow(() -> new RuntimeException("Donut does not exist"));
+
+        donut.setName(updatedDonut.getName());
+        donut.setPrice(updatedDonut.getPrice());
+        donut.setDescription(updatedDonut.getDescription());
+        donut.setImageUrl(updatedDonut.getImageUrl());
+        donut.setRating(updatedDonut.getRating());
+
+        Donut updatedDonutObj = donutRepository.save(donut);
+
+        return DonutMapper.mapToDonutDto(updatedDonutObj);
     }
 
     @Override

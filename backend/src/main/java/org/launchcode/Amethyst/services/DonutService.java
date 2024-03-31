@@ -14,6 +14,8 @@ public interface DonutService {
 
     List<DonutDto> getAllDonuts();
 
+    DonutDto updateDonut(int id, DonutDto updatedDonut);
+
     List<Donut> findByIds(List<Integer> donutIds);
 
     void deleteDonutById(int id);
