@@ -5,7 +5,7 @@ import '../../styles/frontend/Home.css'
 
 const Home = () => {
   return (
-    <div>
+    <div className='container'>
       <img src={HomepagePicture} alt="Homepage" className='homepage-picture'></img>
       <button type="button" className="btn btn-order">Order Online</button>
       <ListDonut numberOfDonuts={3} />

@@ -20,7 +20,8 @@ const AddDonutsModal = ({ closeModal }) => {
 
     createDonuts(donut).then((response) => {
       console.log(response.data);
-      navigator('/backdonuts');
+      closeModal(false); // Close the modal after creating the donuts
+      navigator('/backstage/backdonuts');
     })
   }
 
