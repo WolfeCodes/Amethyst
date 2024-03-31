@@ -1,0 +1,160 @@
+.cart-container {
+  margin-left: 80px;
+  margin-right: 80px;
+  margin-top: 85px;
+
+}
+
+.pickup-container {
+  margin-top: 20px;
+  display: flex;
+  /* Use flexbox */
+  align-items: center;
+  /* Align items vertically */
+  border: 1px solid;
+  border-color: rgba(0, 0, 0, 0.125);
+
+  --bs-modal-inner-border-radius: calc(0.5rem - (1px));
+  border-top-left-radius: var(--bs-modal-inner-border-radius);
+  border-top-right-radius: var(--bs-modal-inner-border-radius);
+
+}
+
+.map-picture {
+  width: 80px;
+  height: 80px;
+}
+
+.map-container {
+  padding: 15px;
+}
+
+.pickup-content {
+  flex: 1;
+  /* Make pickup-content flexible to take remaining space */
+  text-align: left;
+  padding: 15px;
+}
+
+.address {
+  margin-top: 15px;
+}
+
+.cart-title {
+  text-align: left;
+  padding-top: 20px;
+  padding-bottom: 15px;
+  color: #0F1111;
+  border-bottom: 1px solid;
+  border-color: rgba(0, 0, 0, 0.125);
+}
+
+.donut-image {
+  width: 80px;
+  height: 80px;
+  margin: 10px;
+}
+
+.donut-item {
+  display: flex;
+  border-bottom: 1px solid;
+  border-color: rgba(0, 0, 0, 0.125);
+}
+
+.donut-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  flex: 1;
+}
+
+
+.donut-name {
+  text-align: left;
+  font-size: 18px;
+  margin-top: 15px;
+}
+
+.donut-price {
+  font-size: 18px;
+  font-weight: 700;
+  text-align: left;
+  color: #fa6338;
+}
+
+.quantity-container {
+  display: flex;
+  /* Use flexbox */
+  justify-content: center;
+  /* Align children horizontally at the center */
+  align-items: center;
+  margin-right: 15px;
+}
+
+.quantity {
+  padding: 10px;
+}
+
+.quantity-bt {
+  width: 27px;
+  border-color: rgba(8, 8, 8, 0.3);
+  border-radius: 3px;
+}
+
+
+.shopping-cart {
+  margin-bottom: 82px;
+}
+
+.footer {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 20px;
+  margin-top: 10px;
+  background-color: white;
+  color: #212529;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  border-top: 1px solid rgba(8, 8, 8, 0.125);
+  /* Add lighter shadow */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.total {
+  text-align: left;
+  margin-left: 80px;
+}
+
+.submit-tb {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #FC942D;
+  color: white;
+  text-align: center;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  /* Remove underline for anchor tags */
+  transition: background-color 0.3s;
+  /* Smooth transition for background color */
+
+  margin-right: 80px;
+}
+
+.subtotal {
+  font-size: 18px;
+}
+
+.total-price {
+  font-size: 22px;
+  font-weight: 700;
+  text-align: left;
+  color: #fa6338;
+  padding-left: 10px;
+}

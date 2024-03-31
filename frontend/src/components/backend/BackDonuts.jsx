@@ -62,13 +62,17 @@ const BackDonuts = () => {
           <tbody>
             {donuts.map((donut, index) => (
               <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{donut.name}</td>
-                <td><img src={donut.imageUrl} className='table-img' /></td>
-                <td>{donut.description}</td>
+                <td style={{ width: '40px' }}>{index + 1}</td>
+                <td style={{ width: '250px' }}>{donut.name}</td>
+                <td style={{ width: '40px' }}><img src={donut.imageUrl} className='table-img' /></td>
+                <td style={{ width: '550px' }}>{donut.description}</td>
                 <td>{donut.price}</td>
-                <td>{donut.rating}</td>
-                <td color='#0A58CA'>Edit delete</td>
+                <td style={{ width: '40px' }}>{donut.rating}</td>
+                <td >
+                  <button className="btn btn-link">Edit</button>
+                  <button className="btn btn-link">Delete</button>
+                </td>
+                {/* <td><span style={{ color: '#0D6EFD' }}>Edit delete</span></td> */}
               </tr>
 
             ))}

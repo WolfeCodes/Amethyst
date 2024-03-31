@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { listDonuts } from '../../services/DonutService';
+import '../../styles/frontend/ListDonut.css'
+
 
 // fetches a list of donuts from a service and displays them as cards
 const ListDonut = ({ numberOfDonuts }) => {
@@ -18,7 +20,6 @@ const ListDonut = ({ numberOfDonuts }) => {
 
   return (
     <div className='container'>
-
       <div className='row row-cols-1 row-cols-md-3 g-4'>
         {donuts.map(donut =>
           <div className='col' key={donut.id}>
