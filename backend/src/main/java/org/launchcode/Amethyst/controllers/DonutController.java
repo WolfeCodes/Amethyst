@@ -36,4 +36,11 @@ public class DonutController {
         return ResponseEntity.ok(donuts);
     }
 
+    //DELETE Mapping to remove donut
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteDonut(@PathVariable("id") int donutId){
+        donutService.deleteDonutById(donutId);
+        return ResponseEntity.ok("Donut Deleted");
+    }
+
 }

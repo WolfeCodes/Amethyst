@@ -49,4 +49,10 @@ public class DonutServiceImpl implements DonutService {
         donutRepository.findAllById(donutIds).forEach(donuts::add);
         return donuts;
     }
+
+    @Override
+    public void deleteDonutById(int id) {
+        Donut donut = donutRepository.findById(id).orElseThrow(() -> new RuntimeException("Donut does not exist"));
+        donutRepository.deleteById(id);
+    }
 }
