@@ -1,38 +1,54 @@
-/* Order.css */
-
 .order-container {
-    margin: 80px;
+    margin: 80px 20px 20px;
+    position: relative;
+  }
+  
+  .order-section {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
   }
   
   .order-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    margin-bottom: 20px;
   }
   
   .order-page-heading {
     margin: 0;
+    padding: 10px;
+    margin-right: 20px;
+  }
+  
+  .image-placeholder {
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    margin-bottom: 10px; /* Add margin below image */
+  }
+  
+  .image-placeholder img {
+    width: 100%;
   }
   
   .user-info {
     font-weight: bold;
+    position: absolute;
+    top: 20px;
+    right: 20px;
   }
   
   .previous-orders {
-    /* Increased margin to add more space */
-    margin-top: 40px;
-    /* Adjust the width as needed */
-    max-width: 600px;
-    /* Add border around the previous orders */
-    border: 1px solid #ccc;
-    /* Add padding inside the border */
+    margin-top: 20px;
+    max-width: 800px;
+    border: 1px solid #fa6338; /* Add orange border */
+    border-radius: 10px; /* Curve border */
     padding: 10px;
   }
   
-  .previous-orders h2 {
+  .previous-orders-heading {
     margin-bottom: 10px;
-    /* Underline the Previous Orders header */
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #fa6338; /* Add orange underline */
   }
   
   .previous-orders table {
@@ -53,5 +69,11 @@
   
   .previous-orders td {
     text-align: center;
+  }
+  
+  /* Highlight inputs */
+  .previous-orders th.highlight,
+  .previous-orders td.highlight {
+    background-color: #ffe6cc; /* Lighter orange */
   }
   
