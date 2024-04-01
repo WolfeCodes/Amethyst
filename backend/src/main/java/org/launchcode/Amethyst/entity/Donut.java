@@ -17,9 +17,9 @@ public class Donut {
     private String description;
     private String imageUrl;
     private double rating;
-    @ManyToMany(mappedBy = "donuts")
-    @JsonIgnore
-    private List<Cart> carts;
+//    @ManyToMany(mappedBy = "donuts")
+//    @JsonIgnore
+//    private List<Cart> carts;
     public Donut(int id, String name, double price, String description, String imageUrl, double rating) {
         this.id = id;
         this.name = name;
