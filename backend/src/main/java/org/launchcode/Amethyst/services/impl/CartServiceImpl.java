@@ -2,10 +2,12 @@ package org.launchcode.Amethyst.services.impl;
 
 import org.launchcode.Amethyst.dto.CartDto;
 import org.launchcode.Amethyst.entity.Cart;
+import org.launchcode.Amethyst.entity.CartItem;
 import org.launchcode.Amethyst.entity.Donut;
 import org.launchcode.Amethyst.entity.User;
 import org.launchcode.Amethyst.mapper.UserMapper;
 import org.launchcode.Amethyst.models.data.CartRepository;
+import org.launchcode.Amethyst.services.CartItemService;
 import org.launchcode.Amethyst.services.CartService;
 import org.launchcode.Amethyst.services.DonutService;
 import org.launchcode.Amethyst.services.UserService;
@@ -23,6 +25,8 @@ public class CartServiceImpl implements CartService {
     private DonutService donutService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private CartItemService cartItemService;
 
     @Override
     public CartDto createCart(CartDto cartDto) {
@@ -39,14 +43,14 @@ public class CartServiceImpl implements CartService {
 
 
     CartDto toDto(Cart cart) {
-        List<Integer> donutIds = cart.getDonuts().stream().map(Donut::getId).toList();
-        return new CartDto(cart.getId(), cart.getUser().getId(), cart.getTotal(), donutIds);
+        List<Integer> cartItemIds = cart.getCartItems().stream().map(CartItem::getId).toList();
+        return new CartDto(cart.getId(), cart.getUser().getId(), cart.getTotal(), cartItemIds);
     }
 
     Cart toCart(CartDto cartDto) {
         User user = UserMapper.mapToUser(userService.getUserById(cartDto.getUserId()));
-        List<Donut> donuts = donutService.findByIds(cartDto.getDonutIds());
-        return new Cart(cartDto.getId(), user, cartDto.getTotal(), donuts);
+        List<CartItem> cartItems = cartItemService.findByIds(cartDto.getCartItemIds());
+        return new Cart(cartDto.getId(), user, cartDto.getTotal(), cartItems);
     }
 
 

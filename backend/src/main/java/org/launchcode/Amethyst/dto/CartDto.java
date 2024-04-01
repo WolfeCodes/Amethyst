@@ -10,18 +10,17 @@ public class CartDto {
     private int id;
     private int userId;
     private double total; //might not need this in the future
-    private List<Integer> donutIds = new ArrayList<>();
+    private List<Integer> cartItemIds = new ArrayList<>(); //TODO Refactor
 
 
     public CartDto() {
     }
 
-
-    public CartDto(int id, int userId, double total, List<Integer> donutIds) {
+    public CartDto(int id, int userId, double total, List<Integer> cartItemIds) {
         this.id = id;
         this.userId = userId;
         this.total = total;
-        this.donutIds = donutIds;
+        this.cartItemIds = cartItemIds;
     }
 
     public int getId() {
@@ -45,11 +44,12 @@ public class CartDto {
         this.total = total;
     }
 
-    public List<Integer> getDonutIds() {
-        return donutIds;
+
+    public List<Integer> getCartItemIds() {
+        return cartItemIds;
     }
 
-    public void setDonutIds(List<Integer> donutIds) {
-        this.donutIds = donutIds;
+    public void setCartItemIds(List<Integer> cartItemIds) {
+        this.cartItemIds = cartItemIds;
     }
 }
