@@ -9,6 +9,7 @@ import BackSidebar from './components/backend/BackSidebar';
 import BackHome from './components/backend/BackHome';
 import BackHeader from './components/backend/BackHeader';
 import CartComponent from './components/frontend/CartComponent';
+import OrderComponent from './components/frontend/OrderComponent';
 
 function FrontendApp() {
   return (
@@ -18,6 +19,7 @@ function FrontendApp() {
         <Route path="/" element={<Home />} />
         <Route path="/menu" element={<ListDonut />} />
         <Route path='/cart' element={<CartComponent />} />
+        <Route path='/order' element={<OrderComponent />} />
       </Routes>
     </>
   );

@@ -18,7 +18,7 @@ const Header = () => {
                             <Link to="/menu" className="nav-link">Menu</Link>
                         </div>
                         <div className="navbar-nav ms-auto">
-                            <a className="nav-link active" aria-current="page" href="#">My Order</a>
+                            <a className="nav-link active" aria-current="page" href="/order">My Order</a>
                             <a className="nav-link" href="/cart">Cart</a>
                             <Link to="/backstage" className="nav-link btn btn-outline-primary">BackStage</Link>
                             <button type="button" className="signup-bt">Sign up</button>
