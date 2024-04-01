@@ -7,6 +7,7 @@ import org.launchcode.Amethyst.mapper.DonutMapper;
 import org.launchcode.Amethyst.models.data.CartItemRepository;
 import org.launchcode.Amethyst.models.data.DonutRepository;
 import org.launchcode.Amethyst.services.CartItemService;
+import org.launchcode.Amethyst.services.DonutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class CartItemServiceImpl implements CartItemService {
     private CartItemRepository cartItemRepository;
 
     @Autowired
-    private DonutRepository donutRepository;
+    private DonutService donutService;
 
     @Override
     public List<CartItem> findByIds(List<Integer> cartItemIds) {
@@ -44,7 +45,9 @@ public class CartItemServiceImpl implements CartItemService {
         return new CartItemDto(cartItem.getId(), cartItem.getDonut().getId(), cartItem.getQuantity());
     }
 
-    CartItem toCartItem(CartItemDto cartItemDto) {
-        return null;
+    @Override
+    public CartItem toCartItem(CartItemDto cartItemDto) {
+        Donut donut = DonutMapper.mapToDonut(donutService.getDonutById(cartItemDto.getDonutId()));
+        return new CartItem(cartItemDto.getId(), donut, cartItemDto.getQuantity());
     }
 }

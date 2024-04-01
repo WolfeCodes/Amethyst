@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getUserCart } from '../../services/CartService'
 import { getSingleDonut } from '../../services/DonutService';
-import { getCartItemById } from '../../services/CartItemService';
+import { getCartItemById, updateCartItemQuantity } from '../../services/CartItemService';
 import map from '../../assets/map.png'
 import '../../styles/frontend/Cart.css'
 
@@ -51,6 +51,7 @@ const CartComponent = () => {
   const increaseQuantity = (index) => {
     const updatedCartItem = [...cartItems];
     updatedCartItem[index].quantity += 1;
+    updateCartItemQuantity(updatedCartItem[index].id, updatedCartItem[index].quantity);
     setCartItems(updatedCartItem);
   };
 
@@ -58,6 +59,7 @@ const CartComponent = () => {
     const updatedCartItem = [...cartItems];
     if (updatedCartItem[index].quantity > 1) {
       updatedCartItem[index].quantity -= 1;
+      updateCartItemQuantity(updatedCartItem[index].id, updatedCartItem[index].quantity);
     }
     setCartItems(updatedCartItem);
   };
@@ -109,7 +111,7 @@ const CartComponent = () => {
             ))}
           </div>
         </div>
-        
+
       </div>
 
       <div className='footer'>
