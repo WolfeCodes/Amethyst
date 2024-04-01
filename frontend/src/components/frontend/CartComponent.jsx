@@ -4,7 +4,7 @@ import { getSingleDonut } from '../../services/DonutService';
 import { getCartItemById } from '../../services/CartItemService';
 import map from '../../assets/map.png'
 import '../../styles/frontend/Cart.css'
-import { DonutLarge } from '@mui/icons-material';
+
 
 
 const CartComponent = () => {
@@ -15,7 +15,6 @@ const CartComponent = () => {
   const [donutData, setDonutData] = useState([])
   
 
-  //useEffect hook to fetch userCart data, then extracts donutIds, and fetches donut object information from getById mapping
   useEffect(() => {
     const id = 1; //hardcoded for now until dynamic routing
     if (id) {
@@ -27,6 +26,13 @@ const CartComponent = () => {
           uniqueCartItemIds.map((cartItemId) => getCartItemById(cartItemId)) 
         ).then((donutResponses) => {
           setCartItems(donutResponses.map((res) => res.data));
+          //Fetch and store donut data for each cart item
+          const donutPromises = donutResponses.map((res) => 
+          getSingleDonut(res.data.donutId)
+          );
+          Promise.all(donutPromises).then((donutData) => {
+            setDonutData(donutData);
+          });
         }).catch(error => {
           console.error(error);
         })
@@ -43,28 +49,20 @@ const CartComponent = () => {
 
   
   const increaseQuantity = (index) => {
-    const updatedDonuts = [...donuts];
-    updatedDonuts[index].quantity += 1;
-    setDonuts(updatedDonuts);
+    const updatedCartItem = [...cartItems];
+    updatedCartItem[index].quantity += 1;
+    setCartItems(updatedCartItem);
   };
 
   const decreaseQuantity = (index) => {
-    const updatedDonuts = [...donuts];
-    if (updatedDonuts[index].quantity > 1) {
-      updatedDonuts[index].quantity -= 1;
+    const updatedCartItem = [...cartItems];
+    if (updatedCartItem[index].quantity > 1) {
+      updatedCartItem[index].quantity -= 1;
     }
-    setDonuts(updatedDonuts);
+    setCartItems(updatedCartItem);
   };
 
-  async function getDonutData (donutId) {
-    let donut;
-    try{
-      donut = await getSingleDonut(donutId);
-      setDonutData(donut);
-    } catch (e){
-      console.log(e);
-    }
-  }
+  
 
   //reusing backstage table list for the moment
   return (
@@ -89,26 +87,31 @@ const CartComponent = () => {
           <div className="cart-title">
             <h2>Shopping Cart</h2>
           </div>
-
+          
           <div className='items'>
-            {cartItems.map((cartItem) => (
+            {cartItems.map((cartItem, index) => (
               <div key={cartItem.id} className='donut-item'>
-                {console.log(getSingleDonut(cartItem.donutId))}
-                <img src={getSingleDonut(cartItem.donutId).imageUrl} alt={getSingleDonut(cartItem.donutId).name} className='donut-image' />
-                <div className='donut-content'>
-                  <span className='donut-name'>{getSingleDonut(cartItem.donutId).name}</span>
-                  <span className='donut-price'>${getSingleDonut(cartItem.donutId).price}</span>
-                </div>
-                <div className='quantity-container'>
-                  <button className='quantity-bt' onClick={() => decreaseQuantity(index)}>-</button>
-                  <span className='quantity'>2</span>
-                  <button className='quantity-bt' onClick={() => increaseQuantity(index)}>+</button>
-                </div>
+                {donutData[index] && (
+                  <>
+                  <img src={donutData[index].data.imageUrl} alt={donutData[index].data.name} className='donut-image' />
+                  <div className='donut-content'>
+                    <span className='donut-name'>{donutData[index].data.name}</span>
+                    <span className='donut-price'>${donutData[index].data.price}</span>
+                  </div>
+                  <div className='quantity-container'>
+                    <button className='quantity-bt' onClick={() => decreaseQuantity(index)}>-</button>
+                    <span className='quantity'>{cartItem.quantity}</span>
+                    <button className='quantity-bt' onClick={() => increaseQuantity(index)}>+</button>
+                  </div>
+                  </>
+                )}
               </div>
             ))}
           </div>
         </div>
+        
       </div>
+
       <div className='footer'>
         <div className='total'>
           <span className='subtotal'>Subtotal:</span>
