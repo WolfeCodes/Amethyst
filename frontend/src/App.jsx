@@ -10,6 +10,8 @@ import BackHome from './components/backend/BackHome';
 import BackHeader from './components/backend/BackHeader';
 import CartComponent from './components/frontend/CartComponent';
 import OrderComponent from './components/frontend/OrderComponent';
+import Footer from './components/frontend/Footer';
+
 
 function FrontendApp() {
   return (
@@ -21,6 +23,7 @@ function FrontendApp() {
         <Route path='/cart' element={<CartComponent />} />
         <Route path='/order' element={<OrderComponent />} />
       </Routes>
+      <Footer />
     </>
   );
 }

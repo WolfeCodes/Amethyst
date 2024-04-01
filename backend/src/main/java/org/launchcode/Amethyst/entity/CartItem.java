@@ -1,27 +1,32 @@
 package org.launchcode.Amethyst.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.sql.Time;
+import java.util.List;
 
-//@Entity
-public class CartItem {
+
+@Entity
+public class CartItem{
 
     @GeneratedValue
     @Id
     private int id;
-    @ManyToOne
-    private Cart cart;
-    @OneToOne
+    @OneToOne()
     private Donut donut;
     private int quantity;
 
+    @ManyToMany(mappedBy = "cartItems")
+    @JsonIgnore
+    private List<Cart> carts;
+
     public CartItem() {
+        super();
     }
 
-    public CartItem(int id, Cart cart, Donut donut, int quantity) {
+    public CartItem(int id, Donut donut, int quantity) {
         this.id = id;
-        this.cart = cart;
         this.donut = donut;
         this.quantity = quantity;
     }
@@ -30,12 +35,12 @@ public class CartItem {
         return id;
     }
 
-    public Cart getCart() {
-        return cart;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setCart(Cart cart) {
-        this.cart = cart;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public Donut getDonut() {
@@ -44,13 +49,5 @@ public class CartItem {
 
     public void setDonut(Donut donut) {
         this.donut = donut;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 }
