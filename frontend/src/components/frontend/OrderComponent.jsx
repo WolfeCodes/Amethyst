@@ -8,8 +8,10 @@ const OrderComponent = () => {
 
   return (
     <div className="order-container">
-      <h1 className="order-page-heading">Order Page</h1>
-      <div className="user-info">User: {/* Placeholder for user info */}</div>
+      <div className="order-header">
+        <h1 className="order-page-heading">Order Page</h1>
+        <div className="user-info">User: {/* Placeholder for user info */}</div>
+      </div>
       <div className="previous-orders">
         <h2>Previous Orders</h2>
         <table>
@@ -39,3 +41,4 @@ const OrderComponent = () => {
 }
 
 export default OrderComponent;
+

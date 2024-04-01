@@ -4,22 +4,35 @@
     margin: 80px;
   }
   
+  .order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
   .order-page-heading {
-    margin-top: 0;
+    margin: 0;
   }
   
   .user-info {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+    font-weight: bold;
   }
   
   .previous-orders {
-    margin-top: 20px;
+    /* Increased margin to add more space */
+    margin-top: 40px;
+    /* Adjust the width as needed */
+    max-width: 600px;
+    /* Add border around the previous orders */
+    border: 1px solid #ccc;
+    /* Add padding inside the border */
+    padding: 10px;
   }
   
   .previous-orders h2 {
     margin-bottom: 10px;
+    /* Underline the Previous Orders header */
+    border-bottom: 1px solid #ccc;
   }
   
   .previous-orders table {
