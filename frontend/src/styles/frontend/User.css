@@ -1,38 +1,94 @@
+/* Styles for the user container */
 .user-container {
   width: 300px;
-  margin: 100px auto; /* Update margin to move the container down */
+  margin: 100px auto; /* Center the container vertically and horizontally */
   padding: 20px;
-  border: 2px solid black; /* Add black border around the user container */
-  border-radius: 10px; /* Add border radius to curve the border */
+  border: 2px solid black; /* Orange border around the user container */
+  border-radius: 10px; /* Rounded corners for the container */
   background-color: #FFEBCD; /* Very light orange background color */
 }
 
+/* Styles for the 'Sign Up' or 'Log In' heading */
 .user-container h2 {
-  font-weight: bold; /* Bold the 'Sign Up' heading */
+  font-weight: bold; /* Bold the heading */
 }
 
+/* Styles for form input fields */
 .form-group input {
-  width: 100%;
+  width: 100%; /* Make input fields 100% width */
   padding: 8px;
-  margin-bottom: 10px; /* Add margin bottom to separate input fields */
-  border: 2px solid black; /* Add black border around the input fields */
-  border-radius: 5px; /* Add border radius to curve the input borders */
+  margin-bottom: 10px; /* Add space between input fields */
+  border: 2px solid #FC942D; /* Orange border around input fields */
+  border-radius: 5px; /* Rounded corners for input fields */
 }
 
+/* Styles for the 'Sign Up' or 'Log In' button */
 .signup-bt {
   display: inline-block;
   padding: 5px 15px;
-  background-color: #FC942D;
-  color: white;
+  background-color: #FC942D; /* Orange background color */
+  color: white; /* White text color */
   text-align: center;
   border: none;
-  border-radius: 8px;
+  border-radius: 8px; /* Rounded corners */
   cursor: pointer;
   text-decoration: none;
-  font-weight: bold; /* Bold the 'Sign up' button text */
+  font-weight: bold; /* Bold text */
   transition: background-color 0.3s; /* Smooth transition for background color */
 }
 
+/* Change button background color on hover */
 .signup-bt:hover {
-  background-color: #C66900; /* Change background color on hover */
+  background-color: #C66900; /* Darker orange color */
+}
+
+/* Additional styles for login mode */
+.user-container.login-mode {
+  background-color: #85aeda; /* Light blue background color */
+}
+
+.user-container.login-mode h2 {
+  color: white; /* White text color */
+}
+
+.user-container.login-mode .form-group input {
+  border-color: #356ba4; /* Blue border color */
+}
+
+.user-container.login-mode .signup-bt {
+  background-color: #007bff; /* Blue background color */
+  border-color: #007bff; /* Blue border color */
+}
+
+/* Change button background color on hover in login mode */
+.user-container.login-mode .signup-bt:hover {
+  background-color: #0056b3; /* Darker blue color */
+}
+
+/* Style for the 'Don't have an account?' button */
+.user-container p button {
+  display: inline-block;
+  padding: 3px 10px; /* Adjust padding to make the button smaller */
+  background-color: #007bff; /* Orange background color */
+  color: white; /* White text color */
+  border: none; /* Remove button border */
+  border-radius: 8px; /* Rounded corners */
+  font-weight: bold; /* Bold text */
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s; /* Smooth transitions */
+}
+
+/* Change button background color and text color on hover */
+.user-container p button:hover {
+  background-color: #0056b3; /* Darker orange color */
+}
+
+/* Additional styles for login mode */
+.user-container.login-mode p button {
+  background-color: #FC942D; /* Blue background color */
+}
+
+/* Change button background color on hover in login mode */
+.user-container.login-mode p button:hover {
+  background-color: #C66900; /* Darker blue color */
 }
