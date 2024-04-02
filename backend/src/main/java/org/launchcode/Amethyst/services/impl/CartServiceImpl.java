@@ -14,6 +14,7 @@ import org.launchcode.Amethyst.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -39,6 +40,17 @@ public class CartServiceImpl implements CartService {
     public CartDto getCartById(int id) {
         Cart cart = cartRepository.findById(id).orElseThrow(() -> new RuntimeException("Cart does not exist"));
         return toDto(cart);
+    }
+
+    @Override
+    public double getTotal(CartDto cartDto) {
+        double total = 0;
+        Cart cart = toCart(cartDto);
+        List<CartItem> cartItems = cart.getCartItems();
+        for(CartItem cartItem: cartItems) {
+            total += (cartItem.getDonut().getPrice() * cartItem.getQuantity());
+        }
+        return total;
     }
 
 
