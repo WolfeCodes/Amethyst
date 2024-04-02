@@ -21,7 +21,7 @@ const Header = () => {
                             <a className="nav-link active" aria-current="page" href="/order">My Order</a>
                             <a className="nav-link" href="/cart">Cart</a>
                             <Link to="/backstage" className="nav-link btn btn-outline-primary">BackStage</Link>
-                            <button type="button" className="signup-bt">Sign up</button>
+                            <Link type="button" className="signup-bt" to="/user">Sign up</Link>
                         </div>
                     </div>
                 </div>

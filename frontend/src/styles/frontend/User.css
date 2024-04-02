@@ -1,0 +1,43 @@
+.user-container {
+  width: 300px;
+  margin: 80px auto; /* Update margin to 80px from the top */
+  padding: 20px;
+  border: 2px solid #fa6338; /* Change border color to orange */
+  border-radius: 10px; /* Add border radius to curve the border */
+}
+
+h2 {
+  margin-top: 0; /* Remove default top margin for h2 */
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
