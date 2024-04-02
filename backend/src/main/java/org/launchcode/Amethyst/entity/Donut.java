@@ -3,6 +3,7 @@ package org.launchcode.Amethyst.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,16 +18,18 @@ public class Donut {
     private String description;
     private String imageUrl;
     private double rating;
+    private LocalDateTime createTime;
 //    @ManyToMany(mappedBy = "donuts")
 //    @JsonIgnore
 //    private List<Cart> carts;
-    public Donut(int id, String name, double price, String description, String imageUrl, double rating) {
+    public Donut(int id, String name, double price, String description, String imageUrl, double rating,LocalDateTime createTime) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
         this.imageUrl = imageUrl;
         this.rating = rating;
+        this.createTime=createTime;
     }
 
     private Donut() {
@@ -74,6 +77,14 @@ public class Donut {
 
     public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
     }
 
     @Override
