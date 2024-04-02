@@ -21,7 +21,7 @@ function FrontendApp() {
         <Route path="/menu" element={<ListDonut />} />
         <Route path='/cart' element={<CartComponent />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

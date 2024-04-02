@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getUserCart } from '../../services/CartService'
+import { getCartTotal, getUserCart } from '../../services/CartService'
 import { getSingleDonut } from '../../services/DonutService';
 import { getCartItemById, updateCartItemQuantity } from '../../services/CartItemService';
 import map from '../../assets/map.png'
@@ -10,13 +10,14 @@ import '../../styles/frontend/Cart.css'
 const CartComponent = () => {
 
   const [userCart, setUserCart] = useState([]);
-  const [donuts, setDonuts] = useState([]);
+  const [total, setTotal] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [donutData, setDonutData] = useState([])
   
 
   useEffect(() => {
-    const id = 1; //hardcoded for now until dynamic routing
+    const id = 1; //hardcoded for now until dynamic routing 
+    //will need to fetch userId cart get cartId
     if (id) {
       getUserCart(id).then((response) => {
         setUserCart(response.data);
@@ -40,18 +41,37 @@ const CartComponent = () => {
         console.error(error);
       })
     }
-  }, []) //will need the id in the array at the end of this function
+  }, []) //will need the user id in the array at the end of this function
 
   useEffect(() => {
     console.log(cartItems);
   }, [cartItems]);
 
+  //useEffect hook to get the initial cart price
+  useEffect(() => {
+    const id = 1; //hardcoded for now until dynamic routing
+    getCartTotal(id).then((response) => {
+      setTotal(response.data);
+    }).catch(error => {
+      console.error(error);
+    })
+  })
 
   
   const increaseQuantity = (index) => {
     const updatedCartItem = [...cartItems];
     updatedCartItem[index].quantity += 1;
-    updateCartItemQuantity(updatedCartItem[index].id, updatedCartItem[index].quantity);
+    updateCartItemQuantity(updatedCartItem[index].id, updatedCartItem[index].quantity)
+    .then(() => {
+      const id = 1; //hardcoded for now until dynamic routing
+      getCartTotal(id).then((response) => {
+        setTotal(response.data);
+      }).catch(error => {
+        console.error(error);
+      });
+    }).catch(error => {
+      console.error(error);
+    });
     setCartItems(updatedCartItem);
   };
 
@@ -59,14 +79,22 @@ const CartComponent = () => {
     const updatedCartItem = [...cartItems];
     if (updatedCartItem[index].quantity > 1) {
       updatedCartItem[index].quantity -= 1;
-      updateCartItemQuantity(updatedCartItem[index].id, updatedCartItem[index].quantity);
+      updateCartItemQuantity(updatedCartItem[index].id, updatedCartItem[index].quantity)
+      .then(() => {
+        const id = 1; //hardcoded for now until dynamic routing
+        getCartTotal(id).then((response) => {
+          setTotal(response.data);
+        }).catch(error => {
+          console.error(error);
+        });
+      }).catch(error => {
+        console.error(error);
+      });
     }
     setCartItems(updatedCartItem);
   };
 
   
-
-  //reusing backstage table list for the moment
   return (
     <div>
       <div className='cart-container'>
@@ -117,7 +145,7 @@ const CartComponent = () => {
       <div className='footer'>
         <div className='total'>
           <span className='subtotal'>Subtotal:</span>
-          <span className='total-price'>$23.00</span>
+          <span className='total-price'>${total}</span>
         </div>
         <div>
           <button className='submit-tb'>Checkout</button>
