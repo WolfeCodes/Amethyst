@@ -14,9 +14,11 @@
 
 
 .signup-bt {
-  display: inline-block;
+  display: inline-flex; /* Use flexbox to center content */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
   padding: 5px 15px;
-  background-color: #FC942D;
+  background-color: #E17B00; /* Darker shade of orange */
   color: white;
   text-align: center;
   border: none;
@@ -24,8 +26,9 @@
   cursor: pointer;
   text-decoration: none;
   /* Remove underline for anchor tags */
-  transition: background-color 0.3s;
-  /* Smooth transition for background color */
+  transition: background-color 0.3s; /* Smooth transition for background color */
+}
 
-  margin-right: 20px;
+.signup-bt:hover {
+  background-color: #C66900; /* Darker shade on hover */
 }

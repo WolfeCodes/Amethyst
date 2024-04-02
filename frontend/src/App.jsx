@@ -10,6 +10,7 @@ import BackHome from './components/backend/BackHome';
 import BackHeader from './components/backend/BackHeader';
 import CartComponent from './components/frontend/CartComponent';
 import OrderComponent from './components/frontend/OrderComponent';
+import UserComponent from './components/frontend/UserComponent';
 import Footer from './components/frontend/Footer';
 
 
@@ -22,6 +23,7 @@ function FrontendApp() {
         <Route path="/menu" element={<ListDonut />} />
         <Route path='/cart' element={<CartComponent />} />
         <Route path='/order' element={<OrderComponent />} />
+        <Route path='/user' element={<UserComponent />} />
       </Routes>
       {/* <Footer /> */}
     </>
