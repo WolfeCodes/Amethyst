@@ -57,4 +57,12 @@ public class CartController {
         cartDto.setCartItemIds(cartItemIds);
         return new ResponseEntity<>(cartService.createCart(cartDto), HttpStatus.CREATED);
     }
+
+    @GetMapping("/{cartId}/total")
+    public ResponseEntity<Double> getCartTotal(@PathVariable int cartId){
+        //Grab a cart by id
+        CartDto cartDto = cartService.getCartById(cartId);
+        //Call a CartService method to calculate the total given a cartDto
+        return new ResponseEntity<>(cartService.getTotal(cartDto), HttpStatus.CREATED);
+    }
 }

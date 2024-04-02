@@ -23,7 +23,7 @@ function FrontendApp() {
         <Route path='/cart' element={<CartComponent />} />
         <Route path='/order' element={<OrderComponent />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
