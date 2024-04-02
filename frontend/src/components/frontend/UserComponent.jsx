@@ -1,17 +1,14 @@
+// UserComponent.jsx
+
 import React, { useState } from 'react';
-import '../../styles/frontend/User.css';
+import '../../styles/frontend/User.css'; // Import CSS file
 
 const UserComponent = () => {
   // State variables for form data
-  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   // Event handlers for form inputs
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
-  };
-
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
@@ -24,23 +21,13 @@ const UserComponent = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Here, you can perform form validation and submission logic
-    console.log('Form submitted:', { username, email, password });
+    console.log('Form submitted:', { email, password });
   };
 
   return (
     <div className="user-container">
       <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={username}
-            onChange={handleUsernameChange}
-          />
-        </div>
         <div className="form-group">
           <label htmlFor="email">Email:</label>
           <input

@@ -1,43 +1,38 @@
 .user-container {
   width: 300px;
-  margin: 80px auto; /* Update margin to 80px from the top */
+  margin: 100px auto; /* Update margin to move the container down */
   padding: 20px;
-  border: 2px solid #fa6338; /* Change border color to orange */
+  border: 2px solid black; /* Add black border around the user container */
   border-radius: 10px; /* Add border radius to curve the border */
+  background-color: #FFEBCD; /* Very light orange background color */
 }
 
-h2 {
-  margin-top: 0; /* Remove default top margin for h2 */
+.user-container h2 {
+  font-weight: bold; /* Bold the 'Sign Up' heading */
 }
 
-.form-group {
-  margin-bottom: 15px;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"] {
+.form-group input {
   width: 100%;
   padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
+  margin-bottom: 10px; /* Add margin bottom to separate input fields */
+  border: 2px solid black; /* Add black border around the input fields */
+  border-radius: 5px; /* Add border radius to curve the input borders */
 }
 
-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: #fff;
+.signup-bt {
+  display: inline-block;
+  padding: 5px 15px;
+  background-color: #FC942D;
+  color: white;
+  text-align: center;
   border: none;
-  border-radius: 3px;
+  border-radius: 8px;
   cursor: pointer;
+  text-decoration: none;
+  font-weight: bold; /* Bold the 'Sign up' button text */
+  transition: background-color 0.3s; /* Smooth transition for background color */
 }
 
-button:hover {
-  background-color: #0056b3;
+.signup-bt:hover {
+  background-color: #C66900; /* Change background color on hover */
 }
