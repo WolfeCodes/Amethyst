@@ -3,6 +3,8 @@ package org.launchcode.Amethyst.mapper;
 import org.launchcode.Amethyst.dto.DonutDto;
 import org.launchcode.Amethyst.entity.Donut;
 
+import java.time.LocalDateTime;
+
 public class DonutMapper {
 
     public static Donut mapToDonut(DonutDto donutDto){
@@ -12,9 +14,9 @@ public class DonutMapper {
                 donutDto.getPrice(),
                 donutDto.getDescription(),
                 donutDto.getImageUrl(),
-                donutDto.getRating()
+                donutDto.getRating(),
+                donutDto.getCreateTime()
         );
-
         return donut;
     }
 
@@ -25,7 +27,8 @@ public class DonutMapper {
                 donut.getPrice(),
                 donut.getDescription(),
                 donut.getImageUrl(),
-                donut.getRating()
+                donut.getRating(),
+                donut.getCreateTime()
         );
 
         return donutDto;

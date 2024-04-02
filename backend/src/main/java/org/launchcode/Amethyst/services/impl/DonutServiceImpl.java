@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,6 +27,8 @@ public class DonutServiceImpl implements DonutService {
 
     @Override
     public DonutDto createDonut(DonutDto donutDto) {
+        // Set createTime to current timestamp
+        donutDto.setCreateTime(LocalDateTime.now());
         Donut donut = DonutMapper.mapToDonut(donutDto);
         Donut savedDonut = donutRepository.save(donut);
         return DonutMapper.mapToDonutDto(savedDonut);
@@ -37,10 +40,19 @@ public class DonutServiceImpl implements DonutService {
         return DonutMapper.mapToDonutDto(donut);
     }
 
+
+
     @Override
     public List<DonutDto> getAllDonuts() {
         List<Donut> donuts = new ArrayList<>();
         donutRepository.findAll().forEach(donuts::add);
+        return donuts.stream().map(DonutMapper::mapToDonutDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<DonutDto> getAllDonutsByName(String name) {
+        List<Donut> donuts = new ArrayList<>();
+        donutRepository.findByName(name).forEach(donuts::add);
         return donuts.stream().map(DonutMapper::mapToDonutDto).collect(Collectors.toList());
     }
 

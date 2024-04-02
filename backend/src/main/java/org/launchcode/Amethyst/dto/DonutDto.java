@@ -1,6 +1,8 @@
 package org.launchcode.Amethyst.dto;
 
 
+import java.time.LocalDateTime;
+
 public class DonutDto {
     private int id;
     private String name;
@@ -9,16 +11,19 @@ public class DonutDto {
     private String imageUrl;
     private double rating;
 
+    private LocalDateTime createTime;
+
     public DonutDto() {
     }
 
-    public DonutDto(int id, String name, double price, String description, String imageUrl, double rating) {
+    public DonutDto(int id, String name, double price, String description, String imageUrl, double rating, LocalDateTime createTime) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
         this.imageUrl = imageUrl;
         this.rating = rating;
+        this.createTime = createTime;
     }
 
     public int getId() {
@@ -63,5 +68,13 @@ public class DonutDto {
 
     public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
     }
 }
