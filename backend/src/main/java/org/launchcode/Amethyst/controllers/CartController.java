@@ -66,7 +66,7 @@ public class CartController {
         return new ResponseEntity<>(cartService.getTotal(cartDto), HttpStatus.CREATED);
     }
 
-    @GetMapping("/{cartId}/checkout/")
+    @GetMapping("/{cartId}/checkout")
     public ResponseEntity<CartDto> checkoutCart(@PathVariable int cartId){
         //grab a cart by id
         CartDto cartDto = cartService.getCartById(cartId);
