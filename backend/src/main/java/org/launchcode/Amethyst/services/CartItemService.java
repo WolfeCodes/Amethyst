@@ -14,4 +14,5 @@ public interface CartItemService {
     CartItemDto getCartItemById(int id);
 
     CartItem toCartItem(CartItemDto cartItemDto);
+    void deleteCartItem(int id);
 }
