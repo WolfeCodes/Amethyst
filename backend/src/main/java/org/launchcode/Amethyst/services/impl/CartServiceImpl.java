@@ -1,6 +1,7 @@
 package org.launchcode.Amethyst.services.impl;
 
 import org.launchcode.Amethyst.dto.CartDto;
+import org.launchcode.Amethyst.dto.CartItemDto;
 import org.launchcode.Amethyst.entity.Cart;
 import org.launchcode.Amethyst.entity.CartItem;
 import org.launchcode.Amethyst.entity.Donut;
@@ -51,6 +52,19 @@ public class CartServiceImpl implements CartService {
             total += (cartItem.getDonut().getPrice() * cartItem.getQuantity());
         }
         return total;
+    }
+
+    @Override
+    public CartDto emptyCart(CartDto cartDto) {
+        Cart cart = toCart(cartDto);
+        List<CartItem> cartItems = cart.getCartItems();
+        for(CartItem cartItem: cartItems) {
+            cartItemService.deleteCartItem(cartItem.getId());
+        }
+        List<CartItem> emptyCart = new ArrayList<>();
+        cart.setCartItems(emptyCart);
+        cartRepository.save(cart);
+        return null;
     }
 
 

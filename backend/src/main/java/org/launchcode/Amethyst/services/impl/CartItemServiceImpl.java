@@ -50,4 +50,9 @@ public class CartItemServiceImpl implements CartItemService {
         Donut donut = DonutMapper.mapToDonut(donutService.getDonutById(cartItemDto.getDonutId()));
         return new CartItem(cartItemDto.getId(), donut, cartItemDto.getQuantity());
     }
+
+    @Override
+    public void deleteCartItem(int id) {
+        cartItemRepository.deleteById(id);
+    }
 }

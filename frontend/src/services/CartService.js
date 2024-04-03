@@ -8,3 +8,5 @@ export const getUserCart = (cartId) => axios.get(REST_API_BASE_URL + '/' + cartI
 export const addDonutToCart = (cartId, donutId) => axios.put(REST_API_BASE_URL + '/' + cartId + '/donut/' + donutId);
 
 export const getCartTotal = (cartId) => axios.get(REST_API_BASE_URL + '/' + cartId + '/total');
+
+export const checkoutCart = (cartId) => axios.get(REST_API_BASE_URL + '/' + cartId + '/checkout');

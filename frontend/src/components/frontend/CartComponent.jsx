@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getCartTotal, getUserCart } from '../../services/CartService'
+import { checkoutCart, getCartTotal, getUserCart } from '../../services/CartService'
 import { getSingleDonut } from '../../services/DonutService';
 import { getCartItemById, updateCartItemQuantity } from '../../services/CartItemService';
 import map from '../../assets/map.png'
@@ -47,6 +47,8 @@ const CartComponent = () => {
     console.log(cartItems);
   }, [cartItems]);
 
+  
+
   //useEffect hook to get the initial cart price
   useEffect(() => {
     const id = 1; //hardcoded for now until dynamic routing
@@ -93,6 +95,14 @@ const CartComponent = () => {
     }
     setCartItems(updatedCartItem);
   };
+
+  const checkout = () => {
+    console.log('got clicked');
+    const cartId = 1; //hardcoded until user authentication
+    checkoutCart(cartId);
+    setCartItems([]);
+    setTotal([]);
+  }
 
   
   return (
@@ -148,7 +158,7 @@ const CartComponent = () => {
           <span className='total-price'>${total}</span>
         </div>
         <div>
-          <button className='submit-tb'>Checkout</button>
+          <button className='submit-tb' onClick={() => checkout()}>Checkout</button>
         </div>
       </div>
     </div>
