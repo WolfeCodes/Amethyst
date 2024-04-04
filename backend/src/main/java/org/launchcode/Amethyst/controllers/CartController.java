@@ -75,7 +75,7 @@ public class CartController {
         CartDto cartDto = cartService.getCartById(cartId);
         //TODO Save to order functionality;
         //call an OrderService method
-        orderService.createOrder(cartDto);
+        //orderService.createOrder(cartDto);
         //Call cartService
         cartService.emptyCart(cartDto);
         return new ResponseEntity<>(cartService.emptyCart(cartDto), HttpStatus.CREATED);
