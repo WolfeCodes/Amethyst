@@ -70,6 +70,8 @@ public class CartController {
     public ResponseEntity<CartDto> checkoutCart(@PathVariable int cartId){
         //grab a cart by id
         CartDto cartDto = cartService.getCartById(cartId);
+        //TODO Save to order functionality;
+        //call an OrderService method
         //Call cartService
         cartService.emptyCart(cartDto);
         return new ResponseEntity<>(cartService.emptyCart(cartDto), HttpStatus.CREATED);

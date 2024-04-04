@@ -13,7 +13,7 @@ public class CartItem{
     @GeneratedValue
     @Id
     private int id;
-    @OneToOne()
+    @ManyToOne
     private Donut donut;
     private int quantity;
 
