@@ -37,3 +37,16 @@
   display: block;
   flex-direction: column;
 }
+
+.row {
+  justify-content: center;
+  align-items: center;
+}
+
+.input-group {
+  margin: 15px;
+}
+
+.btn-primary {
+  margin: 10px;
+}

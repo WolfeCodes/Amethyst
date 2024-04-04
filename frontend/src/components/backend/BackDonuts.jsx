@@ -11,11 +11,13 @@ const BackDonuts = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedDonutId, setSelectedDonutId] = useState(null); // State to store the selected donut id
 
+
   // useEffect hook to fetch the list of donuts when the component mounts
   useEffect(() => {
     listDonuts()
       .then((response) => {
         setDonuts(response.data);
+        setFilteredData(response.data);
       })
       .catch((error) => {
         console.error(error)
@@ -45,21 +47,34 @@ const BackDonuts = () => {
     }
   }
 
+
+  function handleSearch(event) {
+    // Filter donuts based on search term
+    let value = event.target.value.toLowerCase();
+    let result = [];
+    console.log(value);
+    result = donuts.filter((donut) => {
+      return donut.name.toLowerCase().includes(value);
+    });
+    setFilteredData(result);
+  }
+
   return (
     <div className="backcontainer">
       <div className="row">
         <div className="col-md-6">
-          <div className="input-group mb-3">
+          <div className="input-group">
             <input
               type="text"
               className="form-control"
               placeholder="Search donut name"
               aria-label="Recipient's username"
               aria-describedby="button-addon2"
+              onChange={(event) => handleSearch(event)}
             />
-            <button className="btn btn-outline-secondary" type="button" id="button-addon2">
+            {/* <button className="btn btn-outline-primary" type="button" id="button-addon2">
               Search
-            </button>
+            </button> */}
           </div>
         </div>
         <div className="col-md-6">

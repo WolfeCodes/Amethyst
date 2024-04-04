@@ -13,6 +13,10 @@ export const createDonuts = (donut) => axios.post(REST_API_BASE_URL, donut);
 // Function to fetch a single donut from the REST API based on its ID
 export const getSingleDonut = (donutId) => axios.get(REST_API_BASE_URL + donutId);
 
+// Function to fetch all donuts from the REST API based on its name(imprecise search)
+export const getDonutsByname = (donutName) => axios.get(REST_API_BASE_URL + donutName);
+
+
 // Function to update a single donut from the Database based on its ID
 export const updateDonut = (donutId, donut) => axios.put(REST_API_BASE_URL + donutId, donut);
 

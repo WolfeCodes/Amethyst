@@ -28,7 +28,7 @@ const DonutsModal = ({ closeModal, id }) => {
 
   function saveOrUpdateDonut(e) {
     e.preventDefault();
-    const donut = { name, price, imageUrl, description, rating: 5 };
+    const donut = { name, price, imageUrl, description, rating: 5, createTime: new Date().toISOString() };
     console.log(donut);
     if (id != null) {
       updateDonut(id, donut).then((response) => {
