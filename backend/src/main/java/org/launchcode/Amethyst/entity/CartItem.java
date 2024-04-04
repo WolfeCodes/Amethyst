@@ -13,13 +13,14 @@ public class CartItem{
     @GeneratedValue
     @Id
     private int id;
-    @OneToOne()
+    @ManyToOne
     private Donut donut;
     private int quantity;
 
     @ManyToMany(mappedBy = "cartItems")
     @JsonIgnore
     private List<Cart> carts;
+
 
     public CartItem() {
         super();

@@ -19,9 +19,9 @@ public class Donut {
     private String imageUrl;
     private double rating;
     private LocalDateTime createTime;
-//    @ManyToMany(mappedBy = "donuts")
-//    @JsonIgnore
-//    private List<Cart> carts;
+    @OneToMany
+    @JoinColumn(name = "donut_id")
+    private List<CartItem> cartItems;
     public Donut(int id, String name, double price, String description, String imageUrl, double rating,LocalDateTime createTime) {
         this.id = id;
         this.name = name;

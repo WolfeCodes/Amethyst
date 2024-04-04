@@ -8,6 +8,7 @@ import org.launchcode.Amethyst.mapper.DonutMapper;
 import org.launchcode.Amethyst.services.CartItemService;
 import org.launchcode.Amethyst.services.CartService;
 import org.launchcode.Amethyst.services.DonutService;
+import org.launchcode.Amethyst.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,8 @@ public class CartController {
 
     @Autowired
     private CartItemService cartItemService;
+    @Autowired
+    private OrderService orderService;
 
     @PostMapping
     public ResponseEntity<CartDto> addCart(@RequestBody CartDto cartDto){
@@ -70,6 +73,9 @@ public class CartController {
     public ResponseEntity<CartDto> checkoutCart(@PathVariable int cartId){
         //grab a cart by id
         CartDto cartDto = cartService.getCartById(cartId);
+        //TODO Save to order functionality;
+        //call an OrderService method
+        orderService.createOrder(cartDto);
         //Call cartService
         cartService.emptyCart(cartDto);
         return new ResponseEntity<>(cartService.emptyCart(cartDto), HttpStatus.CREATED);

@@ -57,14 +57,16 @@ public class CartServiceImpl implements CartService {
     @Override
     public CartDto emptyCart(CartDto cartDto) {
         Cart cart = toCart(cartDto);
-        List<CartItem> cartItems = cart.getCartItems();
-        for(CartItem cartItem: cartItems) {
-            cartItemService.deleteCartItem(cartItem.getId());
-        }
         List<CartItem> emptyCart = new ArrayList<>();
         cart.setCartItems(emptyCart);
         cartRepository.save(cart);
         return null;
+    }
+
+    @Override
+    public List<CartItem> getCartItems(CartDto cartDto) {
+        Cart cart = cartRepository.findById(cartDto.getId()).orElseThrow(() -> new RuntimeException("Cart does not exist"));
+        return cart.getCartItems();
     }
 
 
