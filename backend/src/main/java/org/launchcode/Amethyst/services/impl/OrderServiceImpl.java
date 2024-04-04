@@ -6,6 +6,7 @@ import org.launchcode.Amethyst.entity.Orders;
 import org.launchcode.Amethyst.mapper.UserMapper;
 import org.launchcode.Amethyst.models.data.OrderRepository;
 import org.launchcode.Amethyst.services.CartService;
+import org.launchcode.Amethyst.services.OrderItemsService;
 import org.launchcode.Amethyst.services.OrderService;
 import org.launchcode.Amethyst.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +23,15 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private OrderItemsService orderItemsService;
+
 
     @Override
     public OrderDto createOrder(CartDto cartDto) {
         Orders orders = new Orders();
         orders.setUser(UserMapper.mapToUser(userService.getUserById(cartDto.getUserId())));
-        orders.setOrderItems(cartService.getCartItems(cartDto));
+        orders.setOrderItems(orderItemsService.convertToOrderItems(cartService.getCartItems(cartDto)));
         orderRepository.save(orders);
         return null;
     }

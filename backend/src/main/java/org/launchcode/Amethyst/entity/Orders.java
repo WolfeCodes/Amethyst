@@ -13,12 +13,12 @@ public class Orders {
     private User user;
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "order_list", joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "orderItem_id"))
-    private List<CartItem> orderItems;
+    private List<OrderItems> orderItems;
 
     public Orders() {
     }
 
-    public Orders(int id, User user, List<CartItem> orderItems) {
+    public Orders(int id, User user, List<OrderItems> orderItems) {
         this.id = id;
         this.user = user;
         this.orderItems = orderItems;
@@ -36,11 +36,11 @@ public class Orders {
         this.user = user;
     }
 
-    public List<CartItem> getOrderItems() {
+    public List<OrderItems> getOrderItems() {
         return orderItems;
     }
 
-    public void setOrderItems(List<CartItem> orderItems) {
+    public void setOrderItems(List<OrderItems> orderItems) {
         this.orderItems = orderItems;
     }
 }

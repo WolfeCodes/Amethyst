@@ -25,6 +25,9 @@ public class OrderItems {
     @UpdateTimestamp
     private Timestamp modified_at;
 
+    public OrderItems() {
+    }
+
     public OrderItems(int id, int donutId, int quantity){
         this.id = id;
         this.donutId = donutId;

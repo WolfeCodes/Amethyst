@@ -1,15 +1,21 @@
 package org.launchcode.Amethyst.services;
 
 import org.launchcode.Amethyst.dto.OrderItemsDto;
+import org.launchcode.Amethyst.entity.CartItem;
+import org.launchcode.Amethyst.entity.OrderItems;
 
 import java.util.List;
 
 public interface OrderItemsService {
 
-    OrderItemsDto createOrder_Items(OrderItemsDto order_ItemsDto);
+    OrderItemsDto createOrderItems(OrderItemsDto orderItemsDto);
 
-    OrderItemsDto getOrder_ItemsById(int id);
+    OrderItemsDto getOrderItemsById(int id);
 
-    List<OrderItemsDto> getAllOrder_Items();
+    List<OrderItemsDto> getAllOrderItems();
+
+    List<OrderItems> convertToOrderItems(List<CartItem> cartItems);
+
+    OrderItems cartItemToOrderItems(CartItem cartItem);
 
 }

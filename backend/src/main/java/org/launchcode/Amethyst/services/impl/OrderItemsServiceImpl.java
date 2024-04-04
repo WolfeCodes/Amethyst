@@ -1,6 +1,7 @@
 package org.launchcode.Amethyst.services.impl;
 
 import org.launchcode.Amethyst.dto.OrderItemsDto;
+import org.launchcode.Amethyst.entity.CartItem;
 import org.launchcode.Amethyst.entity.OrderItems;
 import org.launchcode.Amethyst.mapper.OrderItemsMapper;
 import org.launchcode.Amethyst.models.data.Order_ItemsRepository;
@@ -19,24 +20,42 @@ public class OrderItemsServiceImpl implements OrderItemsService {
     private Order_ItemsRepository order_ItemsRepository;
 
     @Override
-    public OrderItemsDto createOrder_Items(OrderItemsDto orderItemsDto){
+    public OrderItemsDto createOrderItems(OrderItemsDto orderItemsDto){
         OrderItems orderItems = OrderItemsMapper.mapToOrder_Items(orderItemsDto);
         OrderItems savedOrderItems = order_ItemsRepository.save(orderItems);
         return OrderItemsMapper.mapToOrder_ItemsDTO(savedOrderItems);
     }
     @Override
-    public OrderItemsDto getOrder_ItemsById(int id) {
+    public OrderItemsDto getOrderItemsById(int id) {
         OrderItems orderItems = order_ItemsRepository.findById(id).orElseThrow(()
                                 -> new RuntimeException("Order does not exist"));
         return OrderItemsMapper.mapToOrder_ItemsDTO(orderItems);
     }
 
     @Override
-    public List<OrderItemsDto> getAllOrder_Items() {
+    public List<OrderItemsDto> getAllOrderItems() {
         List<OrderItems> order_Items = new ArrayList<>();
         order_ItemsRepository.findAll().forEach(order_Items::add);
         return order_Items.stream().map(OrderItemsMapper::mapToOrder_ItemsDTO)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<OrderItems> convertToOrderItems(List<CartItem> cartItems) {
+        List<OrderItems> orderItems = new ArrayList<>();
+        for(CartItem cartItem: cartItems){
+            orderItems.add(cartItemToOrderItems(cartItem));
+        }
+        return orderItems;
+    }
+
+    @Override
+    public OrderItems cartItemToOrderItems(CartItem cartItem) {
+        OrderItems orderItems = new OrderItems();
+        orderItems.setDonutId(cartItem.getDonut().getId());
+        orderItems.setQuantity(cartItem.getQuantity());
+        order_ItemsRepository.save(orderItems);
+        return orderItems;
     }
 
 }

@@ -21,17 +21,17 @@ public class Order_ItemsController {
 
     @PostMapping
     public ResponseEntity<OrderItemsDto> addUser(@RequestBody OrderItemsDto orderItemsDto){
-        return new ResponseEntity<>(order_ItemsServices.createOrder_Items(orderItemsDto), HttpStatus.CREATED);
+        return new ResponseEntity<>(order_ItemsServices.createOrderItems(orderItemsDto), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<OrderItemsDto> getOrder_ItemsById(@PathVariable int id){
-        OrderItemsDto order_ItemsDto = order_ItemsServices.getOrder_ItemsById(id);
+        OrderItemsDto order_ItemsDto = order_ItemsServices.getOrderItemsById(id);
         return ResponseEntity.ok(order_ItemsDto);
     }
     @GetMapping("/")
     public ResponseEntity<List<OrderItemsDto>> getAllUsers(){
-        List<OrderItemsDto> order_Items = order_ItemsServices.getAllOrder_Items();
+        List<OrderItemsDto> order_Items = order_ItemsServices.getAllOrderItems();
         return ResponseEntity.ok(order_Items);
     }
 
