@@ -4,7 +4,7 @@ import org.launchcode.Amethyst.dto.OrderItemsDto;
 import org.launchcode.Amethyst.entity.CartItem;
 import org.launchcode.Amethyst.entity.OrderItems;
 import org.launchcode.Amethyst.mapper.OrderItemsMapper;
-import org.launchcode.Amethyst.models.data.Order_ItemsRepository;
+import org.launchcode.Amethyst.models.data.OrderItemsRepository;
 import org.launchcode.Amethyst.services.OrderItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,17 +17,17 @@ import java.util.stream.Collectors;
 public class OrderItemsServiceImpl implements OrderItemsService {
 
     @Autowired
-    private Order_ItemsRepository order_ItemsRepository;
+    private OrderItemsRepository orderItemsRepository;
 
     @Override
     public OrderItemsDto createOrderItems(OrderItemsDto orderItemsDto){
         OrderItems orderItems = OrderItemsMapper.mapToOrder_Items(orderItemsDto);
-        OrderItems savedOrderItems = order_ItemsRepository.save(orderItems);
+        OrderItems savedOrderItems = orderItemsRepository.save(orderItems);
         return OrderItemsMapper.mapToOrder_ItemsDTO(savedOrderItems);
     }
     @Override
     public OrderItemsDto getOrderItemsById(int id) {
-        OrderItems orderItems = order_ItemsRepository.findById(id).orElseThrow(()
+        OrderItems orderItems = orderItemsRepository.findById(id).orElseThrow(()
                                 -> new RuntimeException("Order does not exist"));
         return OrderItemsMapper.mapToOrder_ItemsDTO(orderItems);
     }
@@ -35,7 +35,7 @@ public class OrderItemsServiceImpl implements OrderItemsService {
     @Override
     public List<OrderItemsDto> getAllOrderItems() {
         List<OrderItems> order_Items = new ArrayList<>();
-        order_ItemsRepository.findAll().forEach(order_Items::add);
+        orderItemsRepository.findAll().forEach(order_Items::add);
         return order_Items.stream().map(OrderItemsMapper::mapToOrder_ItemsDTO)
                 .collect(Collectors.toList());
     }
@@ -54,7 +54,7 @@ public class OrderItemsServiceImpl implements OrderItemsService {
         OrderItems orderItems = new OrderItems();
         orderItems.setDonutId(cartItem.getDonut().getId());
         orderItems.setQuantity(cartItem.getQuantity());
-        order_ItemsRepository.save(orderItems);
+        orderItemsRepository.save(orderItems);
         return orderItems;
     }
 

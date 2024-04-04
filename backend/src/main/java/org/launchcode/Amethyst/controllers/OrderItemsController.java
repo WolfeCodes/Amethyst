@@ -14,7 +14,7 @@ import java.util.List;
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/api/orderItems") //changed endpoint because it originally mapped to donuts
-public class Order_ItemsController {
+public class OrderItemsController {
 
     @Autowired
     private OrderItemsService order_ItemsServices;
@@ -30,7 +30,7 @@ public class Order_ItemsController {
         return ResponseEntity.ok(order_ItemsDto);
     }
     @GetMapping("/")
-    public ResponseEntity<List<OrderItemsDto>> getAllUsers(){
+    public ResponseEntity<List<OrderItemsDto>> getAllOrderItems(){
         List<OrderItemsDto> order_Items = order_ItemsServices.getAllOrderItems();
         return ResponseEntity.ok(order_Items);
     }
