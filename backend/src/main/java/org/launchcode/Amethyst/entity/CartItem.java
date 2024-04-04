@@ -20,6 +20,9 @@ public class CartItem{
     @ManyToMany(mappedBy = "cartItems")
     @JsonIgnore
     private List<Cart> carts;
+    @ManyToMany(mappedBy = "orderItems")
+    @JsonIgnore
+    private List<Orders> orders;
 
     public CartItem() {
         super();
