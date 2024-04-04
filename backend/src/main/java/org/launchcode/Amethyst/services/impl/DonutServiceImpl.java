@@ -43,18 +43,22 @@ public class DonutServiceImpl implements DonutService {
 
 
     @Override
-    public List<DonutDto> getAllDonuts() {
+    public List<DonutDto> getAllDonuts(String name) {
         List<Donut> donuts = new ArrayList<>();
-        donutRepository.findAll().forEach(donuts::add);
+        if(name!=null && !name.isEmpty()){
+            donutRepository.findByName(name).forEach(donuts::add);
+        }else {
+            donutRepository.findAll().forEach(donuts::add);
+        }
         return donuts.stream().map(DonutMapper::mapToDonutDto).collect(Collectors.toList());
     }
 
-    @Override
-    public List<DonutDto> getAllDonutsByName(String name) {
-        List<Donut> donuts = new ArrayList<>();
-        donutRepository.findByName(name).forEach(donuts::add);
-        return donuts.stream().map(DonutMapper::mapToDonutDto).collect(Collectors.toList());
-    }
+//    @Override
+//    public List<DonutDto> getAllDonutsByName(String name) {
+//        List<Donut> donuts = new ArrayList<>();
+//        donutRepository.findByName(name).forEach(donuts::add);
+//        return donuts.stream().map(DonutMapper::mapToDonutDto).collect(Collectors.toList());
+//    }
 
     @Override
     public DonutDto updateDonut(int id, DonutDto updatedDonut) {

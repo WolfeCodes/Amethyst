@@ -32,18 +32,18 @@ public class DonutController {
         return ResponseEntity.ok(donutDto);
     }
 
-    //Get all donuts
+    //Get all donuts or get the searched list by name
     @GetMapping("/")
-    public ResponseEntity<List<DonutDto>> getAllDonuts() {
-        List<DonutDto> donuts = donutService.getAllDonuts();
+    public ResponseEntity<List<DonutDto>> getAllDonuts(@RequestParam(required = false) String name) {
+        List<DonutDto> donuts = donutService.getAllDonuts(name);
         return ResponseEntity.ok(donuts);
     }
 
-    @GetMapping("/search/{name}")
-    public ResponseEntity<List<DonutDto>> getAllDonutsByName(@PathVariable("name") String name) {
-        List<DonutDto> donuts = donutService.getAllDonutsByName(name);
-        return ResponseEntity.ok(donuts);
-    }
+//    @GetMapping("/search/{name}")
+//    public ResponseEntity<List<DonutDto>> getAllDonutsByName(@PathVariable("name") String name) {
+//        List<DonutDto> donuts = donutService.getAllDonutsByName(name);
+//        return ResponseEntity.ok(donuts);
+//    }
 
     //Update Donut
     @PutMapping("/{id}")

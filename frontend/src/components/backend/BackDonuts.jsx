@@ -1,62 +1,69 @@
 import React, { useEffect, useState } from 'react';
 import '../../styles/backend/BackDonuts.css';
-import { deleteDonutById, listDonuts } from '../../services/DonutService';
+import { deleteDonutById, listDonuts, getDonutsByname } from '../../services/DonutService';
 import DonutsModal from './DonutsModal';
-
-// import { useNavigate } from 'react-router-dom';
 
 const BackDonuts = () => {
 
   const [donuts, setDonuts] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedDonutId, setSelectedDonutId] = useState(null); // State to store the selected donut id
-
+  const [searchTerm, setSearchTerm] = useState("");
 
   // useEffect hook to fetch the list of donuts when the component mounts
   useEffect(() => {
+    listAllDonuts(); // Fetch all donuts when the component mounts
+  }, []);
+
+  // Function to list all donuts
+  const listAllDonuts = () => {
     listDonuts()
       .then((response) => {
         setDonuts(response.data);
-        setFilteredData(response.data);
       })
       .catch((error) => {
-        console.error(error)
-      })
-  })
+        console.error(error);
+      });
+  };
 
+
+  // Function to list search donuts
+  function handleSearch() {
+    if (searchTerm !== '') { // Ensure searchTerm is not empty
+      getDonutsByname(searchTerm)
+        .then((response) => {
+          setDonuts(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      listAllDonuts(); // If searchTerm is empty, list all donuts
+    }
+  }
+
+  //Edit selected donut
   function updateDonut(id) {
     setSelectedDonutId(id); // Set the selected donut id
     console.log("selected DonutId " + selectedDonutId);
     setShowModal(true); // Open the modal
   }
 
+  //Add a new donut
   function addDonut() {
     setSelectedDonutId(null); // Reset the selected donut id
     setShowModal(true); // Open the modal
   }
 
-
+  //Delete selected donut
   function removeDonut(id) {
     const confirmed = window.confirm("Are you sure you want to delete this donut?")
     if (confirmed) {
       deleteDonutById(id).then((response) => {
-
       }).catch(error => {
         console.error(error);
       })
     }
-  }
-
-
-  function handleSearch(event) {
-    // Filter donuts based on search term
-    let value = event.target.value.toLowerCase();
-    let result = [];
-    console.log(value);
-    result = donuts.filter((donut) => {
-      return donut.name.toLowerCase().includes(value);
-    });
-    setFilteredData(result);
   }
 
   return (
@@ -70,11 +77,12 @@ const BackDonuts = () => {
               placeholder="Search donut name"
               aria-label="Recipient's username"
               aria-describedby="button-addon2"
-              onChange={(event) => handleSearch(event)}
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value.toString())}
             />
-            {/* <button className="btn btn-outline-primary" type="button" id="button-addon2">
+            <button className="btn btn-outline-primary" type="button" id="button-addon2" onClick={handleSearch}>
               Search
-            </button> */}
+            </button>
           </div>
         </div>
         <div className="col-md-6">

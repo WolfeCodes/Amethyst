@@ -12,9 +12,9 @@ public interface DonutService {
 
     DonutDto getDonutById(int id);
 
-    List<DonutDto> getAllDonuts();
+    List<DonutDto> getAllDonuts(String name);
 
-    List<DonutDto> getAllDonutsByName(String name);
+//    List<DonutDto> getAllDonutsByName(String name);
 
     DonutDto updateDonut(int id, DonutDto updatedDonut);
 
