@@ -1,6 +1,7 @@
 package org.launchcode.Amethyst.services.impl;
 
 import org.launchcode.Amethyst.dto.CartDto;
+import org.launchcode.Amethyst.dto.CartItemDto;
 import org.launchcode.Amethyst.entity.Cart;
 import org.launchcode.Amethyst.entity.CartItem;
 import org.launchcode.Amethyst.entity.Donut;
@@ -14,6 +15,7 @@ import org.launchcode.Amethyst.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -39,6 +41,32 @@ public class CartServiceImpl implements CartService {
     public CartDto getCartById(int id) {
         Cart cart = cartRepository.findById(id).orElseThrow(() -> new RuntimeException("Cart does not exist"));
         return toDto(cart);
+    }
+
+    @Override
+    public double getTotal(CartDto cartDto) {
+        double total = 0;
+        Cart cart = toCart(cartDto);
+        List<CartItem> cartItems = cart.getCartItems();
+        for(CartItem cartItem: cartItems) {
+            total += (cartItem.getDonut().getPrice() * cartItem.getQuantity());
+        }
+        return total;
+    }
+
+    @Override
+    public CartDto emptyCart(CartDto cartDto) {
+        Cart cart = toCart(cartDto);
+        List<CartItem> emptyCart = new ArrayList<>();
+        cart.setCartItems(emptyCart);
+        cartRepository.save(cart);
+        return null;
+    }
+
+    @Override
+    public List<CartItem> getCartItems(CartDto cartDto) {
+        Cart cart = cartRepository.findById(cartDto.getId()).orElseThrow(() -> new RuntimeException("Cart does not exist"));
+        return cart.getCartItems();
     }
 
 

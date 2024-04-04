@@ -1,10 +1,9 @@
 package org.launchcode.Amethyst.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.List;
 
 @Entity
 public class User {
@@ -15,6 +14,9 @@ public class User {
     private String password;
     private String role;
     //variables for created_at & modified_at
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private List<Orders> orders;
 
 
     public User(int id, String username, String password, String role) {

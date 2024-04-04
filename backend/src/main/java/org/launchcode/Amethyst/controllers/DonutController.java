@@ -18,21 +18,21 @@ public class DonutController {
     private DonutService donutService;
 
 
-    //Build Add Employee REST API
+    //Create a donut
     @PostMapping("/")
     public ResponseEntity<DonutDto> addDonut(@RequestBody DonutDto donutDto) {
         DonutDto savedDonut = donutService.createDonut(donutDto);
         return new ResponseEntity<>(savedDonut, HttpStatus.CREATED);
     }
 
-    //Build Get Employee REST API
+    //Get single donut by id
     @GetMapping("/{id}")
     public ResponseEntity<DonutDto> getDonutById(@PathVariable int id) {
         DonutDto donutDto = donutService.getDonutById(id);
         return ResponseEntity.ok(donutDto);
     }
 
-    //Build Get All Employee REST API
+    //Get all donuts
     @GetMapping("/")
     public ResponseEntity<List<DonutDto>> getAllDonuts() {
         List<DonutDto> donuts = donutService.getAllDonuts();
@@ -45,7 +45,7 @@ public class DonutController {
         return ResponseEntity.ok(donuts);
     }
 
-    //Build Update Employee REST API
+    //Update Donut
     @PutMapping("/{id}")
     public ResponseEntity<DonutDto> updateDonuts(@PathVariable("id") int id, @RequestBody DonutDto updatedDonut) {
         DonutDto donutDto = donutService.updateDonut(id, updatedDonut);
