@@ -14,7 +14,7 @@ public class User {
     private String username;
 
     private String email;
-    private String telephone;
+//    private String telephone;
     private String password;
     private String role;
 
@@ -24,11 +24,11 @@ public class User {
     private List<Orders> orders;
 
 
-    public User(int id, String username, String password, String role,String email,String telephone) {
+    public User(int id, String username, String password, String role,String email) {
         this.id = id;
         this.username = username;
         this.email=email;
-        this.telephone=telephone;
+//        this.telephone=telephone;
         this.password = password;
         this.role = role;
     }
@@ -72,11 +72,11 @@ public class User {
         this.email = email;
     }
 
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
+//    public String getTelephone() {
+//        return telephone;
+//    }
+//
+//    public void setTelephone(String telephone) {
+//        this.telephone = telephone;
+//    }
 }

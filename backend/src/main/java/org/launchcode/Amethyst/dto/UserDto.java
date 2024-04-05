@@ -5,20 +5,20 @@ public class UserDto {
     private String username;
 
     private String email;
-    private String telephone;
+//    private String telephone;
     private String password;
     private String role;
 
     public UserDto() {
     }
 
-    public UserDto(int id, String username, String password, String role,String email, String telephone) {
+    public UserDto(int id, String username, String password, String role,String email) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.role = role;
         this.email=email;
-        this.telephone=telephone;
+//        this.telephone=telephone;
     }
 
     public int getId() {
@@ -61,11 +61,11 @@ public class UserDto {
         this.email = email;
     }
 
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
+//    public String getTelephone() {
+//        return telephone;
+//    }
+//
+//    public void setTelephone(String telephone) {
+//        this.telephone = telephone;
+//    }
 }

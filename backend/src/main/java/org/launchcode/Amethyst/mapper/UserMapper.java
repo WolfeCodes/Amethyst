@@ -5,15 +5,13 @@ import org.launchcode.Amethyst.entity.User;
 
 public class UserMapper {
 
-    public static User mapToUser(UserDto userDto){
+    public static User mapToUser(UserDto userDto) {
         User user = new User(
                 userDto.getId(),
                 userDto.getUsername(),
                 userDto.getPassword(),
                 userDto.getRole(),
-                userDto.getEmail(),
-                userDto.getTelephone()
-
+                userDto.getEmail()
         );
 
         return user;
@@ -25,8 +23,7 @@ public class UserMapper {
                 user.getUsername(),
                 user.getPassword(),
                 user.getRole(),
-                user.getEmail(),
-                user.getTelephone()
+                user.getEmail()
         );
 
         return userDto;

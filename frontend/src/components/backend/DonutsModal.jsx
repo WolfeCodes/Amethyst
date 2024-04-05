@@ -14,7 +14,6 @@ const DonutsModal = ({ closeModal, id }) => {
   useEffect(() => {
     if (id != null) {
       getSingleDonut(id).then((response) => {
-        console.log(response.data);
         setName(response.data.name);
         setPrice(response.data.price);
         setImageUrl(response.data.imageUrl);
@@ -31,17 +30,17 @@ const DonutsModal = ({ closeModal, id }) => {
     console.log(donut);
     if (id != null) {
       updateDonut(id, donut).then((response) => {
-        console.log(response.data);
         closeModal(false); // Close the modal after creating the donuts
         navigator('/backstage/backdonuts');
+        window.location.reload(); // Reload the page after navigation
       }).catch(error => {
         console.error(error);
       })
     } else {
       createDonuts(donut).then((response) => {
-        console.log(response.data);
         closeModal(false); // Close the modal after creating the donuts
         navigator('/backstage/backdonuts');
+        window.location.reload(); // Reload the page after navigation
       }).catch(error => {
         console.error(error);
       })

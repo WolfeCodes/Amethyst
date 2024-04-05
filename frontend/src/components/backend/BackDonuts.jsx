@@ -60,6 +60,7 @@ const BackDonuts = () => {
     const confirmed = window.confirm("Are you sure you want to delete this donut?")
     if (confirmed) {
       deleteDonutById(id).then((response) => {
+        window.location.reload(); // Refresh the page after deletion
       }).catch(error => {
         console.error(error);
       })

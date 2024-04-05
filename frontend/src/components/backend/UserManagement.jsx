@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { listUsers } from '../../services/UserService';
+import { listUsers, deleteUserById } from '../../services/UserService';
 import UsersModal from './UsersModal';
 
 
@@ -61,6 +61,7 @@ const UserManagement = () => {
     const confirmed = window.confirm("Are you sure you want to delete this donut?")
     if (confirmed) {
       deleteUserById(id).then((response) => {
+        window.location.reload(); // Refresh the page after deletion
       }).catch(error => {
         console.error(error);
       })

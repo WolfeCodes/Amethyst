@@ -4,17 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import { createUser, getSingleUser, updateUser } from '../../services/UserService';
 
 const UsersModal = ({ closeModal, id }) => {
-  const [userName, setUserName] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
-  const [role, setRole] = useState('');
+  const [role, setRole] = useState('User');
 
   const navigator = useNavigate();
 
   useEffect(() => {
     if (id != null) {
       getSingleUser(id).then((response) => {
-        console.log(response.data);
-        setUserName(response.data.username);
+        setUsername(response.data.username);
         setEmail(response.data.email);
         setRole(response.data.role);
       }).catch(error => {
@@ -25,21 +24,22 @@ const UsersModal = ({ closeModal, id }) => {
 
   function saveOrUpdateUser(e) {
     e.preventDefault();
-    const user = { userName, email, role };
+    const user = { username, password: 123456, email, role };
     console.log(user);
     if (id != null) {
       updateUser(id, user).then((response) => {
-        console.log(response.data);
         closeModal(false); // Close the modal after creating the donuts
         navigator('/backstage/UserManagement');
+        window.location.reload(); // Reload the page after navigation
+
       }).catch(error => {
         console.error(error);
       })
     } else {
       createUser(user).then((response) => {
-        console.log(response.data);
         closeModal(false); // Close the modal after creating the donuts
         navigator('/backstage/UserManagement');
+        window.location.reload(); // Reload the page after navigation
       }).catch(error => {
         console.error(error);
       })
@@ -75,8 +75,8 @@ const UsersModal = ({ closeModal, id }) => {
                   className="form-control"
                   placeholder="Enter the user name"
                   name='userName'
-                  value={userName}
-                  onChange={(e) => setUserName(e.target.value)}
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </div>
               <div className="mb-3">
@@ -92,10 +92,9 @@ const UsersModal = ({ closeModal, id }) => {
               </div>
               <div className="mb-3">
                 <label className="col-form-label">Role:</label>
-                <select className="form-select" aria-label="Default select example">
-                  <option selected>Select user role</option>
-                  <option value="1">User</option>
-                  <option value="2">Admin</option>
+                <select className="form-select" aria-label="Default select example" placeholder="Select user role" value={role} onChange={(e) => setRole(e.target.value)}>
+                  <option value="User">User</option>
+                  <option value="Admin">Admin</option>
                 </select>
               </div>
             </form>
