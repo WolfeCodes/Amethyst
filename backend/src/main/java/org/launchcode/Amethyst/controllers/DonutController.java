@@ -39,12 +39,6 @@ public class DonutController {
         return ResponseEntity.ok(donuts);
     }
 
-//    @GetMapping("/search/{name}")
-//    public ResponseEntity<List<DonutDto>> getAllDonutsByName(@PathVariable("name") String name) {
-//        List<DonutDto> donuts = donutService.getAllDonutsByName(name);
-//        return ResponseEntity.ok(donuts);
-//    }
-
     //Update Donut
     @PutMapping("/{id}")
     public ResponseEntity<DonutDto> updateDonuts(@PathVariable("id") int id, @RequestBody DonutDto updatedDonut) {

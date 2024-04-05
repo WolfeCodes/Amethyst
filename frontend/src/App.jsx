@@ -8,10 +8,12 @@ import BackDonuts from './components/backend/BackDonuts';
 import BackSidebar from './components/backend/BackSidebar';
 import BackHome from './components/backend/BackHome';
 import BackHeader from './components/backend/BackHeader';
+import UserManagement from './components/backend/UserManagement';
 import CartComponent from './components/frontend/CartComponent';
 import OrderComponent from './components/frontend/OrderComponent';
 import UserComponent from './components/frontend/UserComponent';
 import Footer from './components/frontend/Footer';
+import OrderManagement from './components/backend/OrderManagement';
 
 
 function FrontendApp() {
@@ -38,6 +40,8 @@ function BackendApp() {
       <Routes>
         <Route path="/backhome" element={<BackHome />} />
         <Route path="/backdonuts" element={<BackDonuts />} />
+        <Route path="/ordermanagement" element={<OrderManagement />} />
+        <Route path="/usermanagement" element={<UserManagement />} />
       </Routes>
     </>
   );

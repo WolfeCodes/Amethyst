@@ -3,6 +3,7 @@ package org.launchcode.Amethyst.entity;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -11,17 +12,23 @@ public class User {
     @GeneratedValue
     private int id;
     private String username;
+
+    private String email;
+//    private String telephone;
     private String password;
     private String role;
+
     //variables for created_at & modified_at
     @OneToMany
     @JoinColumn(name = "user_id")
     private List<Orders> orders;
 
 
-    public User(int id, String username, String password, String role) {
+    public User(int id, String username, String password, String role,String email) {
         this.id = id;
         this.username = username;
+        this.email=email;
+//        this.telephone=telephone;
         this.password = password;
         this.role = role;
     }
@@ -57,5 +64,19 @@ public class User {
         this.role = role;
     }
 
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+//    public String getTelephone() {
+//        return telephone;
+//    }
+//
+//    public void setTelephone(String telephone) {
+//        this.telephone = telephone;
+//    }
 }
