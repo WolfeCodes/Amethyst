@@ -8,6 +8,8 @@ const DonutsModal = ({ closeModal, id }) => {
   const [price, setPrice] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [description, setDescription] = useState('');
+  const [rating, setRating] = useState(null);
+  const [createTime, setCreateTime] = useState('');
 
   const navigator = useNavigate();
 
@@ -18,6 +20,8 @@ const DonutsModal = ({ closeModal, id }) => {
         setPrice(response.data.price);
         setImageUrl(response.data.imageUrl);
         setDescription(response.data.description);
+        setRating(response.data.rating);
+        setCreateTime(response.data.createTime);
       }).catch(error => {
         console.error(error);
       })
@@ -26,7 +30,7 @@ const DonutsModal = ({ closeModal, id }) => {
 
   function saveOrUpdateDonut(e) {
     e.preventDefault();
-    const donut = { name, price, imageUrl, description, rating: 5, createTime: new Date().toISOString() };
+    const donut = { name, price, imageUrl, description, rating, createTime };
     console.log(donut);
     if (id != null) {
       updateDonut(id, donut).then((response) => {

@@ -30,8 +30,8 @@ public class UserController {
         return ResponseEntity.ok(userDto);
     }
     @GetMapping("/")
-    public ResponseEntity<List<UserDto>> getAllUsers(){
-        List<UserDto> users = userService.getAllUsers();
+    public ResponseEntity<List<UserDto>> getAllUsers(@RequestParam(required = false) String username){
+        List<UserDto> users = userService.getAllUsers(username);
         return ResponseEntity.ok(users);
     }
 

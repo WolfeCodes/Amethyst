@@ -35,9 +35,13 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public List<UserDto> getAllUsers() {
+    public List<UserDto> getAllUsers(String username) {
         List<User> users = new ArrayList<>();
-        userRepository.findAll().forEach(users::add);
+        if (username != null && !username.isEmpty()) {
+            userRepository.findByName(username).forEach(users::add);
+        } else {
+            userRepository.findAll().forEach(users::add);
+        }
         return users.stream().map(UserMapper::mapToUserDto).collect(Collectors.toList());
     }
 
@@ -49,14 +53,14 @@ public class UserServiceImpl implements UserService {
         user.setRole(updatedUser.getRole());
         user.setPassword(updatedUser.getPassword());
 
-        User updatedUserObj =userRepository.save(user);
+        User updatedUserObj = userRepository.save(user);
 
         return UserMapper.mapToUserDto(updatedUserObj);
     }
 
     @Override
     public void deleteUserById(int id) {
-        User user=userRepository.findById(id).orElseThrow(() -> new RuntimeException("User does not exist"));
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User does not exist"));
         userRepository.deleteById(id);
     }
 }

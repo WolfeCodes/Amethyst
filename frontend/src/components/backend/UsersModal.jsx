@@ -6,6 +6,7 @@ import { createUser, getSingleUser, updateUser } from '../../services/UserServic
 const UsersModal = ({ closeModal, id }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [role, setRole] = useState('User');
 
   const navigator = useNavigate();
@@ -15,6 +16,7 @@ const UsersModal = ({ closeModal, id }) => {
       getSingleUser(id).then((response) => {
         setUsername(response.data.username);
         setEmail(response.data.email);
+        setPassword(response.data.password);
         setRole(response.data.role);
       }).catch(error => {
         console.error(error);
@@ -24,7 +26,7 @@ const UsersModal = ({ closeModal, id }) => {
 
   function saveOrUpdateUser(e) {
     e.preventDefault();
-    const user = { username, password: 123456, email, role };
+    const user = { username, password, email, role };
     console.log(user);
     if (id != null) {
       updateUser(id, user).then((response) => {

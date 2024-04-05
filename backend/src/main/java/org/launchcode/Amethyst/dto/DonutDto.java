@@ -16,14 +16,13 @@ public class DonutDto {
     public DonutDto() {
     }
 
-    public DonutDto(int id, String name, double price, String description, String imageUrl, double rating, LocalDateTime createTime) {
+    public DonutDto(int id, String name, double price, String description, String imageUrl) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
         this.imageUrl = imageUrl;
-        this.rating = rating;
-        this.createTime = createTime;
+        this.rating = 5.0;
     }
 
     public int getId() {

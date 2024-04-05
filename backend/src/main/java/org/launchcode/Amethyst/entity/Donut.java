@@ -22,14 +22,14 @@ public class Donut {
     @OneToMany
     @JoinColumn(name = "donut_id")
     private List<CartItem> cartItems;
-    public Donut(int id, String name, double price, String description, String imageUrl, double rating,LocalDateTime createTime) {
+    public Donut(int id, String name, double price, String description, String imageUrl) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
         this.imageUrl = imageUrl;
-        this.rating = rating;
-        this.createTime=createTime;
+        this.rating = 5.0;
+        this.createTime= LocalDateTime.now();;
     }
 
     private Donut() {
