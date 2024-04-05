@@ -18,4 +18,5 @@ public interface OrderItemsService {
 
     OrderItems cartItemToOrderItems(CartItem cartItem);
 
+    double getTotal(OrderItemsDto orderItemsDto);
 }
