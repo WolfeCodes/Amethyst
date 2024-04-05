@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import '../../styles/backend/Modal.css'
 import { createDonuts, getSingleDonut, updateDonut } from '../../services/DonutService';
-import { useNavigate, useParams } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 
 const DonutsModal = ({ closeModal, id }) => {
   const [name, setName] = useState('');

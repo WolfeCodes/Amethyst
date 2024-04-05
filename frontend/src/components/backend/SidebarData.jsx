@@ -18,11 +18,11 @@ export const SidebarData = [
   {
     title: "OrderManagement",
     icon: <ListAltIcon />,
-    link: "/backstage/orderManagement"
+    link: "/backstage/ordermanagement"
   },
   {
     title: "UserManagement",
     icon: <AccountCircleIcon />,
-    link: "/usermanagement"
+    link: "/backstage/usermanagement"
   }
 ]
