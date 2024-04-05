@@ -1,8 +1,10 @@
 package org.launchcode.Amethyst.controllers;
 
+import org.launchcode.Amethyst.dto.CartDto;
 import org.launchcode.Amethyst.dto.DonutDto;
 import org.launchcode.Amethyst.dto.UserDto;
 import org.launchcode.Amethyst.entity.User;
+import org.launchcode.Amethyst.services.CartService;
 import org.launchcode.Amethyst.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,9 +21,17 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CartService cartService;
+
     @PostMapping("/")
     public ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto){
-        return new ResponseEntity<>(userService.createUser(userDto), HttpStatus.CREATED);
+        UserDto createdUser = userService.createUser(userDto);
+        //create cart
+        CartDto cartDto = new CartDto();
+        cartDto.setUserId(createdUser.getId());
+        cartService.createCart(cartDto);
+        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
