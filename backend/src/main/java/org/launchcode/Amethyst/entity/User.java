@@ -24,12 +24,12 @@ public class User {
     private List<Orders> orders;
 
 
-    public User(int id, String username, String password, String role,String email) {
+    public User(int id, String username, String role,String email) {
         this.id = id;
         this.username = username;
         this.email=email;
 //        this.telephone=telephone;
-        this.password = password;
+        this.password = "password";
         this.role = role;
     }
 

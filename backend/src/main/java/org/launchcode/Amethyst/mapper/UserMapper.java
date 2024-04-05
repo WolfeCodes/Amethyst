@@ -9,7 +9,6 @@ public class UserMapper {
         User user = new User(
                 userDto.getId(),
                 userDto.getUsername(),
-                userDto.getPassword(),
                 userDto.getRole(),
                 userDto.getEmail()
         );
@@ -21,7 +20,6 @@ public class UserMapper {
         UserDto userDto = new UserDto(
                 user.getId(),
                 user.getUsername(),
-                user.getPassword(),
                 user.getRole(),
                 user.getEmail()
         );

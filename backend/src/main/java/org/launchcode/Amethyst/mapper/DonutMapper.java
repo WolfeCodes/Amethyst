@@ -13,9 +13,7 @@ public class DonutMapper {
                 donutDto.getName(),
                 donutDto.getPrice(),
                 donutDto.getDescription(),
-                donutDto.getImageUrl(),
-                donutDto.getRating(),
-                donutDto.getCreateTime()
+                donutDto.getImageUrl()
         );
         return donut;
     }
@@ -26,9 +24,7 @@ public class DonutMapper {
                 donut.getName(),
                 donut.getPrice(),
                 donut.getDescription(),
-                donut.getImageUrl(),
-                donut.getRating(),
-                donut.getCreateTime()
+                donut.getImageUrl()
         );
 
         return donutDto;
