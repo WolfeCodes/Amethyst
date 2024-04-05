@@ -10,4 +10,7 @@ public interface OrderService {
     OrderDto createOrder(CartDto cartDto);
 
     List<OrderDto> getAllOrders();
+
+    OrderDto getOrderById(int id);
+    double getPriceOfOrder(OrderDto orderDto);
 }

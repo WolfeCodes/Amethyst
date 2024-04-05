@@ -51,6 +51,22 @@ public class OrderServiceImpl implements OrderService {
         return orderDtos;
     }
 
+    @Override
+    public OrderDto getOrderById(int id) {
+        Orders orders = orderRepository.findById(id).orElseThrow(() -> new RuntimeException("Order does not exist"));
+        return toDto(orders);
+    }
+
+    @Override
+    public double getPriceOfOrder(OrderDto orderDto) {
+        double total = 0;
+        List<Integer> orderItemIds = orderDto.getOrderItemIds();
+        for(Integer orderItemId: orderItemIds){
+            total += (orderItemsService.getTotal(orderItemsService.getOrderItemsById(orderItemId)));
+        }
+        return total;
+    }
+
     OrderDto toDto(Orders orders){
         List<Integer> orderItemIds = orders.getOrderItems().stream().map(OrderItems::getId).toList();
         return new OrderDto(orders.getId(), orders.getUser().getId(), orderItemIds);

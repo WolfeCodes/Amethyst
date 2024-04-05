@@ -1,5 +1,6 @@
 package org.launchcode.Amethyst.controllers;
 
+import org.launchcode.Amethyst.dto.CartItemDto;
 import org.launchcode.Amethyst.dto.OrderItemsDto;
 import org.launchcode.Amethyst.services.OrderItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,22 +18,28 @@ import java.util.List;
 public class OrderItemsController {
 
     @Autowired
-    private OrderItemsService order_ItemsServices;
+    private OrderItemsService orderItemsServices;
 
     @PostMapping
     public ResponseEntity<OrderItemsDto> addUser(@RequestBody OrderItemsDto orderItemsDto){
-        return new ResponseEntity<>(order_ItemsServices.createOrderItems(orderItemsDto), HttpStatus.CREATED);
+        return new ResponseEntity<>(orderItemsServices.createOrderItems(orderItemsDto), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<OrderItemsDto> getOrder_ItemsById(@PathVariable int id){
-        OrderItemsDto order_ItemsDto = order_ItemsServices.getOrderItemsById(id);
+        OrderItemsDto order_ItemsDto = orderItemsServices.getOrderItemsById(id);
         return ResponseEntity.ok(order_ItemsDto);
     }
     @GetMapping("/")
     public ResponseEntity<List<OrderItemsDto>> getAllOrderItems(){
-        List<OrderItemsDto> order_Items = order_ItemsServices.getAllOrderItems();
+        List<OrderItemsDto> order_Items = orderItemsServices.getAllOrderItems();
         return ResponseEntity.ok(order_Items);
+    }
+
+    @GetMapping("/price/{orderItemsId}")
+    public ResponseEntity<Double> getTotal(@PathVariable int orderItemsId){
+        OrderItemsDto orderItemsDto = orderItemsServices.getOrderItemsById(orderItemsId);
+        return new ResponseEntity<>(orderItemsServices.getTotal(orderItemsDto), HttpStatus.CREATED);
     }
 
 }

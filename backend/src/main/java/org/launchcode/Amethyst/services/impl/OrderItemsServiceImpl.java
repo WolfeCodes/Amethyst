@@ -5,6 +5,7 @@ import org.launchcode.Amethyst.entity.CartItem;
 import org.launchcode.Amethyst.entity.OrderItems;
 import org.launchcode.Amethyst.mapper.OrderItemsMapper;
 import org.launchcode.Amethyst.models.data.OrderItemsRepository;
+import org.launchcode.Amethyst.services.DonutService;
 import org.launchcode.Amethyst.services.OrderItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,8 @@ public class OrderItemsServiceImpl implements OrderItemsService {
 
     @Autowired
     private OrderItemsRepository orderItemsRepository;
+    @Autowired
+    private DonutService donutService;
 
     @Override
     public OrderItemsDto createOrderItems(OrderItemsDto orderItemsDto){
@@ -56,6 +59,13 @@ public class OrderItemsServiceImpl implements OrderItemsService {
         orderItems.setQuantity(cartItem.getQuantity());
         orderItemsRepository.save(orderItems);
         return orderItems;
+    }
+
+    @Override
+    public double getTotal(OrderItemsDto orderItemsDto) {
+        double total = 0;
+        total = (donutService.getDonutById(orderItemsDto.getDonutId()).getPrice() * orderItemsDto.getQuantity());
+        return total;
     }
 
 }
