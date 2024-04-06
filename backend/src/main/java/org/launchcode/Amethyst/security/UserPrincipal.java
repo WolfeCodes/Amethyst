@@ -1,9 +1,12 @@
 package org.launchcode.Amethyst.security;
 
+import com.auth0.jwt.interfaces.Claim;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
 
 public class UserPrincipal implements UserDetails {
 
@@ -11,7 +14,7 @@ public class UserPrincipal implements UserDetails {
     private String email;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrincipal() {
+    public UserPrincipal(Integer userId, Claim e, List<SimpleGrantedAuthority> authorities) {
     }
 
     public UserPrincipal(int userId, String email, Collection<? extends GrantedAuthority> authorities) {
