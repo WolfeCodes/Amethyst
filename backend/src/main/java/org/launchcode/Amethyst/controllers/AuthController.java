@@ -3,7 +3,9 @@ package org.launchcode.Amethyst.controllers;
 import org.launchcode.Amethyst.models.LoginRequest;
 import org.launchcode.Amethyst.models.LoginResponse;
 import org.launchcode.Amethyst.security.JwtIssuer;
+import org.launchcode.Amethyst.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +25,7 @@ public class AuthController {
     }
 
     @GetMapping("/test")
-    public String testingSecurity(){
-        return "You made it";
+    public String testingSecurity(@AuthenticationPrincipal UserPrincipal userPrincipal){
+        return "You made it. User Id: " + userPrincipal.getUserId() + "email: " + userPrincipal.getEmail() + " " + userPrincipal.getAuthorities();
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 public class JwtToPrincipal {
 
     public UserPrincipal convert(DecodedJWT jwt){
-        return new UserPrincipal(Integer.valueOf(jwt.getSubject()), jwt.getClaim("e"), extractAuthoritiesFromClaim(jwt));
+        return new UserPrincipal(Integer.parseInt(jwt.getSubject()), jwt.getClaim("e").asString(), extractAuthoritiesFromClaim(jwt));
     }
 
     private List<SimpleGrantedAuthority> extractAuthoritiesFromClaim(DecodedJWT jwt){
