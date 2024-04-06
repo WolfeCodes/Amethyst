@@ -8,6 +8,10 @@ const UsersModal = ({ closeModal, id }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('User');
+  const [errors, setErrors] = useState({
+    username: '',
+    email: ''
+  })
 
   const navigator = useNavigate();
 
@@ -26,25 +30,27 @@ const UsersModal = ({ closeModal, id }) => {
 
   function saveOrUpdateUser(e) {
     e.preventDefault();
-    const user = { username, password, email, role };
-    console.log(user);
-    if (id != null) {
-      updateUser(id, user).then((response) => {
-        closeModal(false); // Close the modal after creating the donuts
-        navigator('/backstage/UserManagement');
-        window.location.reload(); // Reload the page after navigation
+    if (validateForm()) {
+      const user = { username, password, email, role };
+      console.log(user);
+      if (id != null) {
+        updateUser(id, user).then((response) => {
+          closeModal(false); // Close the modal after creating the donuts
+          navigator('/backstage/UserManagement');
+          window.location.reload(); // Reload the page after navigation
 
-      }).catch(error => {
-        console.error(error);
-      })
-    } else {
-      createUser(user).then((response) => {
-        closeModal(false); // Close the modal after creating the donuts
-        navigator('/backstage/UserManagement');
-        window.location.reload(); // Reload the page after navigation
-      }).catch(error => {
-        console.error(error);
-      })
+        }).catch(error => {
+          console.error(error);
+        })
+      } else {
+        createUser(user).then((response) => {
+          closeModal(false); // Close the modal after creating the donuts
+          navigator('/backstage/UserManagement');
+          window.location.reload(); // Reload the page after navigation
+        }).catch(error => {
+          console.error(error);
+        })
+      }
     }
   }
 
@@ -57,6 +63,25 @@ const UsersModal = ({ closeModal, id }) => {
     }
   }
 
+  function validateForm() {
+    let valid = true;
+    const errorsCopy = { ...errors };
+
+    if (username.trim()) {
+      errorsCopy.username = '';
+    } else {
+      errorsCopy.username = 'Username is required';
+      valid = false;
+    }
+    if (email.trim()) {
+      errorsCopy.email = '';
+    } else {
+      errorsCopy.email = 'Email is required';
+      valid = false;
+    }
+    setErrors(errorsCopy);
+    return valid;
+  }
 
   return (
     <div className="modal-container">
@@ -74,23 +99,25 @@ const UsersModal = ({ closeModal, id }) => {
                 <label className="col-form-label">User Name:</label>
                 <input
                   type="text"
-                  className="form-control"
+                  className={`form-control ${errors.username ? 'is-invalid' : ''}`}
                   placeholder="Enter the user name"
                   name='userName'
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                 />
+                {errors.username && <div className='invalid-feedback'>{errors.username}</div>}
               </div>
               <div className="mb-3">
                 <label className="col-form-label">Email:</label>
                 <input
                   type="text"
-                  className="form-control"
+                  className={`form-control ${errors.email ? 'is-invalid' : ''}`}
                   placeholder="Enter user email"
                   name='email'
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
+                {errors.email && <div className='invalid-feedback'>{errors.email}</div>}
               </div>
               <div className="mb-3">
                 <label className="col-form-label">Role:</label>

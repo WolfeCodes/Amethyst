@@ -10,6 +10,12 @@ const DonutsModal = ({ closeModal, id }) => {
   const [description, setDescription] = useState('');
   const [rating, setRating] = useState(null);
   const [createTime, setCreateTime] = useState('');
+  const [errors, setErrors] = useState({
+    name: '',
+    price: '',
+    imageUrl: '',
+    description: ''
+  })
 
   const navigator = useNavigate();
 
@@ -30,24 +36,26 @@ const DonutsModal = ({ closeModal, id }) => {
 
   function saveOrUpdateDonut(e) {
     e.preventDefault();
-    const donut = { name, price, imageUrl, description, rating, createTime };
-    console.log(donut);
-    if (id != null) {
-      updateDonut(id, donut).then((response) => {
-        closeModal(false); // Close the modal after creating the donuts
-        navigator('/backstage/backdonuts');
-        window.location.reload(); // Reload the page after navigation
-      }).catch(error => {
-        console.error(error);
-      })
-    } else {
-      createDonuts(donut).then((response) => {
-        closeModal(false); // Close the modal after creating the donuts
-        navigator('/backstage/backdonuts');
-        window.location.reload(); // Reload the page after navigation
-      }).catch(error => {
-        console.error(error);
-      })
+    if (validateForm()) {
+      const donut = { name, price, imageUrl, description, rating, createTime };
+      console.log(donut);
+      if (id != null) {
+        updateDonut(id, donut).then((response) => {
+          closeModal(false); // Close the modal after creating the donuts
+          navigator('/backstage/backdonuts');
+          window.location.reload(); // Reload the page after navigation
+        }).catch(error => {
+          console.error(error);
+        })
+      } else {
+        createDonuts(donut).then((response) => {
+          closeModal(false); // Close the modal after creating the donuts
+          navigator('/backstage/backdonuts');
+          window.location.reload(); // Reload the page after navigation
+        }).catch(error => {
+          console.error(error);
+        })
+      }
     }
   }
 
@@ -58,6 +66,40 @@ const DonutsModal = ({ closeModal, id }) => {
     } else {
       return <h1 className="modal-title fs-5" >Add Donut</h1>
     }
+  }
+
+  function validateForm() {
+    let valid = true;
+    const errorsCopy = { ...errors };
+    if (name.trim()) {
+      errorsCopy.name = '';
+    } else {
+      errorsCopy.name = 'Donut name is required';
+      valid = false;
+    }
+
+    if (price.trim()) {
+      errorsCopy.price = '';
+    } else {
+      errorsCopy.price = 'Donut price is required';
+      valid = false;
+    }
+
+    if (imageUrl.trim()) {
+      errorsCopy.imageUrl = '';
+    } else {
+      errorsCopy.imageUrl = 'Donut imageUrl is required';
+      valid = false;
+    }
+
+    if (description.trim()) {
+      errorsCopy.description = '';
+    } else {
+      errorsCopy.description = 'Donut description is required';
+      valid = false;
+    }
+    setErrors(errorsCopy);
+    return valid;
   }
 
 
@@ -77,44 +119,48 @@ const DonutsModal = ({ closeModal, id }) => {
                 <label className="col-form-label">Name:</label>
                 <input
                   type="text"
-                  className="form-control"
+                  className={`form-control ${errors.name ? 'is-invalid' : ''}`}
                   placeholder="Enter the donut name"
                   name='name'
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
+                {errors.name && <div className='invalid-feedback'>{errors.name}</div>}
               </div>
               <div className="mb-3">
                 <label className="col-form-label">Price:</label>
                 <input
                   type="text"
-                  className="form-control"
+                  className={`form-control ${errors.price ? 'is-invalid' : ''}`}
                   placeholder="Enter the donut price"
                   name='price'
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
                 />
+                {errors.price && <div className='invalid-feedback'>{errors.price}</div>}
               </div>
               <div className="mb-3">
                 <label className="col-form-label">Image Url:</label>
                 <input
                   type="text"
-                  className="form-control"
+                  className={`form-control ${errors.imageUrl ? 'is-invalid' : ''}`}
                   placeholder="Enter the image URL"
                   name='imageUrl'
                   value={imageUrl}
                   onChange={(e) => setImageUrl(e.target.value)}
                 />
+                {errors.imageUrl && <div className='invalid-feedback'>{errors.imageUrl}</div>}
               </div>
               <div className="mb-3">
                 <label className="col-form-label" >Description:</label>
                 <textarea
-                  className="form-control"
+                  className={`form-control ${errors.description ? 'is-invalid' : ''}`}
                   placeholder="Enter the donut description"
                   name='description'
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 ></textarea>
+                {errors.description && <div className='invalid-feedback'>{errors.description}</div>}
               </div>
             </form>
           </div>
