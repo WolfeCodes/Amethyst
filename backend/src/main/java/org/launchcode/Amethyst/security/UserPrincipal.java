@@ -1,6 +1,6 @@
 package org.launchcode.Amethyst.security;
 
-import com.auth0.jwt.interfaces.Claim;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,15 +12,18 @@ public class UserPrincipal implements UserDetails {
 
     private int userId;
     private String email;
+    @JsonIgnore
+    private String password;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrincipal(Integer userId, Claim e, List<SimpleGrantedAuthority> authorities) {
+    public UserPrincipal(Integer userId, String e, List<SimpleGrantedAuthority> authorities) {
     }
 
-    public UserPrincipal(int userId, String email, Collection<? extends GrantedAuthority> authorities) {
+    public UserPrincipal(int userId, String email, Collection<? extends GrantedAuthority> authorities, String password) {
         this.userId = userId;
         this.email = email;
         this.authorities = authorities;
+        this.password = password;
     }
 
     public int getUserId() {
@@ -50,7 +53,7 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
     @Override

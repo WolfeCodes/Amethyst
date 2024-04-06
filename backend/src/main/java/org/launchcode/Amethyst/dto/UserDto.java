@@ -15,7 +15,7 @@ public class UserDto {
     public UserDto(int id, String username, String role,String email) {
         this.id = id;
         this.username = username;
-        this.password = "password";
+        this.password = "$2a$12$DX.yW.2KYJFT61BdqmwliuWidCE9yQfjySLKNnMdp8T531.N9tGUK";
         this.role = role;
         this.email=email;
 //        this.telephone=telephone;
