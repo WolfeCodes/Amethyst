@@ -23,9 +23,12 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(registry -> registry
                         .requestMatchers("/**").permitAll()
                         .requestMatchers("/api/donuts/").permitAll()
+                        .anyRequest().authenticated()
                 );
 
         return http.build();
     }
+
+
 
 }
