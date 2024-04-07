@@ -68,7 +68,7 @@
 /* Styles for the price section of the card */
 .price {
   font-weight: bold; /* Make the price text bold */
-  margin: 12px; /* Add margin */
+  margin: 15px; /* Add margin */
 }
 
 /* Styles for the text section of the card */
@@ -84,7 +84,7 @@
 
 /* Styles for the "Add to Cart" button */
 .btn-add-to-cart {
-  margin: 12px; /* Align the add to cart button to the bottom of the card */
+  margin: 15px; /* Align the add to cart button to the bottom of the card */
   font-weight: bold; /* Make the button text bold */
 }
 
