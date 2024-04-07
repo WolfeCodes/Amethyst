@@ -1,79 +1,91 @@
+/* Styles for the order container */
 .order-container {
-    margin: 80px 20px 20px;
-    position: relative;
-  }
-  
-  .order-section {
-    display: flex;
-    flex-direction: column; /* Stack items vertically */
-  }
-  
-  .order-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .order-page-heading {
-    margin: 0;
-    padding: 10px;
-    margin-right: 20px;
-  }
-  
-  .image-placeholder {
-    width: 50px;
-    height: 50px;
-    overflow: hidden;
-    margin-bottom: 10px; /* Add margin below image */
-  }
-  
-  .image-placeholder img {
-    width: 100%;
-  }
-  
-  .user-info {
-    font-weight: bold;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-  }
-  
-  .previous-orders {
-    margin-top: 20px;
-    max-width: 800px;
-    border: 1px solid #fa6338; /* Add orange border */
-    border-radius: 10px; /* Curve border */
-    padding: 10px;
-  }
-  
-  .previous-orders-heading {
-    margin-bottom: 10px;
-    border-bottom: 1px solid #fa6338; /* Add orange underline */
-  }
-  
-  .previous-orders table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .previous-orders th,
-  .previous-orders td {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  .previous-orders th {
-    background-color: #f2f2f2;
-    text-align: left;
-  }
-  
-  .previous-orders td {
-    text-align: center;
-  }
-  
-  /* Highlight inputs */
-  .previous-orders th.highlight,
-  .previous-orders td.highlight {
-    background-color: #ffe6cc; /* Lighter orange */
-  }
-  
+  margin: 80px 20px 20px; /* Margin to create space around the container */
+  position: relative; /* Position relative for absolute positioning of user info */
+}
+
+/* Styles for the order section */
+.order-section {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+}
+
+/* Styles for the order header */
+.order-header {
+  display: flex;
+  align-items: center; /* Align items vertically */
+  margin-bottom: 20px; /* Margin below the header */
+}
+
+/* Styles for the order page heading */
+.order-page-heading {
+  margin: 0;
+  padding: 10px;
+  margin-right: 20px; /* Margin to separate heading from image */
+}
+
+/* Styles for the image placeholder */
+.image-placeholder {
+  width: 50px; /* Set width */
+  height: 50px; /* Set height */
+  overflow: hidden; /* Hide overflowing content */
+  margin-bottom: 10px; /* Margin below image */
+}
+
+/* Styles for the image inside the placeholder */
+.image-placeholder img {
+  width: 100%; /* Make image fill its container */
+}
+
+/* Styles for user information */
+.user-info {
+  font-weight: bold; /* Bold font */
+  position: absolute; /* Position absolutely */
+  top: 20px; /* Position from top */
+  right: 20px; /* Position from right */
+}
+
+/* Styles for the previous orders section */
+.previous-orders {
+  margin-top: 20px; /* Margin at the top */
+  max-width: 800px; /* Limit maximum width */
+  border: 1px solid #fa6338; /* Add orange border */
+  border-radius: 10px; /* Round border corners */
+  padding: 10px; /* Add padding */
+}
+
+/* Styles for the previous orders heading */
+.previous-orders-heading {
+  margin-bottom: 10px; /* Margin below heading */
+  border-bottom: 1px solid #fa6338; /* Add orange underline */
+}
+
+/* Styles for the previous orders table */
+.previous-orders table {
+  width: 100%; /* Make table fill its container */
+  border-collapse: collapse; /* Collapse table borders */
+}
+
+/* Styles for table headers and cells */
+.previous-orders th,
+.previous-orders td {
+  border: 1px solid #ddd; /* Add border */
+  padding: 8px; /* Add padding */
+}
+
+/* Styles for table headers */
+.previous-orders th {
+  background-color: #f2f2f2; /* Light gray background */
+  text-align: left; /* Align text to the left */
+}
+
+/* Styles for table cells */
+.previous-orders td {
+  text-align: center; /* Align text to the center */
+}
+
+/* Highlight inputs */
+.previous-orders th.highlight,
+.previous-orders td.highlight {
+  background-color: #ffe6cc; /* Lighter orange background for highlighted cells */
+}

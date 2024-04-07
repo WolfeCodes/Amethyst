@@ -41,15 +41,29 @@
 }
 
 .card-title {
-  width: 100%; /* Set width to fill the container */
-  height: 60px; /* Set a fixed height for the container */
-  display: flex; /* Enable flexbox layout */
-  align-items: center; /* Center content vertically */
-  justify-content: center; /* Center content horizontally */
-  text-align: center; /* Center title text */
-  font-weight: bold; /* Make the title text bold */
-  margin-bottom: 5px; /* Add margin to separate title from description */
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 5px;
+  position: relative; /* Position relative for absolute positioning of the dash */
 }
+
+/* Add a dash under the title */
+.card-title::after {
+  content: '';
+  position: absolute;
+  width: 250px; /* Adjust the width of the dash */
+  height: 2px; /* Adjust the height of the dash */
+  background-color: #FC942D; /* Color of the dash */
+  bottom: 1px; /* Adjust the position of the dash */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 
 .card-description {
   text-align: left; /* Align description text to the left */
