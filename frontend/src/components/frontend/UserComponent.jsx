@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../../styles/frontend/User.css'; // Import CSS file
+import { logIn } from '../../services/AuthenticationService';
 
 const UserComponent = () => {
   // State variables for form data and login mode
@@ -16,10 +17,20 @@ const UserComponent = () => {
     setPassword(event.target.value);
   };
 
+  
+
   // Function to handle form submission
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (isLogin) {
+      try{
+        const response = await logIn(email, password);
+        const token = response.data;
+        sessionStorage.setItem('jwtToken', token);
+        console.log(token);
+      } catch (error) {
+        console.error(error);
+      }
       console.log('Login submitted:', { email, password });
     } else {
       console.log('Sign up submitted:', { email, password });
@@ -39,7 +50,7 @@ const UserComponent = () => {
         <div className="form-group">
           <label htmlFor="email">Email:</label>
           <input
-            type="email"
+            type="text" 
             id="email"
             name="email"
             value={email}
