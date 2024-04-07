@@ -8,10 +8,12 @@ const Header = () => {
         <div className='header'>
             <nav className='navbar navbar-expand'>
                 <div className='container-fluid'>
-                    <a className='navbar-brand' href='/'>
-                        <img src="https://donutbank.com/cdn/shop/products/WhiteIcingCakewithSprinkles.png?v=1695916793" alt="Logo" width="50" height="40"></img>
-                        Donut Delights
-                    </a>
+                    <div className="logo-wrapper">
+                        <Link to="/" className='navbar-brand'>
+                            <img src="https://donutbank.com/cdn/shop/products/WhiteIcingCakewithSprinkles.png?v=1695916793" alt="Logo" />
+                        </Link>
+                    </div>
+                    <Link to="/" className='navbar-brand'>Donut Delights</Link>
                     <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div className="navbar-nav">
                             <Link to="/" className="nav-link active" aria-current="page">Home</Link>
@@ -31,3 +33,4 @@ const Header = () => {
 };
 
 export default Header;
+
