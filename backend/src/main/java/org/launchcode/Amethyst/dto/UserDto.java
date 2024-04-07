@@ -12,11 +12,11 @@ public class UserDto {
     public UserDto() {
     }
 
-    public UserDto(int id, String username, String role,String email) {
+    public UserDto(int id, String username, String password, String email) {
         this.id = id;
         this.username = username;
-        this.password = "$2a$12$DX.yW.2KYJFT61BdqmwliuWidCE9yQfjySLKNnMdp8T531.N9tGUK";
-        this.role = role;
+        this.password = password;
+        this.role = "user";
         this.email=email;
 //        this.telephone=telephone;
     }

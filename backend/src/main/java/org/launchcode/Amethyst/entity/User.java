@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 public class User {
@@ -15,8 +16,10 @@ public class User {
 
     private String email;
 //    private String telephone;
-    private String password;
+    private String pwHash;
     private String role;
+
+    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     //variables for created_at & modified_at
     @OneToMany
@@ -24,12 +27,12 @@ public class User {
     private List<Orders> orders;
 
 
-    public User(int id, String username, String role,String email) {
+    public User(int id, String username, String password, String role,String email) {
         this.id = id;
         this.username = username;
         this.email=email;
 //        this.telephone=telephone;
-        this.password = "password";
+        this.pwHash = encoder.encode(password);
         this.role = role;
     }
 
@@ -49,11 +52,11 @@ public class User {
     }
 
     public String getPassword() {
-        return password;
+        return pwHash;
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.pwHash = password;
     }
 
     public String getRole() {
