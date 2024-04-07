@@ -27,13 +27,6 @@ const UserComponent = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      // Validate password length
-      if (password.length < 5) {
-        setError('Password must be at least 5 characters long.');
-        setShowPasswordPopup(true); // Show the password popup
-        return; // Exit the function
-      }
-
       // Perform login or registration based on the selected mode (isLogin)
       if (isLogin) {
         // Call listUsers function to get all users
@@ -56,6 +49,13 @@ const UserComponent = () => {
           setShowLoginSuccessPopup(false); // Hide login success popup
         }
       } else {
+        // Validate password length for sign-up only
+        if (password.length < 5) {
+          setError('Password must be at least 5 characters long.');
+          setShowPasswordPopup(true); // Show the password popup
+          return; // Exit the function
+        }
+
         // Call listUsers function to get all users
         const response = await listUsers();
         const users = response.data;
@@ -180,4 +180,3 @@ const UserComponent = () => {
 };
 
 export default UserComponent;
-
