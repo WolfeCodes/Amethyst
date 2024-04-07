@@ -200,6 +200,7 @@ ul,
   -webkit-transition: background 0.3s linear, color 0.3s linear;
 }
 
+
 .btn.btn-primary:focus,
 .btn.btn-primary:hover {
   background: #fc830a;
@@ -270,4 +271,9 @@ textarea {
 
 .donut-block .btn-holder {
   text-align: center;
+}
+
+.backstage-home {
+  text-align: center;
+  margin: 100px;
 }
