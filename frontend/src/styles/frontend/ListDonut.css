@@ -40,7 +40,7 @@
 
 .card-title {
   width: 100%; /* Set width to fill the container */
-  height: 50px; /* Set a fixed height for the container */
+  height: 60px; /* Set a fixed height for the container */
   display: flex; /* Enable flexbox layout */
   align-items: center; /* Center content vertically */
   justify-content: center; /* Center content horizontally */
@@ -51,19 +51,25 @@
 
 .card-description {
   text-align: left; /* Align description text to the left */
-  margin-bottom: 5px; /* Add margin to separate description from price */
+  margin-bottom: 8px; /* Add margin to separate description from price */
 }
 
-.card-text, .price {
+.price {
+  font-weight: bold; /* Make the price text bold */
+  margin: 5px; /* Add margin */
+}
+
+.card-text {
   width: 100%; /* Set width to fill the container */
-  height: 25px; /* Set a fixed height for the container */
+  height: 20px; /* Set a fixed height for the container */
   display: flex; /* Enable flexbox layout */
   align-items: center; /* Center content vertically */
   justify-content: center; /* Center content horizontally */
-  margin: 5px; /* Add margin */
+  margin: 8px; /* Add margin */
   font-size: 14px; /* Adjust font size */
 }
 
 .btn-add-to-cart {
   margin-top: auto; /* Align the add to cart button to the bottom of the card */
+  font-weight: bold; /* Make the button text bold */
 }
