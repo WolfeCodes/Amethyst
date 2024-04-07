@@ -92,3 +92,30 @@
 .user-container.login-mode p button:hover {
   background-color: #C66900; /* Darker blue color */
 }
+.popup {
+  position: relative; /* Position popup relative to its container */
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background color */
+  color: white; /* White text color */
+  border-radius: 5px; /* Rounded corners */
+  padding: 20px; /* Add padding */
+  text-align: center; /* Center text horizontally */
+}
+
+.popup p {
+  margin-bottom: 30px; /* Add margin below the paragraph */
+}
+
+.popup button {
+  position: absolute; /* Position button relative to its container */
+  bottom: 10px; /* Place button 10px from the bottom */
+  left: 50%; /* Align button horizontally to the center */
+  transform: translateX(-50%); /* Center the button horizontally */
+  padding: 5px 10px; /* Add padding */
+  background-color: white; /* White background color */
+  color: black; /* Black text color */
+  border: none; /* Remove button border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Add pointer cursor */
+  font-weight: bold; /* Bold text */
+  margin-top: 40px; /* Add margin on top */
+}

@@ -1,23 +1,15 @@
-.container {
-  margin-top: 85px;
-
-}
-
-.homepage-picture {
-  width: 100%;
-  object-fit: cover;
-}
-
-.btn.btn-order {
+.btn.btn-view {
+  display: flex;
+  justify-content: center;
   margin: 20px;
-  color: white;
-  background-color: #FC942D;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
+  color: #FC942D;
+  font-size: 22px;
+  position: relative;
+  font-family: "Muli", sans-serif;
+  text-align: center;
 }
 
-.btn.btn-order:hover {
+/* .btn.btn-order:hover {
   background-color: #f87e00;
 }
 
@@ -36,4 +28,4 @@
 
 .btn.btn-learn-more:hover {
   color: #f76800;
-}
+} */

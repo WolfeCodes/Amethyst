@@ -6,17 +6,23 @@ const OrderComponent = () => {
 
   return (
     <div className="order-container">
+      {/* Order Section */}
       <div className="order-section">
         <div className="order-header">
           <h1 className="order-page-heading">Order Page</h1>
+          {/* Image Placeholder */}
           <div className="image-placeholder">
             <img src="https://donutbank.com/cdn/shop/products/GlazedwithSprinkles.png?v=1695916807" alt="Donut Placeholder" />
           </div>
         </div>
+        {/* User Information */}
         <div className="user-info">User: {/* Placeholder for user info */}</div>
       </div>
+
+      {/* Previous Orders Section */}
       <div className="previous-orders">
         <h2 className="previous-orders-heading">Previous Orders</h2>
+        {/* Table to Display Previous Orders */}
         <table>
           <thead>
             <tr>

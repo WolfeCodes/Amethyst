@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { listUsers, deleteUserById, getUsersByname } from '../../services/UserService';
 import UsersModal from './UsersModal';
-
+import '../../styles/backend/BackDonuts.css';
 
 const UserManagement = () => {
 
@@ -90,7 +90,7 @@ const UserManagement = () => {
           </div>
         </div>
         <div className="col-md-6">
-          <button type="button" className="btn btn-primary" onClick={() => { addUser() }}>
+          <button type="button" className="btn btn-backprimary" id="adddonuts" onClick={() => { addUser() }}>
             Add User
           </button>
           {showModal && (

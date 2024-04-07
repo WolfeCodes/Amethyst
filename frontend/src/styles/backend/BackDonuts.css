@@ -47,6 +47,8 @@
   margin: 15px;
 }
 
-.btn-primary {
+.btn-backprimary {
   margin: 10px;
+  color: white;
+  background-color: #0D6EFD;
 }

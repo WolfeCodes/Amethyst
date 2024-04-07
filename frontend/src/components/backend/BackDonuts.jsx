@@ -87,7 +87,7 @@ const BackDonuts = () => {
           </div>
         </div>
         <div className="col-md-6">
-          <button type="button" className="btn btn-primary" id="adddonuts" onClick={() => { addDonut() }}>
+          <button type="button" className="btn btn-backprimary" id="adddonuts" onClick={() => { addDonut() }}>
             Add Donuts
           </button>
           {showModal && (
