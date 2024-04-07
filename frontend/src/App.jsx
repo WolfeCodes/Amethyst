@@ -1,6 +1,8 @@
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/frontend/Header';
 import Home from './components/frontend/Home';
 import ListDonut from './components/frontend/ListDonut';
@@ -13,10 +15,16 @@ import CartComponent from './components/frontend/CartComponent';
 import OrderComponent from './components/frontend/OrderComponent';
 import UserComponent from './components/frontend/UserComponent';
 import Footer from './components/frontend/Footer';
+import Contact from './components/frontend/Contact';
 import OrderManagement from './components/backend/OrderManagement';
 
 
 function FrontendApp() {
+  const location = useLocation(); // Get current location using useLocation hook
+  // Check if the current location is either Home or ListDonut
+  const isHomePage = location.pathname === '/';
+  const isListDonutPage = location.pathname === '/menu';
+
   return (
     <>
       <Header />
@@ -27,7 +35,9 @@ function FrontendApp() {
         <Route path='/order' element={<OrderComponent />} />
         <Route path='/user' element={<UserComponent />} />
       </Routes>
-      {/* <Footer /> */}
+      {isHomePage && <Contact />}
+      {/* Render Footer only on Home and ListDonut pages */}
+      {(isHomePage || isListDonutPage) && <Footer />}
     </>
   );
 }

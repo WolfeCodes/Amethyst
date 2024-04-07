@@ -8,8 +8,6 @@ import { addDonutToCart } from '../../services/CartService';
 const ListDonut = ({ numberOfDonuts }) => {
 
   const [donuts, setDonuts] = useState([]);
-
-
   // useEffect hook to fetch the list of donuts when the component mounts
   useEffect(() => {
     listDonuts().then((response) => {
@@ -41,7 +39,7 @@ const ListDonut = ({ numberOfDonuts }) => {
                 <h5 className="card-title">{donut.name}</h5>
                 <p className="card-text flex-fill description">{donut.description}</p>
                 <p>Price: ${donut.price}</p>
-                <button className="btn btn-primary mt-auto" onClick={() => handleAddToCart(donut.id)}>Add to cart</button>
+                <button className="btn btn-outline-primary" onClick={() => handleAddToCart(donut.id)}>Add to cart</button>
               </div>
             </div>
           </div>
