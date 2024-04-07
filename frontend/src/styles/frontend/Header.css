@@ -8,15 +8,15 @@
   border-bottom: 1px solid;
   border-color: rgba(8, 8, 8, 0.125);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 4px 8px rgba(0, 0, 0, 0.05);
-  padding: 2px 0; /* Adjust the padding as needed */
+  padding: 1px 0; /* Adjust the padding as needed */
 }
 
 .logo-wrapper {
-  margin-right: 4px; /* Adjust margin if necessary */
+  margin-right: 0px; /* Adjust margin if necessary */
 }
 
 .logo-wrapper img {
-  width: 50px; /* Set the desired width of the logo */
+  width: 40px; /* Set the desired width of the logo */
   height: 40px; /* Set the desired height of the logo */
 }
 
