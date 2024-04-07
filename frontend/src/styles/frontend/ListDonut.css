@@ -12,8 +12,10 @@
   margin-bottom: 10px; /* Add margin between cards */
   overflow: hidden; /* Hide overflow content */
   border-radius: 10px; /* Add border radius for rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for a card effect */
+  box-shadow: 0 4px 8px #f2c292; /* Add shadow for a card effect */
+  border: 2px solid #FC942D; /* Add a transparent border with the color #E17B00 */
 }
+
 
 .card-body {
   height: 100%; /* Ensure card body fills the height of the card */
