@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { loginUser, registerUser } from '../../services/UserService'; // Import loginUser and registerUser functions from UserService
+import { createUser, listUsers } from '../../services/UserService'; // Import createUser and listUsers functions from UserService
 import '../../styles/frontend/User.css'; // Import CSS file
 
 const UserComponent = () => {
   // State variables for form data, login mode, logged in state, error message, and popup visibility
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLogin, setIsLogin] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [error, setError] = useState(null);
-  const [showPopup, setShowPopup] = useState(false);
+  const [isLogin, setIsLogin] = useState(false); // State to track if the user is in login or sign up mode
+  const [loggedIn, setLoggedIn] = useState(false); // State to track if the user is logged in
+  const [error, setError] = useState(null); // State to store error message
+  const [showPopup, setShowPopup] = useState(false); // State to control the visibility of the success popup
 
   // Event handlers for input changes
   const handleEmailChange = (event) => {
@@ -26,35 +26,25 @@ const UserComponent = () => {
     try {
       // Perform login or registration based on the selected mode (isLogin)
       if (isLogin) {
-        // Call the loginUser function from the UserService
-        const response = await loginUser(email, password);
-        // Log the response data to the console
-        console.log('Login submitted:', response.data);
-        // Set the loggedIn state to true
-        setLoggedIn(true);
+        // Implement loginUser function
+        // You can handle login logic here
       } else {
-        // Call the registerUser function from the UserService
-        const response = await registerUser(email, password);
-        // Log the response data to the console
+        // Call the createUser function from the UserService
+        const response = await createUser({ email, password }); // Pass user data to createUser function
         console.log('Sign up submitted:', response.data);
-        // Set the loggedIn state to true
         setLoggedIn(true);
       }
-      // Show the popup message
-      setShowPopup(true);
+      setShowPopup(true); // Show the success popup after successful submission
     } catch (error) {
-      // If an error occurs, set the error state to the error message returned from the server
-      setError(error.response.data.message);
+      setError(error.response.data.message); // Set error message if there's an error
     }
   };
 
   // Function to toggle between sign up and login modes
   const handleToggleMode = () => {
-    // Toggle the isLogin state
-    setIsLogin(!isLogin);
-    // Reset other states when toggling modes
-    setLoggedIn(false);
-    setShowPopup(false);
+    setIsLogin(!isLogin); // Toggle the isLogin state
+    setLoggedIn(false); // Reset loggedIn state when toggling modes
+    setShowPopup(false); // Hide the success popup when toggling modes
     setError(null); // Reset error message state when toggling modes
   };
 
@@ -88,7 +78,6 @@ const UserComponent = () => {
             onChange={handlePasswordChange}
           />
         </div>
-        {/* Button text changes based on login mode */}
         <button
           type="submit"
           className={`signup-bt ${isLogin ? 'login' : ''}`}
@@ -96,15 +85,12 @@ const UserComponent = () => {
           {isLogin ? 'Login' : 'Sign up'}
         </button>
       </form>
-      {/* Toggle button for switching between login and sign up modes */}
       <p>{isLogin ? 'Don\'t have an account? ' : 'Already have an account? '}
         <button type="button" onClick={handleToggleMode}>
           {isLogin ? 'Sign up' : 'Login'}
         </button>
       </p>
-      {/* Display error message if there's an error */}
-      {error && <p className="error">{error}</p>}
-      {/* Show popup message when the user is logged in */}
+      {error && <p className="error">{error}</p>} {/* Display error message if there's an error */}
       {showPopup && (
         <div className="popup">
           <p>Logged in successfully!</p>
@@ -116,3 +102,4 @@ const UserComponent = () => {
 };
 
 export default UserComponent;
+
