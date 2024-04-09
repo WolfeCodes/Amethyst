@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { createUser, listUsers } from '../../services/UserService'; // Import createUser and listUsers functions from UserService
 import '../../styles/frontend/User.css'; // Import CSS file
+import { logIn } from '../../services/AuthenticationService';
 
 const UserComponent = () => {
   // State variables for form data, login mode, logged in state, error message, and popup visibility
@@ -22,6 +23,8 @@ const UserComponent = () => {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
+
+  
 
   // Function to handle form submission
   const handleSubmit = async (event) => {
@@ -116,7 +119,7 @@ const UserComponent = () => {
         <div className="form-group">
           <label htmlFor="email">Email:</label>
           <input
-            type="email"
+            type="text" 
             id="email"
             name="email"
             value={email}
