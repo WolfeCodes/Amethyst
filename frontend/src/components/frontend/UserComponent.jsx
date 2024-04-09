@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { createUser, listUsers } from '../../services/UserService'; // Import createUser and listUsers functions from UserService
 import '../../styles/frontend/User.css'; // Import CSS file
 import { logIn } from '../../services/AuthenticationService';
+import { LoginContext } from '../../contexts/LoginContext';
 
 const UserComponent = () => {
   // State variables for form data, login mode, logged in state, error message, and popup visibility
@@ -14,6 +15,7 @@ const UserComponent = () => {
   const [showSignUpPopup, setShowSignUpPopup] = useState(false); // State for sign up popup
   const [showPasswordPopup, setShowPasswordPopup] = useState(false); // State for password popup
   const [showLoginSuccessPopup, setShowLoginSuccessPopup] = useState(false); // State for login success popup
+  const {setUser} = useContext(LoginContext);
 
   // Event handlers for input changes
   const handleEmailChange = (event) => {

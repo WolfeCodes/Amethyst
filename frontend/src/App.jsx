@@ -17,6 +17,7 @@ import UserComponent from './components/frontend/UserComponent';
 import Footer from './components/frontend/Footer';
 import Contact from './components/frontend/Contact';
 import OrderManagement from './components/backend/OrderManagement';
+import { LoginContext } from './contexts/LoginContext';
 
 
 function FrontendApp() {
@@ -24,20 +25,23 @@ function FrontendApp() {
   // Check if the current location is either Home or ListDonut
   const isHomePage = location.pathname === '/';
   const isListDonutPage = location.pathname === '/menu';
+  const [user, SetUser] = useState('');
 
   return (
     <>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/menu" element={<ListDonut />} />
-        <Route path='/cart' element={<CartComponent />} />
-        <Route path='/order' element={<OrderComponent />} />
-        <Route path='/user' element={<UserComponent />} />
-      </Routes>
-      {isHomePage && <Contact />}
-      {/* Render Footer only on Home and ListDonut pages */}
-      {(isHomePage || isListDonutPage) && <Footer />}
+      <LoginContext.Provider value={ {user, SetUser} }>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/menu" element={<ListDonut />} />
+          <Route path='/cart' element={<CartComponent />} />
+          <Route path='/order' element={<OrderComponent />} />
+          <Route path='/user' element={<UserComponent />} />
+        </Routes>
+        {isHomePage && <Contact />}
+        {/* Render Footer only on Home and ListDonut pages */}
+        {(isHomePage || isListDonutPage) && <Footer />}
+      </LoginContext.Provider>
     </>
   );
 }
