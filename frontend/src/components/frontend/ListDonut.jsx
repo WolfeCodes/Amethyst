@@ -1,11 +1,16 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import { listDonuts } from '../../services/DonutService';
 import { addDonutToCart } from '../../services/CartService';
 import '../../styles/frontend/ListDonut.css';
+import { LoginContext } from '../../contexts/LoginContext';
 
 const ListDonut = ({ numberOfDonuts }) => {
   const [donuts, setDonuts] = useState([]);
   const tallestTextRef = useRef(null);
+
+  const {user} = useContext(LoginContext);
+
+  console.log(user);
 
   useEffect(() => {
     listDonuts()

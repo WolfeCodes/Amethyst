@@ -26,7 +26,7 @@ const UserComponent = () => {
     setPassword(event.target.value);
   };
 
-  
+  console.log(user);
 
   // Function to handle form submission
   const handleSubmit = async (event) => {
@@ -95,6 +95,7 @@ const UserComponent = () => {
       setShowPasswordPopup(false); // Hide the password popup
       setShowLoginSuccessPopup(false); // Hide login success popup
     }
+
   };
 
   // Function to toggle between sign up and login modes
@@ -117,6 +118,7 @@ const UserComponent = () => {
     setShowPasswordPopup(false);
     setShowLoginSuccessPopup(false);
   };
+
 
   return (
     <div className={`user-container ${isLogin ? 'login-mode' : ''}`}>

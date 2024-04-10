@@ -25,11 +25,11 @@ function FrontendApp() {
   // Check if the current location is either Home or ListDonut
   const isHomePage = location.pathname === '/';
   const isListDonutPage = location.pathname === '/menu';
-  const [user, SetUser] = useState('');
+  const [user, SetUser] = useState(null);
 
   return (
+    <LoginContext.Provider value={ {user, SetUser} }>
     <>
-      <LoginContext.Provider value={ {user, SetUser} }>
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -41,8 +41,9 @@ function FrontendApp() {
         {isHomePage && <Contact />}
         {/* Render Footer only on Home and ListDonut pages */}
         {(isHomePage || isListDonutPage) && <Footer />}
-      </LoginContext.Provider>
+      
     </>
+    </LoginContext.Provider>
   );
 }
 

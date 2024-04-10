@@ -2,18 +2,18 @@ import axios from "axios";
 
 const REST_API_BASE_URL = 'http://localhost:8080/api/cart';
 
-axios.interceptors.request.use(
-    config => {
-      const token = getCartTotal();
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-      }
-      return config;
-    },
-    error => {
-      return Promise.reject(error);
-    }
-  );
+// axios.interceptors.request.use(
+//     config => {
+//       const token = getCartTotal();
+//       if (token) {
+//         config.headers.Authorization = `Bearer ${token}`;
+//       }
+//       return config;
+//     },
+//     error => {
+//       return Promise.reject(error);
+//     }
+//   );
 
 export const getUserCart = (cartId) => axios.get(REST_API_BASE_URL + '/' + cartId);
 
