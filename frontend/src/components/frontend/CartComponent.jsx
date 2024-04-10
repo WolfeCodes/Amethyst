@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { checkoutCart, getCartTotal, getUserCart } from '../../services/CartService'
 import { getSingleDonut } from '../../services/DonutService';
 import { getCartItemById, updateCartItemQuantity } from '../../services/CartItemService';
 import map from '../../assets/map.png'
 import '../../styles/frontend/Cart.css'
-
+import { LoginContext } from '../../contexts/LoginContext';
 
 
 const CartComponent = () => {
@@ -13,11 +13,16 @@ const CartComponent = () => {
   const [total, setTotal] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [donutData, setDonutData] = useState([])
+  const {user} = useContext(LoginContext);
   
 
   useEffect(() => {
     const id = 1; //hardcoded for now until dynamic routing 
     //will need to fetch userId cart get cartId
+
+    //create a cartByJwt endpoint to return cartId
+    //getCart().then((response) => {id = response.data})
+
     if (id) {
       getUserCart(id).then((response) => {
         setUserCart(response.data);

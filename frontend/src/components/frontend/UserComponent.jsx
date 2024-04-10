@@ -15,7 +15,7 @@ const UserComponent = () => {
   const [showSignUpPopup, setShowSignUpPopup] = useState(false); // State for sign up popup
   const [showPasswordPopup, setShowPasswordPopup] = useState(false); // State for password popup
   const [showLoginSuccessPopup, setShowLoginSuccessPopup] = useState(false); // State for login success popup
-  const {setUser} = useContext(LoginContext);
+  const { user, SetUser } = useContext(LoginContext);
 
   // Event handlers for input changes
   const handleEmailChange = (event) => {
@@ -35,10 +35,15 @@ const UserComponent = () => {
       // Perform login or registration based on the selected mode (isLogin)
       if (isLogin) {
         // Call listUsers function to get all users
-        const response = await listUsers();
-        const users = response.data;
+        // const response = await listUsers();
+        // const users = response.data;
         // Check if the entered email and password match any user
-        const user = users.find((user) => user.email === email && user.password === password);
+        // const user = users.find((user) => user.email === email && user.password === password);
+        logIn(email, password).then((response) => {
+          SetUser(response.data);
+        }).catch(error => {
+          console.error(error);
+        });
         if (user) {
           console.log('Login successful:', user);
           setLoggedIn(true);
