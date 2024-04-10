@@ -12,4 +12,5 @@ public interface CartService {
     double getTotal(CartDto cartDto);
     CartDto emptyCart(CartDto cartDto);
     List<CartItem> getCartItems(CartDto cartDto);
+    int getCartIdByUserId(int userId);
 }

@@ -2,16 +2,18 @@ package org.launchcode.Amethyst.controllers;
 
 import org.launchcode.Amethyst.dto.CartDto;
 import org.launchcode.Amethyst.dto.DonutDto;
+import org.launchcode.Amethyst.dto.UserDto;
 import org.launchcode.Amethyst.entity.CartItem;
 import org.launchcode.Amethyst.entity.Donut;
+import org.launchcode.Amethyst.entity.User;
 import org.launchcode.Amethyst.mapper.DonutMapper;
-import org.launchcode.Amethyst.services.CartItemService;
-import org.launchcode.Amethyst.services.CartService;
-import org.launchcode.Amethyst.services.DonutService;
-import org.launchcode.Amethyst.services.OrderService;
+import org.launchcode.Amethyst.mapper.UserMapper;
+import org.launchcode.Amethyst.security.UserPrincipal;
+import org.launchcode.Amethyst.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -25,14 +27,14 @@ public class CartController {
 
     @Autowired
     private CartService cartService;
-
     @Autowired
     private DonutService donutService;
-
     @Autowired
     private CartItemService cartItemService;
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private UserService userService;
 
     @PostMapping
     public ResponseEntity<CartDto> addCart(@RequestBody CartDto cartDto){
@@ -79,5 +81,11 @@ public class CartController {
         //Call cartService
         cartService.emptyCart(cartDto);
         return new ResponseEntity<>(cartService.emptyCart(cartDto), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/cartId")
+    public ResponseEntity<Integer> getCartIdByUserId(@AuthenticationPrincipal UserPrincipal userPrincipal){
+        UserDto userDto = userService.getUserById(userPrincipal.getUserId());
+        return new ResponseEntity<>(cartService.getCartIdByUserId(userDto.getId()), HttpStatus.CREATED);
     }
 }

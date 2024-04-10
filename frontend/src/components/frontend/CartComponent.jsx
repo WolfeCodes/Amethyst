@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { checkoutCart, getCartTotal, getUserCart } from '../../services/CartService'
+import { checkoutCart, getCartTotal, getUserCart, getCartByUserId } from '../../services/CartService'
 import { getSingleDonut } from '../../services/DonutService';
 import { getCartItemById, updateCartItemQuantity } from '../../services/CartItemService';
 import map from '../../assets/map.png'
@@ -17,11 +17,16 @@ const CartComponent = () => {
   
 
   useEffect(() => {
-    const id = 1; //hardcoded for now until dynamic routing 
+    let id = 0; //hardcoded for now until dynamic routing 
     //will need to fetch userId cart get cartId
 
     //create a cartByJwt endpoint to return cartId
     //getCart().then((response) => {id = response.data})
+    getCartByUserId(user).then((response => {
+      id = response.data;
+    }).catch(error => {
+      console.error(error);
+    }));
 
     if (id) {
       getUserCart(id).then((response) => {
