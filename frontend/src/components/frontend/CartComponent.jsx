@@ -13,15 +13,31 @@ const CartComponent = () => {
   const [total, setTotal] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [donutData, setDonutData] = useState([])
-  const {user} = useContext(LoginContext);
+  const [cartId, setCartId] = useState([]);
+  const {user, SetUser} = useContext(LoginContext);
   
-  console.log(user.accessToken);
+  //useEffect to set user state if a token is stored
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      SetUser(localStorage.getItem("token"));
+    }
+  });
+
 
   // getCartByUserId(user.accessToken).then((response => {
   //   console.log(response);
   // }).catch(error => {
   //   console.error(error);
   // }));
+
+  useEffect(() => {
+    getCartByUserId(user).then(response => {
+      console.log(response.data);
+      setCartId(response.data);
+    }).catch(error => {
+      console.error(error);
+    });
+  }, [user])
 
   useEffect(() => {
     const id = 1; //hardcoded for now until dynamic routing 
@@ -32,8 +48,8 @@ const CartComponent = () => {
     
 
 
-    if (id) {
-      getUserCart(id).then((response) => {
+    if (cartId) {
+      getUserCart(cartId).then((response) => {
         setUserCart(response.data);
         const uniqueCartItemIds = [...new Set(response.data.cartItemIds)];
         console.log(uniqueCartItemIds);
@@ -55,7 +71,7 @@ const CartComponent = () => {
         console.error(error);
       })
     }
-  }, []) //will need the user id in the array at the end of this function
+  }, [cartId]) //will need the user id in the array at the end of this function
 
   useEffect(() => {
     console.log(cartItems);

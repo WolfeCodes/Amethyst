@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { createUser, listUsers } from '../../services/UserService'; // Import createUser and listUsers functions from UserService
 import '../../styles/frontend/User.css'; // Import CSS file
 import { logIn } from '../../services/AuthenticationService';
@@ -16,6 +16,13 @@ const UserComponent = () => {
   const [showPasswordPopup, setShowPasswordPopup] = useState(false); // State for password popup
   const [showLoginSuccessPopup, setShowLoginSuccessPopup] = useState(false); // State for login success popup
   const { user, SetUser } = useContext(LoginContext);
+
+  //useEffect to set user state if a token is stored
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      SetUser(localStorage.getItem("token"));
+    }
+  });
 
   // Event handlers for input changes
   const handleEmailChange = (event) => {
@@ -40,7 +47,10 @@ const UserComponent = () => {
         // Check if the entered email and password match any user
         // const user = users.find((user) => user.email === email && user.password === password);
         logIn(email, password).then((response) => {
-          SetUser(response.data);
+          console.log(response.data);
+          const realToken = response.data;
+          localStorage.setItem("token", realToken.accessToken);
+          SetUser(localStorage.getItem('token'));
         }).catch(error => {
           console.error(error);
         });

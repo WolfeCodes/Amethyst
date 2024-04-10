@@ -1,14 +1,31 @@
 import React, { useEffect, useState, useRef, useContext } from 'react';
 import { listDonuts } from '../../services/DonutService';
-import { addDonutToCart } from '../../services/CartService';
+import { addDonutToCart, getCartByUserId } from '../../services/CartService';
 import '../../styles/frontend/ListDonut.css';
 import { LoginContext } from '../../contexts/LoginContext';
 
 const ListDonut = ({ numberOfDonuts }) => {
   const [donuts, setDonuts] = useState([]);
+  const [cartId, setCartId] = useState([]);
   const tallestTextRef = useRef(null);
 
-  const {user} = useContext(LoginContext);
+  const {user, SetUser} = useContext(LoginContext);
+
+  //useEffect to set user state if a token is stored
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      SetUser(localStorage.getItem("token"));
+    }
+  });
+
+  useEffect(() => {
+    getCartByUserId(user).then(response => {
+      console.log(response.data);
+      setCartId(response.data);
+    }).catch(error => {
+      console.error(error);
+    });
+  }, [user])
 
   console.log(user);
 
@@ -23,7 +40,7 @@ const ListDonut = ({ numberOfDonuts }) => {
   }, [numberOfDonuts]);
 
   const handleAddToCart = (donutId) => {
-    const cartId = 1; // Need static user until authentication is set up
+     // Need static user until authentication is set up
     addDonutToCart(cartId, donutId)
       .then(() => {
         console.log('Donut added to cart successfully!');
