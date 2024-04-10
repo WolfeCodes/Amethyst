@@ -83,9 +83,9 @@ public class CartController {
         return new ResponseEntity<>(cartService.emptyCart(cartDto), HttpStatus.CREATED);
     }
 
-    @GetMapping("/cartId")
-    public ResponseEntity<Integer> getCartIdByUserId(@AuthenticationPrincipal UserPrincipal userPrincipal){
-        UserDto userDto = userService.getUserById(userPrincipal.getUserId());
-        return new ResponseEntity<>(cartService.getCartIdByUserId(userDto.getId()), HttpStatus.CREATED);
-    }
+//    @GetMapping("/cartId")
+//    public ResponseEntity<Integer> getCartIdByUserId(@AuthenticationPrincipal UserPrincipal userPrincipal){
+//        UserDto userDto = userService.getUserById(userPrincipal.getUserId());
+//        return new ResponseEntity<>(cartService.getCartIdByUserId(userDto.getId()), HttpStatus.CREATED);
+//    }
 }

@@ -23,8 +23,8 @@ export const getCartTotal = (cartId) => axios.get(REST_API_BASE_URL + '/' + cart
 
 export const checkoutCart = (cartId) => axios.get(REST_API_BASE_URL + '/' + cartId + '/checkout');
 
-export const getCartByUserId = (token) => axios.get(REST_API_BASE_URL + '/cartId', {
-  headers: {
-    Authorization: `Bearer ${token}`
-  }
-}); 
+// export const getCartByUserId = (token) => axios.get(REST_API_BASE_URL + '/cartId', {
+//   headers: {
+//     Authorization: `Bearer ${token}`
+//   }
+// }); 

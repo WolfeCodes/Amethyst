@@ -17,16 +17,16 @@ const CartComponent = () => {
   
 
   useEffect(() => {
-    let id = 0; //hardcoded for now until dynamic routing 
+    let id = 1; //hardcoded for now until dynamic routing 
     //will need to fetch userId cart get cartId
 
     //create a cartByJwt endpoint to return cartId
     //getCart().then((response) => {id = response.data})
-    getCartByUserId(user).then((response => {
-      id = response.data;
-    }).catch(error => {
-      console.error(error);
-    }));
+    // getCartByUserId(user).then((response => {
+    //   id = response.data;
+    // }).catch(error => {
+    //   console.error(error);
+    // }));
 
     if (id) {
       getUserCart(id).then((response) => {
