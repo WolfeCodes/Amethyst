@@ -13,41 +13,41 @@ const CartComponent = () => {
   const [total, setTotal] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [donutData, setDonutData] = useState([])
-  const [cartId, setCartId] = useState([]);
+  const [cartId, setCartId] = useState(null);
   const {user, SetUser} = useContext(LoginContext);
   
   //useEffect to set user state if a token is stored
+  // useEffect(() => {
+  //   if (localStorage.getItem("token")) {
+  //     SetUser(localStorage.getItem("token"));
+  //   }
+  // });
+
+  // useEffect(() => {
+  //   getCartByUserId(user).then(response => {
+  //     console.log(response.data);
+  //     setCartId(response.data);
+  //   }).catch(error => {
+  //     console.error(error);
+  //   });
+  // }, [user])
+
+  //Attempting to combine above useEffects
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      SetUser(localStorage.getItem("token"));
+    const token = localStorage.getItem("token");
+    console.log(token);
+    if (token) {
+      SetUser(token);
+      getCartByUserId(token).then(response => {
+        setCartId(response.data);
+        console.log(cartId);
+      }).catch(error => {
+        console.error(error);
+      });
     }
-  });
-
-
-  // getCartByUserId(user.accessToken).then((response => {
-  //   console.log(response);
-  // }).catch(error => {
-  //   console.error(error);
-  // }));
+  }, []);
 
   useEffect(() => {
-    getCartByUserId(user).then(response => {
-      console.log(response.data);
-      setCartId(response.data);
-    }).catch(error => {
-      console.error(error);
-    });
-  }, [user])
-
-  useEffect(() => {
-    const id = 1; //hardcoded for now until dynamic routing 
-    //will need to fetch userId cart get cartId
-
-    //create a cartByJwt endpoint to return cartId
-    //getCart().then((response) => {id = response.data})
-    
-
-
     if (cartId) {
       getUserCart(cartId).then((response) => {
         setUserCart(response.data);

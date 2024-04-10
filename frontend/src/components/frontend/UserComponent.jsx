@@ -21,6 +21,7 @@ const UserComponent = () => {
   useEffect(() => {
     if (localStorage.getItem("token")) {
       SetUser(localStorage.getItem("token"));
+      setIsLogin(true);
     }
   });
 
