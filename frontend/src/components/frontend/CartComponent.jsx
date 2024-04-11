@@ -32,19 +32,24 @@ const CartComponent = () => {
   //   });
   // }, [user])
 
-  //Attempting to combine above useEffects
+  //Sets user to its JWT and sets cartId based on logged in user
   useEffect(() => {
+    //Gets the token from localStorage
     const token = localStorage.getItem("token");
     console.log(token);
+    //if token exist SetUser and then get cart by userId
     if (token) {
+      //passes the token to user. 
       SetUser(token);
+      //this is an API call to localhost8080/api/cart/cartId
       getCartByUserId(token).then(response => {
+        //sets the cartId
         setCartId(response.data);
         console.log(cartId);
       }).catch(error => {
         console.error(error);
       });
-    }
+    } //follow up with a redirect to Login/SignUp if user token does not exist
   }, []);
 
   useEffect(() => {
@@ -71,7 +76,7 @@ const CartComponent = () => {
         console.error(error);
       })
     }
-  }, [cartId]) //will need the user id in the array at the end of this function
+  }, [cartId]) 
 
   useEffect(() => {
     console.log(cartItems);

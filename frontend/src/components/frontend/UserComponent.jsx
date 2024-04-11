@@ -23,7 +23,7 @@ const UserComponent = () => {
       SetUser(localStorage.getItem("token"));
       setIsLogin(true);
     }
-  });
+  }, []);
 
   // Event handlers for input changes
   const handleEmailChange = (event) => {
@@ -42,14 +42,11 @@ const UserComponent = () => {
     try {
       // Perform login or registration based on the selected mode (isLogin)
       if (isLogin) {
-        // Call listUsers function to get all users
-        // const response = await listUsers();
-        // const users = response.data;
-        // Check if the entered email and password match any user
-        // const user = users.find((user) => user.email === email && user.password === password);
+        //sends a POST request to LogIn API with email and password. 
         logIn(email, password).then((response) => {
           console.log(response.data);
           const realToken = response.data;
+          //Storing token to get user information later. 
           localStorage.setItem("token", realToken.accessToken);
           SetUser(localStorage.getItem('token'));
         }).catch(error => {
