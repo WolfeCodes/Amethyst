@@ -87,7 +87,7 @@ const CartComponent = () => {
   //useEffect hook to get the initial cart price
   useEffect(() => {
     const id = 1; //hardcoded for now until dynamic routing
-    getCartTotal(id).then((response) => {
+    getCartTotal(cartId).then((response) => {
       setTotal(response.data);
     }).catch(error => {
       console.error(error);
@@ -132,8 +132,7 @@ const CartComponent = () => {
   };
 
   const checkout = () => {
-    console.log('got clicked');
-    const cartId = 1; //hardcoded until user authentication
+    console.log('got clicked'); 
     checkoutCart(cartId);
     setCartItems([]);
     setTotal([]);

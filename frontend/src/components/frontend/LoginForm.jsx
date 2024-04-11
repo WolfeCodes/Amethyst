@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react'
+import { createUser, listUsers } from '../../services/UserService'; // Import createUser and listUsers functions from UserService
 import { logIn } from '../../services/AuthenticationService';
 import { LoginContext } from '../../contexts/LoginContext';
 
