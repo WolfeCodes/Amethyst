@@ -3,6 +3,8 @@ import { createUser, listUsers } from '../../services/UserService'; // Import cr
 import '../../styles/frontend/User.css'; // Import CSS file
 import { logIn } from '../../services/AuthenticationService';
 import { LoginContext } from '../../contexts/LoginContext';
+import LoginForm from './LoginForm';
+import Logout from './Logout';
 
 const UserComponent = () => {
   // State variables for form data, login mode, logged in state, error message, and popup visibility
@@ -127,74 +129,87 @@ const UserComponent = () => {
     setShowLoginSuccessPopup(false);
   };
 
+  let content;
+  if (user) {
+    content = <Logout />;
+  } else {
+    content = <LoginForm />
+  }
+
 
   return (
-    <div className={`user-container ${isLogin ? 'login-mode' : ''}`}>
-      <h2>{isLogin ? 'Log In' : 'Sign Up'}</h2>
-      {loggedIn && !isLogin && <p>You are logged in.</p>}
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="text" 
-            id="email"
-            name="email"
-            value={email}
-            onChange={handleEmailChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-        </div>
-        {/* Button text changes based on login mode */}
-        <button
-          type="submit"
-          className={`signup-bt ${isLogin ? 'login' : ''}`}
-        >
-          {isLogin ? 'Login' : 'Sign up'}
-        </button>
-      </form>
-      {/* Toggle button for switching between login and sign up modes */}
-      <p>{isLogin ? 'Don\'t have an account? ' : 'Already have an account? '}
-        <button type="button" onClick={handleToggleMode}>
-          {isLogin ? 'Sign up' : 'Login'}
-        </button>
-      </p>
-      {/* Display error message if there's an error */}
-      {error && showPopup && (
-        <div className="popup">
-          <p>{error}</p>
-          <button onClick={closePopup}>Close</button>
-        </div>
-      )}
-      {/* Show sign up popup message after successful sign up */}
-      {showSignUpPopup && (
-        <div className="popup">
-          <p>Signed up successfully!</p>
-          <button onClick={closePopup}>Close</button>
-        </div>
-      )}
-      {/* Show password popup message if password is too short */}
-      {showPasswordPopup && (
-        <div className="popup">
-          <p>Password must be at least 5 characters long.</p>
-          <button onClick={closePopup}>Close</button>
-        </div>
-      )}
-      {/* Show login success popup message after successful login */}
-      {showLoginSuccessPopup && (
-        <div className="popup">
-          <p>Login successful!</p>
-          <button onClick={closePopup}>Close</button>
-        </div>
-      )}
+    
+    // <div className={`user-container ${isLogin ? 'login-mode' : ''}`}>
+    //   <h2>{isLogin ? 'Log In' : 'Sign Up'}</h2>
+    //   {loggedIn && !isLogin && <p>You are logged in.</p>}
+    //   <form onSubmit={handleSubmit}>
+    //     <div className="form-group">
+    //       <label htmlFor="email">Email:</label>
+    //       <input
+    //         type="text" 
+    //         id="email"
+    //         name="email"
+    //         value={email}
+    //         onChange={handleEmailChange}
+    //       />
+    //     </div>
+    //     <div className="form-group">
+    //       <label htmlFor="password">Password:</label>
+    //       <input
+    //         type="password"
+    //         id="password"
+    //         name="password"
+    //         value={password}
+    //         onChange={handlePasswordChange}
+    //       />
+    //     </div>
+    //     {/* Button text changes based on login mode */}
+    //     <button
+    //       type="submit"
+    //       className={`signup-bt ${isLogin ? 'login' : ''}`}
+    //     >
+    //       {isLogin ? 'Login' : 'Sign up'}
+    //     </button>
+    //   </form>
+    //   {/* Toggle button for switching between login and sign up modes */}
+    //   <p>{isLogin ? 'Don\'t have an account? ' : 'Already have an account? '}
+    //     <button type="button" onClick={handleToggleMode}>
+    //       {isLogin ? 'Sign up' : 'Login'}
+    //     </button>
+    //   </p>
+    //   {/* Display error message if there's an error */}
+    //   {error && showPopup && (
+    //     <div className="popup">
+    //       <p>{error}</p>
+    //       <button onClick={closePopup}>Close</button>
+    //     </div>
+    //   )}
+    //   {/* Show sign up popup message after successful sign up */}
+    //   {showSignUpPopup && (
+    //     <div className="popup">
+    //       <p>Signed up successfully!</p>
+    //       <button onClick={closePopup}>Close</button>
+    //     </div>
+    //   )}
+    //   {/* Show password popup message if password is too short */}
+    //   {showPasswordPopup && (
+    //     <div className="popup">
+    //       <p>Password must be at least 5 characters long.</p>
+    //       <button onClick={closePopup}>Close</button>
+    //     </div>
+    //   )}
+    //   {/* Show login success popup message after successful login */}
+    //   {showLoginSuccessPopup && (
+    //     <div className="popup">
+    //       <p>Login successful!</p>
+    //       <button onClick={closePopup}>Close</button>
+    //     </div>
+    //   )}
+    // </div>
+    // <LoginForm isLogin={isLogin}/>
+
+    <div>
+      {content}
     </div>
   );
 };
