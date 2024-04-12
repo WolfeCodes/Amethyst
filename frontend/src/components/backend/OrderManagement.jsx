@@ -40,8 +40,8 @@ const OrderManagement = () => {
           <thead className="table-light">
             <tr>
               <th>Id</th>
-              <th>Name</th>
-              <th>Image</th>
+              <th>OrderId</th>
+              <th>Order</th>
               <th>Description</th>
               <th>Price</th>
               <th>rating</th>

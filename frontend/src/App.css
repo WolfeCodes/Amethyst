@@ -158,7 +158,7 @@ ul,
 
 .container-fluid {
   margin: 0 auto;
-  max-width: 1200px;
+  /* max-width: 1200px; */
 }
 
 .content-block ul {
