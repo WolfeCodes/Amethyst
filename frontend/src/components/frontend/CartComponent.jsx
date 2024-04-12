@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { checkoutCart, getCartTotal, getUserCart } from '../../services/CartService'
+import React, { useEffect, useState, useContext } from 'react'
+import { checkoutCart, getCartTotal, getUserCart, getCartByUserId } from '../../services/CartService'
 import { getSingleDonut } from '../../services/DonutService';
 import { getCartItemById, updateCartItemQuantity } from '../../services/CartItemService';
 import map from '../../assets/map.png'
 import '../../styles/frontend/Cart.css'
-
+import { LoginContext } from '../../contexts/LoginContext';
 
 
 const CartComponent = () => {
@@ -13,13 +13,48 @@ const CartComponent = () => {
   const [total, setTotal] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [donutData, setDonutData] = useState([])
+  const [cartId, setCartId] = useState(null);
+  const {user, SetUser} = useContext(LoginContext);
   
+  //useEffect to set user state if a token is stored
+  // useEffect(() => {
+  //   if (localStorage.getItem("token")) {
+  //     SetUser(localStorage.getItem("token"));
+  //   }
+  // });
+
+  // useEffect(() => {
+  //   getCartByUserId(user).then(response => {
+  //     console.log(response.data);
+  //     setCartId(response.data);
+  //   }).catch(error => {
+  //     console.error(error);
+  //   });
+  // }, [user])
+
+  //Sets user to its JWT and sets cartId based on logged in user
+  useEffect(() => {
+    //Gets the token from localStorage
+    const token = localStorage.getItem("token");
+    console.log(token);
+    //if token exist SetUser and then get cart by userId
+    if (token) {
+      //passes the token to user. 
+      SetUser(token);
+      //this is an API call to localhost8080/api/cart/cartId
+      getCartByUserId(token).then(response => {
+        //sets the cartId
+        setCartId(response.data);
+        console.log(cartId);
+      }).catch(error => {
+        console.error(error);
+      });
+    } //follow up with a redirect to Login/SignUp if user token does not exist
+  }, []);
 
   useEffect(() => {
-    const id = 1; //hardcoded for now until dynamic routing 
-    //will need to fetch userId cart get cartId
-    if (id) {
-      getUserCart(id).then((response) => {
+    if (cartId) {
+      getUserCart(cartId).then((response) => {
         setUserCart(response.data);
         const uniqueCartItemIds = [...new Set(response.data.cartItemIds)];
         console.log(uniqueCartItemIds);
@@ -41,7 +76,7 @@ const CartComponent = () => {
         console.error(error);
       })
     }
-  }, []) //will need the user id in the array at the end of this function
+  }, [cartId]) 
 
   useEffect(() => {
     console.log(cartItems);
@@ -52,7 +87,7 @@ const CartComponent = () => {
   //useEffect hook to get the initial cart price
   useEffect(() => {
     const id = 1; //hardcoded for now until dynamic routing
-    getCartTotal(id).then((response) => {
+    getCartTotal(cartId).then((response) => {
       setTotal(response.data);
     }).catch(error => {
       console.error(error);
@@ -97,8 +132,7 @@ const CartComponent = () => {
   };
 
   const checkout = () => {
-    console.log('got clicked');
-    const cartId = 1; //hardcoded until user authentication
+    console.log('got clicked'); 
     checkoutCart(cartId);
     setCartItems([]);
     setTotal([]);

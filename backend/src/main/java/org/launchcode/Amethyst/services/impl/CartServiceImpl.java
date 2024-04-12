@@ -69,6 +69,19 @@ public class CartServiceImpl implements CartService {
         return cart.getCartItems();
     }
 
+    @Override
+    public int getCartIdByUserId(int userId) {
+        List<Cart> carts = new ArrayList<>();
+        cartRepository.findAll().forEach(carts::add);
+        int cartId = 0;
+        for(Cart cart: carts){
+            if (cart.getUser().getId() == userId) {
+                return cartId = cart.getId();
+            }
+        }
+        return cartId;
+    }
+
 
     CartDto toDto(Cart cart) {
         List<Integer> cartItemIds = cart.getCartItems().stream().map(CartItem::getId).toList();
