@@ -6,7 +6,7 @@ const UserComponent = () => {
   // State variables for form data, login mode, logged in state, error message, and popup visibility
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
   const [error, setError] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
@@ -110,7 +110,7 @@ const UserComponent = () => {
 
   return (
     <div className={`user-container ${isLogin ? 'login-mode' : ''}`}>
-      <h2>{isLogin ? 'Log In' : 'Sign Up'}</h2>
+      <h2 className='logSignTitle'>{isLogin ? 'Log In' : 'Sign Up'}</h2>
       {loggedIn && !isLogin && <p>You are logged in.</p>}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -138,13 +138,13 @@ const UserComponent = () => {
           type="submit"
           className={`signup-bt ${isLogin ? 'login' : ''}`}
         >
-          {isLogin ? 'Login' : 'Sign up'}
+          {isLogin ? 'Log In' : 'Sign Up'}
         </button>
       </form>
       {/* Toggle button for switching between login and sign up modes */}
-      <p>{isLogin ? 'Don\'t have an account? ' : 'Already have an account? '}
+      <p className='reminder'>{isLogin ? 'Don\'t have an account? ' : 'Already have an account? '}
         <button type="button" onClick={handleToggleMode}>
-          {isLogin ? 'Sign up' : 'Login'}
+          {isLogin ? 'Sign Up' : 'Log In'}
         </button>
       </p>
       {/* Display error message if there's an error */}

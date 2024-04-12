@@ -71,5 +71,4 @@ public class OrderServiceImpl implements OrderService {
         List<Integer> orderItemIds = orders.getOrderItems().stream().map(OrderItems::getId).toList();
         return new OrderDto(orders.getId(), orders.getUser().getId(), orderItemIds);
     }
-
 }

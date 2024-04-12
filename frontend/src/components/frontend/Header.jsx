@@ -23,7 +23,7 @@ const Header = () => {
                             <a className="nav-link active" aria-current="page" href="/order">My Order</a>
                             <a className="nav-link" href="/cart">Cart</a>
                             <Link to="/backstage/backhome" className="nav-link btn btn-outline-primary">BackStage</Link>
-                            <Link type="button" className="signup-bt" to="/user">Sign up</Link>
+                            <Link type="button" className="signup-bt" to="/user">Log In</Link>
                         </div>
                     </div>
                 </div>
