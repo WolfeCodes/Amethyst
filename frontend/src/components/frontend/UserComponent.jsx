@@ -1,10 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { createUser, listUsers } from '../../services/UserService'; // Import createUser and listUsers functions from UserService
-import '../../styles/frontend/User.css'; // Import CSS file
 import { logIn } from '../../services/AuthenticationService';
 import { LoginContext } from '../../contexts/LoginContext';
-import LoginForm from './LoginForm';
 import Logout from './Logout';
+import LoginForm from './LoginForm';
 
 const UserComponent = () => {
   // State variables for form data, login mode, logged in state, error message, and popup visibility
@@ -208,7 +207,7 @@ const UserComponent = () => {
     // </div>
     // <LoginForm isLogin={isLogin}/>
 
-    <div>
+    < div >
       {content}
     </div>
   );
