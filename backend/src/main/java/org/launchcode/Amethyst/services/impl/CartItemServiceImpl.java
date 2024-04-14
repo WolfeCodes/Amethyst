@@ -52,6 +52,18 @@ public class CartItemServiceImpl implements CartItemService {
     }
 
     @Override
+    public Boolean isDuplicateDonut(List<CartItem> cartItems, int donutId) {
+        Boolean isDupe = false;
+        for(CartItem cartItem:cartItems){
+            if(cartItem.getDonut().getId() == donutId) {
+                cartItem.setQuantity(cartItem.getQuantity() + 1);
+                isDupe = true;
+            }
+        }
+        return isDupe;
+    }
+
+    @Override
     public void deleteCartItem(int id) {
         cartItemRepository.deleteById(id);
     }
