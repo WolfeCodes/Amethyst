@@ -1,48 +1,71 @@
 /* Styles for the container holding the cards */
 .container {
-  margin: 85px auto; /* Center the container horizontally with a top margin of 85px */
-  max-width: 1200px; /* Limit the maximum width of the container */
+  margin: 85px auto;
+  /* Center the container horizontally with a top margin of 85px */
+  max-width: 1200px;
+  /* Limit the maximum width of the container */
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; /* Center the cards horizontally */
+  justify-content: center;
+  /* Center the cards horizontally */
 }
 
 /* Styles for individual cards */
 .card {
-  width: 350px; /* Set a fixed width of 350px for each card */
-  height: 400px; /* Set a fixed height of 400px for each card */
-  margin-bottom: 10px; /* Add margin between cards */
-  overflow: hidden; /* Hide overflow content */
-  border-radius: 10px; /* Add border radius for rounded corners */
-  box-shadow: 0 4px 8px #5c5b5b; /* Add shadow for a card effect */
-  border: 2px solid #00000000; /* Add a transparent border with the color #E17B00 */
-  transition: box-shadow 0.3s; /* Add smooth transition for box-shadow property */
+  width: 350px;
+  /* Set a fixed width of 350px for each card */
+  height: 400px;
+  /* Set a fixed height of 400px for each card */
+  margin-bottom: 10px;
+  /* Add margin between cards */
+  overflow: hidden;
+  /* Hide overflow content */
+  border-radius: 10px;
+  /* Add border radius for rounded corners */
+  box-shadow: 0 4px 8px #5c5b5b;
+  /* Add shadow for a card effect */
+  border: 2px solid #00000000;
+  /* Add a transparent border with the color #E17B00 */
+  transition: box-shadow 0.3s;
+  /* Add smooth transition for box-shadow property */
 }
 
 /* Styles for the body of the card */
 .card-body {
-  height: 100%; /* Ensure card body fills the height of the card */
+  height: 100%;
+  /* Ensure card body fills the height of the card */
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Space out content vertically */
-  align-items: center; /* Center content horizontally */
+  justify-content: space-between;
+  /* Space out content vertically */
+  align-items: center;
+  /* Center content horizontally */
 }
 
 /* Styles for the top image of the card */
 .card-img-top {
-  width: 300px; /* Set a fixed width of 300px for the image */
-  height: 250px; /* Set a fixed height of 250px for the image */
-  object-fit: cover; /* Ensure the image covers the entire container */
-  border-top-left-radius: 10px; /* Add border radius for top left corner */
-  border-top-right-radius: 10px; /* Add border radius for top right corner */
-  margin: auto; /* Center the image horizontally */
+  width: 300px;
+  /* Set a fixed width of 300px for the image */
+  height: 250px;
+  /* Set a fixed height of 250px for the image */
+  object-fit: cover;
+  /* Ensure the image covers the entire container */
+  border-top-left-radius: 10px;
+  /* Add border radius for top left corner */
+  border-top-right-radius: 10px;
+  /* Add border radius for top right corner */
+  margin: auto;
+  /* Center the image horizontally */
 }
 
 /* Styles for the content section of the card */
 .card-content {
-  width: 100%; /* Set width to fill the card */
-  padding: 10px; /* Add padding to the content */
-  text-align: center; /* Center the content horizontally */
+  width: 100%;
+  /* Set width to fill the card */
+  padding: 10px;
+  /* Add padding to the content */
+  text-align: center;
+  /* Center the content horizontally */
 }
 
 /* Styles for the title of the card */
@@ -54,41 +77,69 @@
   justify-content: center;
   text-align: center;
   font-weight: bold;
-  position: relative; /* Position relative for absolute positioning of the dash */
-  margin: 15px; /* Add margin */
-  border-bottom: 2px solid #ccc /* Add grey border under the title */
+  position: relative;
+  /* Position relative for absolute positioning of the dash */
+  margin: 15px;
+  /* Add margin */
+  border-bottom: 2px solid #ccc
+    /* Add grey border under the title */
 }
 
 /* Styles for the description section of the card */
 .card-description {
-  text-align: left; /* Align description text to the left */
-  margin-bottom: 12px; /* Add margin to separate description from price */
+  text-align: left;
+  /* Align description text to the left */
+  margin-bottom: 12px;
+  /* Add margin to separate description from price */
 }
 
 /* Styles for the price section of the card */
 .price {
-  font-weight: bold; /* Make the price text bold */
-  margin: 15px; /* Add margin */
+  font-weight: bold;
+  /* Make the price text bold */
+  margin: 15px;
+  /* Add margin */
 }
 
 /* Styles for the text section of the card */
 .card-text {
-  width: 100%; /* Set width to fill the container */
-  height: 20px; /* Set a fixed height for the container */
-  display: flex; /* Enable flexbox layout */
-  align-items: center; /* Center content vertically */
-  justify-content: center; /* Center content horizontally */
-  margin: 12px; /* Add margin */
-  font-size: 14px; /* Adjust font size */
+  width: 100%;
+  /* Set width to fill the container */
+  height: 20px;
+  /* Set a fixed height for the container */
+  display: flex;
+  /* Enable flexbox layout */
+  align-items: center;
+  /* Center content vertically */
+  justify-content: center;
+  /* Center content horizontally */
+  margin: 12px;
+  /* Add margin */
+  font-size: 14px;
+  /* Adjust font size */
 }
 
 /* Styles for the "Add to Cart" button */
 .btn-add-to-cart {
-  margin: 15px; /* Align the add to cart button to the bottom of the card */
-  font-weight: bold; /* Make the button text bold */
+  margin: 15px;
+  /* Align the add to cart button to the bottom of the card */
+  font-weight: bold;
+  /* Make the button text bold */
+  background-color: #FC942D;
+  color: white;
+  border-color: white;
+}
+
+.btn-add-to-cart:hover {
+
+  /* Make the button text bold */
+  background-color: #ff8000;
+  border-color: white;
+
 }
 
 /* Hover effect for the card */
 .card:hover {
-  box-shadow: 0 8px 16px #5c5b5b; /* Darker shadow on hover */
+  box-shadow: 0 8px 16px #5c5b5b;
+  /* Darker shadow on hover */
 }

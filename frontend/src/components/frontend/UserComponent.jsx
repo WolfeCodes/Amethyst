@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { createUser, listUsers } from '../../services/UserService'; // Import createUser and listUsers functions from UserService
 import { logIn } from '../../services/AuthenticationService';
 import { LoginContext } from '../../contexts/LoginContext';
-import Logout from './Logout';
+import Home from './Home';
 import LoginForm from './LoginForm';
 
 const UserComponent = () => {
@@ -130,7 +130,7 @@ const UserComponent = () => {
 
   let content;
   if (user) {
-    content = <Logout />;
+    content = <Home />;
   } else {
     content = <LoginForm />
   }
