@@ -88,7 +88,8 @@ const CartComponent = () => {
   useEffect(() => {
     const id = 1; //hardcoded for now until dynamic routing
     getCartTotal(cartId).then((response) => {
-      setTotal(response.data);
+      const formatTotal = new Intl.NumberFormat('en-US', { style: 'decimal', maximumFractionDigits: 2 }).format(response.data);
+      setTotal(formatTotal);
     }).catch(error => {
       console.error(error);
     })
