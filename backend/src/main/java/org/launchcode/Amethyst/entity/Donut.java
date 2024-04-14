@@ -19,7 +19,7 @@ public class Donut {
     private String imageUrl;
     private double rating;
     private LocalDateTime createTime;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "donut_id")
     private List<CartItem> cartItems;
     public Donut(int id, String name, double price, String description, String imageUrl) {
@@ -85,6 +85,14 @@ public class Donut {
 
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
+    }
+
+    public List<CartItem> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems;
     }
 
     @Override
