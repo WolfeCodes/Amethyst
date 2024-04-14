@@ -105,7 +105,7 @@ const OrderManagement = () => {
             <input
               type="text"
               className="form-control"
-              placeholder="Search order"
+              placeholder="Search username"
               aria-label="Recipient's username"
               aria-describedby="button-addon2"
             // value={searchTerm}
