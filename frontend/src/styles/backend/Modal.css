@@ -2,7 +2,7 @@
   position: fixed;
   left: 0;
   top: 0;
-  width: 100%;
+  /* width: 100%; */
   height: 100%;
   display: flex;
   align-items: center;
@@ -78,4 +78,49 @@
   border-bottom-right-radius: var(--bs-modal-inner-border-radius);
   border-bottom-left-radius: var(--bs-modal-inner-border-radius);
 
+}
+
+/* Order Details */
+.row-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-left: 25px;
+}
+
+/* Donut Image */
+.item-image {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+/* Donut Name and Price */
+.col-6 {
+  flex: 1;
+}
+
+.item-title-order {
+  margin-left: 25px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.item-title-detail {
+  margin-left: 25px;
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
+.col-6-title {
+  text-align: right !important;
+}
+
+.col-6-content {
+  margin-left: 10px;
+}
+
+.order-table {
+  margin-left: 25px;
 }

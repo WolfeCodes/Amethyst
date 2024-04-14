@@ -49,7 +49,7 @@ const Home = () => {
             <ListDonut numberOfDonuts={3} />
           </Container>
           <div className='btn-holder'>
-            <Button type="submit" href='/menu'>View all donuts</Button>
+            <Button className="btn btn-view " type="submit" href='/menu'>View all donuts</Button>
           </div>
         </section>
       </div>

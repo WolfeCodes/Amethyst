@@ -24,6 +24,7 @@ public class UserServiceImpl implements UserService {
     public UserDto createUser(UserDto userDto) {
         User user = UserMapper.mapToUser(userDto);
         user.setUsername(user.getEmail());
+        user.setRole("User");
         User savedUser = userRepository.save(user);
         return UserMapper.mapToUserDto(savedUser);
     }

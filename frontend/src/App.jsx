@@ -1,7 +1,7 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/frontend/Header';
 import Home from './components/frontend/Home';
@@ -28,8 +28,8 @@ function FrontendApp() {
   const [user, SetUser] = useState(null);
 
   return (
-    <LoginContext.Provider value={ {user, SetUser} }>
-    <>
+    <LoginContext.Provider value={{ user, SetUser }}>
+      <>
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -41,8 +41,8 @@ function FrontendApp() {
         {isHomePage && <Contact />}
         {/* Render Footer only on Home and ListDonut pages */}
         {(isHomePage || isListDonutPage) && <Footer />}
-      
-    </>
+
+      </>
     </LoginContext.Provider>
   );
 }
@@ -53,10 +53,10 @@ function BackendApp() {
       <BackSidebar />
       <BackHeader />
       <Routes>
-        <Route path="/backhome" element={<BackHome />} />
-        <Route path="/backdonuts" element={<BackDonuts />} />
-        <Route path="/ordermanagement" element={<OrderManagement />} />
-        <Route path="/usermanagement" element={<UserManagement />} />
+        <Route path="/backhome" element={<BackHome companyName="Home" />} />
+        <Route path="/backdonuts" element={<BackDonuts companyName="DonutHub" />} />
+        <Route path="/ordermanagement" element={<OrderManagement companyName="OrderManagement" />} />
+        <Route path="/usermanagement" element={<UserManagement companyName="UserManagement" />} />
       </Routes>
     </>
   );

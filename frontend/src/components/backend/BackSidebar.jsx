@@ -1,20 +1,18 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { SidebarData } from './SidebarData'
+import { Link } from 'react-router-dom';
+
 import '../../styles/backend/Sidebar.css'
-import BackHeader from './BackHeader';
 
 function BackSidebar() {
-  // const [activeSidebar, setActiveSidebar] = useState(SidebarData[0]); // Initialize active sidebar with the first item
-
-  // const handleSidebarClick = (item) => {
-  //   setActiveSidebar(item);
-  //   window.location.pathname = item.link; // Redirect to the clicked item's link
-  // };
-
-
   return (
     <div className='Sidebar'>
-      {/* <BackHeader sidebarName={activeSidebar.title} sidebarLink={activeSidebar.link} /> */}
+      <div className="logo-wrapper">
+        <Link to="/backstage/backhome" className='navbar-brand'>
+          <img src="https://donutbank.com/cdn/shop/products/WhiteIcingCakewithSprinkles.png?v=1695916793" alt="Logo" />
+        </Link>
+        <Link to="/backstage/backhome" className='navbar-brand'>Donut Delights</Link>
+      </div>
       <div>
         <ul className='SidebarList'>
           {SidebarData.map((val, key) => {
