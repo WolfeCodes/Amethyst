@@ -2,19 +2,21 @@ import React, { useState, useContext } from 'react'
 import { createUser, listUsers } from '../../services/UserService'; // Import createUser and listUsers functions from UserService
 import { logIn } from '../../services/AuthenticationService';
 import { LoginContext } from '../../contexts/LoginContext';
+import '../../styles/frontend/User.css'; // Import CSS file
+
 
 const LoginForm = () => {
 
-const [isLogin, setIsLogin] = useState(false);
-const [loggedIn, setLoggedIn] = useState(false);
-const [email, setEmail] = useState('');
-const [password, setPassword] = useState('');
-const [error, setError] = useState(null);
-const [showPopup, setShowPopup] = useState(false);
-const [showSignUpPopup, setShowSignUpPopup] = useState(false); // State for sign up popup
-const [showPasswordPopup, setShowPasswordPopup] = useState(false); // State for password popup
-const [showLoginSuccessPopup, setShowLoginSuccessPopup] = useState(false); // State for login success popup
-const { user, SetUser } = useContext(LoginContext);
+  const [isLogin, setIsLogin] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
+  const [showPopup, setShowPopup] = useState(false);
+  const [showSignUpPopup, setShowSignUpPopup] = useState(false); // State for sign up popup
+  const [showPasswordPopup, setShowPasswordPopup] = useState(false); // State for password popup
+  const [showLoginSuccessPopup, setShowLoginSuccessPopup] = useState(false); // State for login success popup
+  const { user, SetUser } = useContext(LoginContext);
 
   // Event handlers for input changes
   const handleEmailChange = (event) => {
@@ -25,7 +27,7 @@ const { user, SetUser } = useContext(LoginContext);
     setPassword(event.target.value);
   };
 
-const handleSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       // Perform login or registration based on the selected mode (isLogin)
@@ -124,7 +126,7 @@ const handleSubmit = async (event) => {
         <div className="form-group">
           <label htmlFor="email">Email:</label>
           <input
-            type="text" 
+            type="text"
             id="email"
             name="email"
             value={email}
@@ -150,7 +152,7 @@ const handleSubmit = async (event) => {
         </button>
       </form>
       {/* Toggle button for switching between login and sign up modes */}
-      <p>{isLogin ? 'Don\'t have an account? ' : 'Already have an account? '}
+      <p className='reminder'>{isLogin ? 'Don\'t have an account? ' : 'Already have an account? '}
         <button type="button" onClick={handleToggleMode}>
           {isLogin ? 'Sign up' : 'Login'}
         </button>

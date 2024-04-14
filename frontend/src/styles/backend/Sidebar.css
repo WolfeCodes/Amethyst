@@ -26,10 +26,10 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 50px;
+  height: 60px;
   border: 1px solid black;
   margin: 0;
-  padding: 0 10px;
+  padding: 0 15px;
   color: white;
 }
 
@@ -50,4 +50,12 @@
   flex: 70%;
   text-align: left;
   margin-left: 15px;
+}
+
+.logo-wrapper {
+  /* display: flex; */
+  align-items: center;
+  color: white;
+  padding-bottom: 15px;
+  padding-left: 17px;
 }

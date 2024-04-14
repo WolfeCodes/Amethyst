@@ -90,7 +90,7 @@ const UserManagement = () => {
           </div>
         </div>
         <div className="col-md-6">
-          <button type="button" className="btn btn-backprimary" id="adddonuts" onClick={() => { addUser() }}>
+          <button type="button" className="btn btn-primary" id="adddonuts" onClick={() => { addUser() }}>
             Add User
           </button>
           {showModal && (

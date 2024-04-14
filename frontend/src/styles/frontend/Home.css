@@ -1,12 +1,11 @@
 .btn.btn-view {
-  display: flex;
-  justify-content: center;
-  margin: 20px;
-  color: #FC942D;
-  font-size: 22px;
-  position: relative;
-  font-family: "Muli", sans-serif;
-  text-align: center;
+  background-color: #FC942D;
+  border-color: white;
+}
+
+.btn.btn-view:hover {
+  background-color: #ff8000;
+  border-color: white;
 }
 
 /* .btn.btn-order:hover {

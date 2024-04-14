@@ -1,51 +1,10 @@
-/* #root {
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.description {
-  -webkit-line-clamp: 2;
-  /* Limit to 2 lines */
-
-
-
 .title-holder {
   text-align: center;
   margin: 50px 0 50px;
 }
 
 .title-holder h2 {
-  margin: 0 0 5px;
+  /* margin: 0 0 5px; */
   text-transform: uppercase;
 }
 
@@ -125,7 +84,7 @@ p {
 }
 
 a {
-  color: #f64b4b;
+  color: #FC942D;
   text-decoration: none;
   transition: color 0.3s ease;
 }
@@ -133,7 +92,7 @@ a {
 a:hover,
 a:focus {
   text-decoration: none;
-  color: #f41a1a;
+  color: #FC942D;
 }
 
 ul,
@@ -158,7 +117,7 @@ ul,
 
 .container-fluid {
   margin: 0 auto;
-  max-width: 1200px;
+  /* max-width: 1200px; */
 }
 
 .content-block ul {
@@ -188,7 +147,7 @@ ul,
   color: #FC942D;
 }
 
-.btn.btn-primary {
+/* .btn.btn-primary {
   background: #FC942D;
   border-color: #FC942D;
   padding: 13px 25px;
@@ -211,7 +170,7 @@ ul,
 .btn.btn-primary .fas {
   margin: 0 0 0 6px;
   font-size: 15px;
-}
+} */
 
 input[type=text],
 input[type=email],
@@ -276,4 +235,12 @@ textarea {
 .backstage-home {
   text-align: center;
   margin: 100px;
+}
+
+.header-title {
+  color: #000;
+}
+
+.navbar-nav .nav-link.active:hover {
+  color: #fc830a;
 }

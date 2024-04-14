@@ -1,121 +1,176 @@
 /* Styles for the user container */
 .user-container {
-  width: 300px;
-  margin: 100px auto; /* Center the container vertically and horizontally */
+  width: 500px;
+  height: 400px;
+  margin: 200px auto;
+  /* Center the container vertically and horizontally */
   padding: 20px;
-  border: 2px solid black; /* Orange border around the user container */
-  border-radius: 10px; /* Rounded corners for the container */
-  background-color: #FFEBCD; /* Very light orange background color */
+  border: 1px solid rgb(120, 120, 120);
+  /* Orange border around the user container */
+  border-radius: 8px;
+  /* Rounded corners for the container */
+  background-color: #FFEBCD;
+  /* Very light orange background color */
 }
 
 /* Styles for the 'Sign Up' or 'Log In' heading */
 .user-container h2 {
-  font-weight: bold; /* Bold the heading */
+  font-weight: bold;
+  /* Bold the heading */
 }
 
 /* Styles for form input fields */
 .form-group input {
-  width: 100%; /* Make input fields 100% width */
+  width: 100%;
+  /* Make input fields 100% width */
   padding: 8px;
-  margin-bottom: 10px; /* Add space between input fields */
-  border: 2px solid #FC942D; /* Orange border around input fields */
-  border-radius: 5px; /* Rounded corners for input fields */
+  margin-bottom: 22px;
+  /* Add space between input fields */
+  border: 1px solid #a9a9a9;
+  /* Orange border around input fields */
+  border-radius: 5px;
+  /* Rounded corners for input fields */
 }
 
 /* Styles for the 'Sign Up' or 'Log In' button */
 .signup-bt {
   display: inline-block;
   padding: 5px 15px;
-  background-color: #FC942D; /* Orange background color */
-  color: white; /* White text color */
+  background-color: #FC942D;
+  /* Orange background color */
+  color: white;
+  /* White text color */
   text-align: center;
   border: none;
-  border-radius: 8px; /* Rounded corners */
+  border-radius: 8px;
+  /* Rounded corners */
   cursor: pointer;
   text-decoration: none;
-  font-weight: bold; /* Bold text */
-  transition: background-color 0.3s; /* Smooth transition for background color */
+  font-weight: bold;
+  /* Bold text */
+  transition: background-color 0.3s;
+  /* Smooth transition for background color */
 }
 
 /* Change button background color on hover */
 .signup-bt:hover {
-  background-color: #C66900; /* Darker orange color */
+  background-color: #C66900;
+  /* Darker orange color */
 }
 
 /* Additional styles for login mode */
 .user-container.login-mode {
-  background-color: #85aeda; /* Light blue background color */
-}
-
-.user-container.login-mode h2 {
-  color: white; /* White text color */
+  background-color: #bad8f8;
+  /* Light blue background color */
 }
 
 .user-container.login-mode .form-group input {
-  border-color: #356ba4; /* Blue border color */
+  border-color: #356ba4;
+  /* Blue border color */
 }
 
 .user-container.login-mode .signup-bt {
-  background-color: #007bff; /* Blue background color */
-  border-color: #007bff; /* Blue border color */
+  background-color: #007bff;
+  /* Blue background color */
+  border-color: #007bff;
+  /* Blue border color */
 }
 
 /* Change button background color on hover in login mode */
 .user-container.login-mode .signup-bt:hover {
-  background-color: #0056b3; /* Darker blue color */
+  background-color: #0056b3;
+  /* Darker blue color */
 }
 
 /* Style for the 'Don't have an account?' button */
 .user-container p button {
   display: inline-block;
-  padding: 3px 10px; /* Adjust padding to make the button smaller */
-  background-color: #007bff; /* Orange background color */
-  color: white; /* White text color */
-  border: none; /* Remove button border */
-  border-radius: 8px; /* Rounded corners */
-  font-weight: bold; /* Bold text */
+  padding: 3px 10px;
+  /* Adjust padding to make the button smaller */
+  background-color: #007bff;
+  /* Orange background color */
+  color: white;
+  /* White text color */
+  border: none;
+  /* Remove button border */
+  border-radius: 8px;
+  /* Rounded corners */
+  font-weight: bold;
+  /* Bold text */
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s; /* Smooth transitions */
+  transition: background-color 0.3s, color 0.3s;
+  /* Smooth transitions */
 }
 
 /* Change button background color and text color on hover */
 .user-container p button:hover {
-  background-color: #0056b3; /* Darker orange color */
+  background-color: #0056b3;
+  /* Darker orange color */
 }
 
 /* Additional styles for login mode */
 .user-container.login-mode p button {
-  background-color: #FC942D; /* Blue background color */
+  background-color: #FC942D;
+  /* Blue background color */
 }
 
 /* Change button background color on hover in login mode */
 .user-container.login-mode p button:hover {
-  background-color: #C66900; /* Darker blue color */
+  background-color: #C66900;
+  /* Darker blue color */
 }
+
 .popup {
-  position: relative; /* Position popup relative to its container */
-  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background color */
-  color: white; /* White text color */
-  border-radius: 5px; /* Rounded corners */
-  padding: 20px; /* Add padding */
-  text-align: center; /* Center text horizontally */
+  position: relative;
+  /* Position popup relative to its container */
+  background-color: rgba(0, 0, 0, 0.8);
+  /* Semi-transparent background color */
+  color: white;
+  /* White text color */
+  border-radius: 5px;
+  /* Rounded corners */
+  padding: 20px;
+  /* Add padding */
+  text-align: center;
+  /* Center text horizontally */
 }
 
 .popup p {
-  margin-bottom: 30px; /* Add margin below the paragraph */
+  margin-bottom: 30px;
+  /* Add margin below the paragraph */
 }
 
 .popup button {
-  position: absolute; /* Position button relative to its container */
-  bottom: 10px; /* Place button 10px from the bottom */
-  left: 50%; /* Align button horizontally to the center */
-  transform: translateX(-50%); /* Center the button horizontally */
-  padding: 5px 10px; /* Add padding */
-  background-color: white; /* White background color */
-  color: black; /* Black text color */
-  border: none; /* Remove button border */
-  border-radius: 5px; /* Rounded corners */
-  cursor: pointer; /* Add pointer cursor */
-  font-weight: bold; /* Bold text */
-  margin-top: 40px; /* Add margin on top */
+  position: absolute;
+  /* Position button relative to its container */
+  bottom: 10px;
+  /* Place button 10px from the bottom */
+  left: 50%;
+  /* Align button horizontally to the center */
+  transform: translateX(-50%);
+  /* Center the button horizontally */
+  padding: 5px 10px;
+  /* Add padding */
+  background-color: white;
+  /* White background color */
+  color: black;
+  /* Black text color */
+  border: none;
+  /* Remove button border */
+  border-radius: 5px;
+  /* Rounded corners */
+  cursor: pointer;
+  /* Add pointer cursor */
+  font-weight: bold;
+  /* Bold text */
+  margin-top: 40px;
+  /* Add margin on top */
+}
+
+.reminder {
+  margin-top: 25px;
+}
+
+.logSignTitle {
+  margin-bottom: 15px;
 }

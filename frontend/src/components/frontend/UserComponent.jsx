@@ -1,16 +1,15 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { createUser, listUsers } from '../../services/UserService'; // Import createUser and listUsers functions from UserService
-import '../../styles/frontend/User.css'; // Import CSS file
 import { logIn } from '../../services/AuthenticationService';
 import { LoginContext } from '../../contexts/LoginContext';
+import Home from './Home';
 import LoginForm from './LoginForm';
-import Logout from './Logout';
 
 const UserComponent = () => {
   // State variables for form data, login mode, logged in state, error message, and popup visibility
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
   const [error, setError] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
@@ -131,14 +130,14 @@ const UserComponent = () => {
 
   let content;
   if (user) {
-    content = <Logout />;
+    content = <Home />;
   } else {
     content = <LoginForm />
   }
 
 
   return (
-    
+
     // <div className={`user-container ${isLogin ? 'login-mode' : ''}`}>
     //   <h2>{isLogin ? 'Log In' : 'Sign Up'}</h2>
     //   {loggedIn && !isLogin && <p>You are logged in.</p>}
@@ -208,7 +207,7 @@ const UserComponent = () => {
     // </div>
     // <LoginForm isLogin={isLogin}/>
 
-    <div>
+    < div >
       {content}
     </div>
   );
