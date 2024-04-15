@@ -43,9 +43,7 @@ const Header = () => {
                             {user ? (
                                 <>
                                     {/* <p>{loginUser.username}</p> */}
-                                    <Link type="button" className="logout-bt" onClick={logout}>Logout</Link>
-
-                                    {/* <button onClick={logout} className='btn btn-danger btn-lg'>Logout</button> */}
+                                    <span className="logout-bt" onClick={logout}>Logout</span>
                                 </>
                             ) : (
                                 <Link type="button" className="signup-bt" to="/user">Log In</Link>

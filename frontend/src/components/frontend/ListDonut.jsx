@@ -9,7 +9,7 @@ const ListDonut = ({ numberOfDonuts }) => {
   const [cartId, setCartId] = useState([]);
   const tallestTextRef = useRef(null);
 
-  const {user, SetUser} = useContext(LoginContext);
+  const { user, SetUser } = useContext(LoginContext);
 
   //useEffect to set user state if a token is stored
   useEffect(() => {
@@ -40,7 +40,7 @@ const ListDonut = ({ numberOfDonuts }) => {
   }, [numberOfDonuts]);
 
   const handleAddToCart = (donutId) => {
-     // Need static user until authentication is set up
+    // Need static user until authentication is set up
     addDonutToCart(cartId, donutId)
       .then(() => {
         console.log('Donut added to cart successfully!');
