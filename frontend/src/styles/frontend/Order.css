@@ -64,6 +64,7 @@
 .previous-orders table {
   width: 100%; /* Make table fill its container */
   border-collapse: collapse; /* Collapse table borders */
+  overflow-x: auto; /* Add horizontal scroll for small screens */
 }
 
 /* Styles for table headers and cells */
@@ -89,6 +90,22 @@
 .previous-orders th.highlight,
 .previous-orders td.highlight {
   background-color: #ffe6cc; /* Lighter orange background for highlighted cells */
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 600px) {
+  /* Reduce padding on table cells for small screens */
+  .previous-orders th,
+  .previous-orders td {
+    padding: 6px; /* Adjust padding */
+  }
+}
+
+/* Set maximum width for the first column */
+.previous-orders td:first-child {
+  max-width: 100px; /* Adjust the maximum width as needed */
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Styles for the donut name */

@@ -34,7 +34,7 @@ const OrderComponent = () => {
             // Fetch order items
             getOrderItems(unfilteredOrders[i].id)
               .then(itemsResponse => {
-                console.log('Donut data:', itemsResponse.data); // Log donutData
+                console.log('Order Items data:', itemsResponse.data); // Log donutData
                 setDonutData(prevState => ({
                   ...prevState,
                   [unfilteredOrders[i].id]: itemsResponse.data
@@ -91,10 +91,10 @@ const OrderComponent = () => {
             {/* Map over orders to display previous orders */}
             {orders.map((order, index) => (
               <tr key={index}>
-                <td>{order.id}</td>
+                <td style={{ width: '40px' }}>{order.id}</td>
                 <td>{donutData[order.id]?.quantity || '-'}</td>
                 <td>{new Date(order.createTime).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}</td>
-                <td>${userOrderPrice[order.id]?.toFixed(2)}</td> {/* Display formatted price */}
+                <td>${userOrderPrice[order.id]?.toFixed(2)}</td>
               </tr>
             ))}
           </tbody>
