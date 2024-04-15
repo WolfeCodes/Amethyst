@@ -49,18 +49,28 @@ public class CartController {
 
     @PutMapping("/{cartId}/donut/{donutId}")
     public ResponseEntity<CartDto> addDonutToCart(@PathVariable int cartId, @PathVariable Integer donutId){
-        CartDto cartDto = cartService.getCartById(cartId);
-        //get donut object
-        DonutDto donutDto = donutService.getDonutById(donutId);
-        //initialize CartItem(donut, 1)
-        CartItem cartItem = new CartItem();
-        cartItem.setDonut(DonutMapper.mapToDonut(donutDto));
-        cartItem.setQuantity(1);
-        cartItemService.createCartItem(cartItem);
-        List<Integer> cartItemIds = new ArrayList<>(cartDto.getCartItemIds());
-        cartItemIds.add(cartItem.getId());
-        cartDto.setCartItemIds(cartItemIds);
-        return new ResponseEntity<>(cartService.createCart(cartDto), HttpStatus.CREATED);
+        CartDto cartDto = cartService.getCartById(cartId); //grabs the cartDto from cartId
+        List<CartItem> cartItems= new ArrayList<>(); //initializes an empty ArrayList of cartItems
+        cartItemService.findByIds(cartDto.getCartItemIds()).forEach(cartItems::add); //populates cartItems ArrayList
+        if (cartItemService.isDuplicateDonut(cartItems, donutId)) {
+            //isDuplicateDonut searches each cart item for a matching donutId
+            //if matching donutId to cartItem, increase cartItem quantity by 1
+            //isDuplicateDonut returns true
+            return new ResponseEntity<>(cartService.createCart(cartDto), HttpStatus.CREATED);
+        } else {
+            //isDuplicateDonut returns false and the cartItem is created and added to the cart
+            //get donut object
+            DonutDto donutDto = donutService.getDonutById(donutId);
+            //initialize CartItem(donut, 1)
+            CartItem cartItem = new CartItem();
+            cartItem.setDonut(DonutMapper.mapToDonut(donutDto));
+            cartItem.setQuantity(1);
+            cartItemService.createCartItem(cartItem);
+            List<Integer> cartItemIds = new ArrayList<>(cartDto.getCartItemIds());
+            cartItemIds.add(cartItem.getId());
+            cartDto.setCartItemIds(cartItemIds);
+            return new ResponseEntity<>(cartService.createCart(cartDto), HttpStatus.CREATED);
+        }
     }
 
     @GetMapping("/{cartId}/total")
