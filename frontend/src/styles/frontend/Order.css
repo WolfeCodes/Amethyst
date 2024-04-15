@@ -48,7 +48,7 @@
 /* Styles for the previous orders section */
 .previous-orders {
   margin-top: 20px; /* Margin at the top */
-  max-width: 800px; /* Limit maximum width */
+  max-width: 1000px; /* Limit maximum width */
   border: 1px solid #fa6338; /* Add orange border */
   border-radius: 10px; /* Round border corners */
   padding: 10px; /* Add padding */
@@ -71,6 +71,7 @@
 .previous-orders td {
   border: 1px solid #ddd; /* Add border */
   padding: 8px; /* Add padding */
+  word-wrap: break-word; /* Break long words to prevent overflow */
 }
 
 /* Styles for table headers */
@@ -88,4 +89,26 @@
 .previous-orders th.highlight,
 .previous-orders td.highlight {
   background-color: #ffe6cc; /* Lighter orange background for highlighted cells */
+}
+
+/* Styles for the donut name */
+.donut-name {
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Align items vertically */
+  white-space: nowrap; /* Prevent wrapping */
+  overflow: hidden; /* Hide overflowing text */
+  text-overflow: ellipsis; /* Show ellipsis (...) for overflow */
+}
+
+/* Styles for the DonutDetails component */
+.donut-details {
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Align items vertically */
+}
+
+/* Styles for the donut image inside the DonutDetails component */
+.donut-details .order-img {
+  width: 50px; /* Set width */
+  height: auto; /* Maintain aspect ratio */
+  margin-left: 10px; /* Add margin to separate image from text */
 }

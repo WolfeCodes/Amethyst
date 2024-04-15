@@ -1,8 +1,63 @@
-import React from 'react';
-import '../../styles/frontend/Order.css';
+import React, { useEffect, useState } from 'react';
+import { listOrders, getOrderPrice, getOrderItems } from '../../services/OrderService';
+import { getSingleUser } from '../../services/UserService';
+import { getSingleDonut } from '../../services/DonutService';
+import '../../styles/frontend/Order.css'; // Import CSS file
 
 const OrderComponent = () => {
-  const orders = []; // Placeholder for orders
+  const [orders, setOrders] = useState([]);
+  const [userOrderPrice, setUserOrderPrice] = useState({});
+  const [donutData, setDonutData] = useState({});
+  const [userIds, setUserIds] = useState([]);
+
+  useEffect(() => {
+    listOrders()
+      .then(response => {
+        const unfilteredOrders = response.data;
+        const userOrders = [];
+
+        for (let i = 0; i < unfilteredOrders.length; i++) {
+          if (unfilteredOrders[i].userId === 1) {
+            userOrders.push(unfilteredOrders[i]);
+            // Fetch the order price
+            getOrderPrice(unfilteredOrders[i].id)
+              .then(priceResponse => {
+                setUserOrderPrice(prevState => ({
+                  ...prevState,
+                  [unfilteredOrders[i].id]: priceResponse.data
+                }));
+              })
+              .catch(error => {
+                console.error('Error fetching order price:', error);
+              });
+
+            // Fetch order items
+            getOrderItems(unfilteredOrders[i].id)
+              .then(itemsResponse => {
+                console.log('Donut data:', itemsResponse.data); // Log donutData
+                setDonutData(prevState => ({
+                  ...prevState,
+                  [unfilteredOrders[i].id]: itemsResponse.data
+                }));
+              })
+              .catch(error => {
+                console.error('Error fetching order items:', error);
+              });
+          }
+        }
+        setOrders(userOrders);
+
+        // Extract user IDs from userOrders and store in userIds state
+        const extractedUserIds = userOrders.map(order => order.id);
+        setUserIds(extractedUserIds);
+
+        console.log('User Orders:', userOrders);
+        console.log('User IDs:', extractedUserIds);
+      })
+      .catch(error => {
+        console.error('Error fetching orders:', error);
+      });
+  }, []);
 
   return (
     <div className="order-container">
@@ -16,7 +71,7 @@ const OrderComponent = () => {
           </div>
         </div>
         {/* User Information */}
-        <div className="user-info">User: {/* Placeholder for user info */}</div>
+        <div className="user-info">User: {}</div>
       </div>
 
       {/* Previous Orders Section */}
@@ -26,7 +81,7 @@ const OrderComponent = () => {
         <table>
           <thead>
             <tr>
-              <th>Donut</th>
+              <th>Order Number</th>
               <th>Quantity</th>
               <th>Date</th>
               <th>Price</th>
@@ -36,10 +91,10 @@ const OrderComponent = () => {
             {/* Map over orders to display previous orders */}
             {orders.map((order, index) => (
               <tr key={index}>
-                <td>{order.donut}</td>
-                <td>{order.quantity}</td>
-                <td>{order.date}</td>
-                <td>{order.price}</td>
+                <td>{order.id}</td>
+                <td>{donutData[order.id]?.quantity || '-'}</td>
+                <td>{new Date(order.createTime).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}</td>
+                <td>${userOrderPrice[order.id]?.toFixed(2)}</td> {/* Display formatted price */}
               </tr>
             ))}
           </tbody>
