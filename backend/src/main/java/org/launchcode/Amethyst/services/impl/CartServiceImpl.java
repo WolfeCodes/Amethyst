@@ -44,6 +44,13 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public List<Cart> getAllCarts() {
+        List<Cart> carts = new ArrayList<>();
+        cartRepository.findAll().forEach(carts::add);
+        return carts;
+    }
+
+    @Override
     public double getTotal(CartDto cartDto) {
         double total = 0;
         Cart cart = toCart(cartDto);

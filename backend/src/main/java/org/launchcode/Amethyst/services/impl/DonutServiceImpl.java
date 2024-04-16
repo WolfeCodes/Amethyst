@@ -86,6 +86,9 @@ public class DonutServiceImpl implements DonutService {
 
     @Override
     public void deleteDonutById(int id) {
+        //scan all carts for cartIds with donutIds return a list<cartItemIds> cartItemService
+        //loop through carts to compare for cartItems if cartItem in cart, remove from cart cartService
+        //delete cartItems cartItemService
         Donut donut = donutRepository.findById(id).orElseThrow(() -> new RuntimeException("Donut does not exist"));
         donutRepository.deleteById(id);
     }

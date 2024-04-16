@@ -1,12 +1,14 @@
 package org.launchcode.Amethyst.services.impl;
 
 import org.launchcode.Amethyst.dto.CartItemDto;
+import org.launchcode.Amethyst.entity.Cart;
 import org.launchcode.Amethyst.entity.CartItem;
 import org.launchcode.Amethyst.entity.Donut;
 import org.launchcode.Amethyst.mapper.DonutMapper;
 import org.launchcode.Amethyst.models.data.CartItemRepository;
 import org.launchcode.Amethyst.models.data.DonutRepository;
 import org.launchcode.Amethyst.services.CartItemService;
+import org.launchcode.Amethyst.services.CartService;
 import org.launchcode.Amethyst.services.DonutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,9 @@ public class CartItemServiceImpl implements CartItemService {
 
     @Autowired
     private DonutService donutService;
+
+    @Autowired
+    private CartService cartService;
 
     @Override
     public List<CartItem> findByIds(List<Integer> cartItemIds) {
@@ -61,6 +66,16 @@ public class CartItemServiceImpl implements CartItemService {
             }
         }
         return isDupe;
+    }
+
+    @Override
+    public List<CartItem> itemsToRemove(int donutId) {
+        List<Cart> carts = cartService.getAllCarts();
+        List<CartItem> cartItems = new ArrayList<>();
+        for(Cart cart : carts) {
+            return null;
+        }
+        return null;
     }
 
     @Override
