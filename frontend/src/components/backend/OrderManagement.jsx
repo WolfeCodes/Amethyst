@@ -9,6 +9,8 @@ import '../../styles/backend/BackDonuts.css';
 const OrderManagement = () => {
   const [orders, setOrders] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [selectedOrderId, setSelectedOrderId] = useState(null); // State to store the selected donut id
+
 
   // Fetch all orders when the component mounts
   useEffect(() => {
@@ -73,10 +75,13 @@ const OrderManagement = () => {
       });
   };
 
+
   // Open the modal to show order details
-  const OrderDetails = () => {
-    setShowModal(true);
-  };
+  function OrderDetails(id) {
+    setSelectedOrderId(id); // Set the selected order id
+    console.log("selected orderId " + selectedOrderId);
+    setShowModal(true); // Open the modal
+  }
 
 
   // // Function to list search orders
@@ -139,10 +144,10 @@ const OrderManagement = () => {
                 <td style={{ width: '250px' }}>{order.username}</td>
                 <td>{order.email}</td>
                 <td >
-                  <button className="btn btn-link" onClick={() => { OrderDetails() }}>
+                  <button className="btn btn-link" onClick={() => { OrderDetails(order.id) }}>
                     Detail
                   </button>
-                  {showModal && <OrderDetailModal closeModal={() => setShowModal(false)} order={order} />}
+                  {showModal && <OrderDetailModal closeModal={() => setShowModal(false)} order={orders.find(order => order.id === selectedOrderId)} />}
                 </td>
               </tr>
 

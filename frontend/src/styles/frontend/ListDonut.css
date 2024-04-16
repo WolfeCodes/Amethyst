@@ -38,7 +38,7 @@
   flex-direction: column;
   justify-content: space-between;
   /* Space out content vertically */
-  align-items: center;
+  /* align-items: center; */
   /* Center content horizontally */
 }
 
@@ -64,7 +64,7 @@
   /* Set width to fill the card */
   padding: 10px;
   /* Add padding to the content */
-  text-align: center;
+  text-align: left;
   /* Center the content horizontally */
 }
 
@@ -99,6 +99,8 @@
   /* Make the price text bold */
   margin: 15px;
   /* Add margin */
+  color: #fa6338;
+  text-align: left;
 }
 
 /* Styles for the text section of the card */
