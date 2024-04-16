@@ -26,39 +26,23 @@
 
 /* Adjust the size and color of the sign-up button */
 .signup-bt {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
   padding: 8px 8px;
-  /* Adjust button padding: top and bottom, left and right */
   background-color: #FC942D;
-  /* Button background color */
   color: white;
-  /* Button text color */
   text-align: center;
-  border: none;
   border-radius: 5px;
   cursor: pointer;
   text-decoration: none;
-  transition: background-color 0.3s;
-  /* Smooth transition for background color */
   font-size: 16px;
-  /* Button font size */
 }
 
-/* Change the sign-up button highlight color to the darker shade of orange */
 .signup-bt:hover {
-  background-color: #ff8000;
-  /* Darker shade of orange on hover */
+  background-color: #ff7f16 !important;
   color: white;
-  /* Text color on hover */
 }
 
 
 .logout-bt {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
   padding: 8px 8px;
   /* Adjust button padding: top and bottom, left and right */
   background-color: #f85231;
