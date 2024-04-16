@@ -16,6 +16,6 @@ public interface CartItemService {
 
     CartItem toCartItem(CartItemDto cartItemDto);
     Boolean isDuplicateDonut(List<CartItem> cartItems, int donutId);
-    List<CartItem> itemsToRemove(int donutId);
+
     void deleteCartItem(int id);
 }

@@ -14,5 +14,7 @@ public interface CartService {
     double getTotal(CartDto cartDto);
     CartDto emptyCart(CartDto cartDto);
     List<CartItem> getCartItems(CartDto cartDto);
+    List<CartItem> lookForDonut(int donutId);
+    void removeFromCart(List<CartItem> cartItemsToRemove);
     int getCartIdByUserId(int userId);
 }

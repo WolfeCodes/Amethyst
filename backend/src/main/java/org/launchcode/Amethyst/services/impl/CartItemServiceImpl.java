@@ -25,8 +25,6 @@ public class CartItemServiceImpl implements CartItemService {
     @Autowired
     private DonutService donutService;
 
-    @Autowired
-    private CartService cartService;
 
     @Override
     public List<CartItem> findByIds(List<Integer> cartItemIds) {
@@ -66,16 +64,6 @@ public class CartItemServiceImpl implements CartItemService {
             }
         }
         return isDupe;
-    }
-
-    @Override
-    public List<CartItem> itemsToRemove(int donutId) {
-        List<Cart> carts = cartService.getAllCarts();
-        List<CartItem> cartItems = new ArrayList<>();
-        for(Cart cart : carts) {
-            return null;
-        }
-        return null;
     }
 
     @Override
