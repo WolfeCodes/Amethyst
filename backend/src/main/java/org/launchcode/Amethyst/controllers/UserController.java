@@ -4,11 +4,13 @@ import org.launchcode.Amethyst.dto.CartDto;
 import org.launchcode.Amethyst.dto.DonutDto;
 import org.launchcode.Amethyst.dto.UserDto;
 import org.launchcode.Amethyst.entity.User;
+import org.launchcode.Amethyst.security.UserPrincipal;
 import org.launchcode.Amethyst.services.CartService;
 import org.launchcode.Amethyst.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -51,7 +53,13 @@ public class UserController {
         return ResponseEntity.ok(userDto);
     }
 
-    //DELETE Mapping to remove donut
+    @GetMapping("/userInfo")
+    public ResponseEntity<UserPrincipal> getUserInformation(@AuthenticationPrincipal UserPrincipal userPrincipal) {
+        UserPrincipal userInfo = userPrincipal;
+        return new ResponseEntity<>(userInfo, HttpStatus.CREATED);
+    }
+
+    //DELETE Mapping to remove user
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable("id") int userId) {
         userService.deleteUserById(userId);
