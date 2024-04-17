@@ -54,11 +54,11 @@ public class DonutController {
     //DELETE Mapping to remove donut
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteDonut(@PathVariable("id") int donutId) {
-        //scan all carts for cartIds with donutIds return a list<cartItemIds> cartService
+        //scan all carts for cartItems that match donutIds and return a list<CartItem>
         List<CartItem> donutsFound = cartService.lookForDonut(donutId);
         //loop through carts to compare for cartItems if cartItem in cart, remove from cart cartService
         cartService.removeFromCart(donutsFound);
-        //delete cartItems cartItemService
+        //delete the donut
         donutService.deleteDonutById(donutId);
         return ResponseEntity.ok("Donut Deleted");
     }
