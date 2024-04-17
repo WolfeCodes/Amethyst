@@ -1,6 +1,8 @@
 package org.launchcode.Amethyst.services.impl;
 
 import org.launchcode.Amethyst.dto.DonutDto;
+import org.launchcode.Amethyst.entity.Cart;
+import org.launchcode.Amethyst.entity.CartItem;
 import org.launchcode.Amethyst.entity.Donut;
 import org.launchcode.Amethyst.mapper.DonutMapper;
 import org.launchcode.Amethyst.models.data.DonutRepository;

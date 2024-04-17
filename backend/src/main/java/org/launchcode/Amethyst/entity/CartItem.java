@@ -51,4 +51,12 @@ public class CartItem{
     public void setDonut(Donut donut) {
         this.donut = donut;
     }
+
+    public List<Cart> getCarts() {
+        return carts;
+    }
+
+    public void setCarts(List<Cart> carts) {
+        this.carts = carts;
+    }
 }

@@ -6,6 +6,7 @@ import org.launchcode.Amethyst.entity.Cart;
 import org.launchcode.Amethyst.entity.CartItem;
 import org.launchcode.Amethyst.entity.Donut;
 import org.launchcode.Amethyst.entity.User;
+import org.launchcode.Amethyst.mapper.DonutMapper;
 import org.launchcode.Amethyst.mapper.UserMapper;
 import org.launchcode.Amethyst.models.data.CartRepository;
 import org.launchcode.Amethyst.services.CartItemService;
@@ -44,6 +45,13 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public List<Cart> getAllCarts() {
+        List<Cart> carts = new ArrayList<>();
+        cartRepository.findAll().forEach(carts::add);
+        return carts;
+    }
+
+    @Override
     public double getTotal(CartDto cartDto) {
         double total = 0;
         Cart cart = toCart(cartDto);
@@ -67,6 +75,32 @@ public class CartServiceImpl implements CartService {
     public List<CartItem> getCartItems(CartDto cartDto) {
         Cart cart = cartRepository.findById(cartDto.getId()).orElseThrow(() -> new RuntimeException("Cart does not exist"));
         return cart.getCartItems();
+    }
+
+    @Override
+    public List<CartItem> lookForDonut(int donutId) {
+        Donut donut = DonutMapper.mapToDonut(donutService.getDonutById(donutId));
+        List<CartItem> donutsFound = new ArrayList<>();
+        List<Cart> cartsToSearch = getAllCarts();
+        for (Cart cart : cartsToSearch) {
+            List<CartItem> cartItemList = cart.getCartItems();
+            for (CartItem cartItem : cartItemList) {
+                if (cartItem.getDonut().getId() == donutId) {
+                    donutsFound.add(cartItem);
+                }
+            }
+        }
+        return donutsFound;
+    }
+
+    @Override
+    public void removeFromCart(List<CartItem> cartItemsToRemove) {
+        List<CartItem> cartItems = cartItemsToRemove;
+        for (CartItem cartItem : cartItems) {
+            for (Cart cart : cartItem.getCarts()) {
+                cart.getCartItems().remove(cartItem);
+            }
+        }
     }
 
     @Override

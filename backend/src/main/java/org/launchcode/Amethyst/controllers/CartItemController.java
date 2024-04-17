@@ -30,4 +30,10 @@ public class CartItemController {
         return new ResponseEntity<>(cartItemDto, HttpStatus.CREATED);
     }
 
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteCartItem(@PathVariable("id") int cartItemId) {
+        cartItemService.deleteCartItem(cartItemId);
+        return ResponseEntity.ok("Cart Item Deleted");
+    }
+
 }

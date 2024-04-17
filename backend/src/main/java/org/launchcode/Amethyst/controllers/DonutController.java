@@ -1,6 +1,8 @@
 package org.launchcode.Amethyst.controllers;
 
 import org.launchcode.Amethyst.dto.DonutDto;
+import org.launchcode.Amethyst.entity.CartItem;
+import org.launchcode.Amethyst.services.CartService;
 import org.launchcode.Amethyst.services.DonutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,9 @@ public class DonutController {
 
     @Autowired
     private DonutService donutService;
+
+    @Autowired
+    private CartService cartService;
 
 
     //Create a donut
@@ -49,6 +54,11 @@ public class DonutController {
     //DELETE Mapping to remove donut
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteDonut(@PathVariable("id") int donutId) {
+        //scan all carts for cartItems that match donutIds and return a list<CartItem>
+        List<CartItem> donutsFound = cartService.lookForDonut(donutId);
+        //loop through carts to compare for cartItems if cartItem in cart, remove from cart cartService
+        cartService.removeFromCart(donutsFound);
+        //delete the donut
         donutService.deleteDonutById(donutId);
         return ResponseEntity.ok("Donut Deleted");
     }

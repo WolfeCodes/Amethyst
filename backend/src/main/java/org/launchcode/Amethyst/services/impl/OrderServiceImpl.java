@@ -1,17 +1,12 @@
 package org.launchcode.Amethyst.services.impl;
 
 import org.launchcode.Amethyst.dto.CartDto;
-import org.launchcode.Amethyst.dto.CartItemDto;
 import org.launchcode.Amethyst.dto.OrderDto;
-import org.launchcode.Amethyst.entity.Donut;
 import org.launchcode.Amethyst.entity.OrderItems;
 import org.launchcode.Amethyst.entity.Orders;
 import org.launchcode.Amethyst.mapper.UserMapper;
 import org.launchcode.Amethyst.models.data.OrderRepository;
-import org.launchcode.Amethyst.services.CartService;
-import org.launchcode.Amethyst.services.OrderItemsService;
-import org.launchcode.Amethyst.services.OrderService;
-import org.launchcode.Amethyst.services.UserService;
+import org.launchcode.Amethyst.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +28,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderItemsService orderItemsService;
+    @Autowired
+    private DonutService donutService;
 
 
     @Override
@@ -62,6 +59,7 @@ public class OrderServiceImpl implements OrderService {
         return toDto(orders);
     }
 
+
     @Override
     public double getPriceOfOrder(OrderDto orderDto) {
         double total = 0;
@@ -76,4 +74,5 @@ public class OrderServiceImpl implements OrderService {
         List<Integer> orderItemIds = orders.getOrderItems().stream().map(OrderItems::getId).toList();
         return new OrderDto(orders.getId(), orders.getUser().getId(), orderItemIds,orders.getCreateTime());
     }
+
 }
