@@ -15,7 +15,7 @@ public class Cart {
     @OneToOne
     private User user;
     private double total;
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,})
     @JoinTable(name = "cart_list", joinColumns = @JoinColumn(name = "cart_id"), inverseJoinColumns = @JoinColumn(name = "cartItem_Id"))
     private List<CartItem> cartItems = new ArrayList<>();
 

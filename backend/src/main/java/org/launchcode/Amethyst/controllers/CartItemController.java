@@ -3,6 +3,7 @@ package org.launchcode.Amethyst.controllers;
 import org.launchcode.Amethyst.dto.CartItemDto;
 import org.launchcode.Amethyst.entity.CartItem;
 import org.launchcode.Amethyst.services.CartItemService;
+import org.launchcode.Amethyst.services.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 public class CartItemController {
     @Autowired
     CartItemService cartItemService;
+    @Autowired
+    CartService cartService;
 
     @GetMapping("{id}")
     public ResponseEntity<CartItemDto> getCartItemById(@PathVariable int id){
@@ -32,6 +35,7 @@ public class CartItemController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteCartItem(@PathVariable("id") int cartItemId) {
+        cartService.removeSingleItemFromCart(cartItemId);
         cartItemService.deleteCartItem(cartItemId);
         return ResponseEntity.ok("Cart Item Deleted");
     }
