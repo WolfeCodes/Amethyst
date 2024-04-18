@@ -8,7 +8,7 @@ const OrderComponent = () => {
   const [orders, setOrders] = useState([]);
   const [userOrderPrice, setUserOrderPrice] = useState({});
   const [donutData, setDonutData] = useState({});
-  const [cartId, setCartId] = useState({});
+  const [cartId, setCartId] = useState(null); // Initialize cartId as null
   const { SetUser } = useContext(LoginContext);
 
   useEffect(() => {
@@ -19,15 +19,20 @@ const OrderComponent = () => {
       getCartByUserId(token)
         .then(response => {
           console.log('getCartByUserId', response);
-          setCartId(response.data);
-          console.log('Cart ID:', cartId);
+          // Extract cartId from response.data
+          const cartIdFromResponse = response.data;
+          setCartId(cartIdFromResponse);
+          console.log('Cart ID:', cartIdFromResponse);
           
-          listOrders(response.data.userId)
+          listOrders(cartIdFromResponse) // Use cartIdFromResponse instead of response.data.userId
             .then(response => {
               console.log('All Orders:', response.data);
-              const userOrders = response.data.filter(order => order.userId === cartId);
+
+              // Filter orders based on cart ID
+              const userOrders = response.data.filter(order => order.userId === cartIdFromResponse);
               console.log('Filtered Orders:', userOrders);
 
+              // Fetch order price and items for each order
               userOrders.forEach(order => {
                 getOrderPrice(order.id)
                   .then(priceResponse => {
