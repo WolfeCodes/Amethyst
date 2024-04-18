@@ -113,6 +113,7 @@ public class CartServiceImpl implements CartService {
                 if (cartItem.getId() == cartItemToRemove.getId()) {
                     cart.getCartItems().remove(cartItem);
                     cartRepository.save(cart);
+                    return;
                 }
             }
         }
