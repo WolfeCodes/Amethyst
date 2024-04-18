@@ -104,6 +104,22 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public void removeSingleItemFromCart(int cartItemId) {
+        CartItem cartItemToRemove = cartItemService.toCartItem(cartItemService.getCartItemById(cartItemId));
+        List<Cart> cartList = getAllCarts();
+        for (Cart cart : cartList) {
+            List<CartItem> cartItems = cart.getCartItems();
+            for (CartItem cartItem : cartItems) {
+                if (cartItem.getId() == cartItemToRemove.getId()) {
+                    cart.getCartItems().remove(cartItem);
+                    cartRepository.save(cart);
+                    return;
+                }
+            }
+        }
+    }
+
+    @Override
     public int getCartIdByUserId(int userId) {
         List<Cart> carts = new ArrayList<>();
         cartRepository.findAll().forEach(carts::add);
