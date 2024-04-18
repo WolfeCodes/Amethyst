@@ -3,6 +3,7 @@ package org.launchcode.Amethyst.controllers;
 import org.launchcode.Amethyst.dto.CartDto;
 import org.launchcode.Amethyst.dto.DonutDto;
 import org.launchcode.Amethyst.dto.UserDto;
+import org.launchcode.Amethyst.dto.UserInfoDto;
 import org.launchcode.Amethyst.entity.User;
 import org.launchcode.Amethyst.security.UserPrincipal;
 import org.launchcode.Amethyst.services.CartService;
@@ -54,8 +55,8 @@ public class UserController {
     }
 
     @GetMapping("/userInfo")
-    public ResponseEntity<UserPrincipal> getUserInformation(@AuthenticationPrincipal UserPrincipal userPrincipal) {
-        UserPrincipal userInfo = userPrincipal;
+    public ResponseEntity<UserInfoDto> getUserInformation(@AuthenticationPrincipal UserPrincipal userPrincipal) {
+        UserInfoDto userInfo = new UserInfoDto(userPrincipal.getUserId(), cartService.getCartIdByUserId(userPrincipal.getUserId()), "user");
         return new ResponseEntity<>(userInfo, HttpStatus.CREATED);
     }
 
