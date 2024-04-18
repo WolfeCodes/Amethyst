@@ -12,3 +12,13 @@ export const listOrders = () => axios.get(REST_API_BASE_URL);
 export const getOrderPrice = (orderId) => axios.get(REST_API_PRICE_URL + orderId);
 
 export const getOrderItems = (orderItemId) => axios.get(REST_API_ITEM_URL + orderItemId)
+
+export const getOrderByUserId = (token) => {
+    return axios.get(REST_API_BASE_URL, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  };
+   
+  

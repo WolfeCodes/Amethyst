@@ -1,62 +1,77 @@
-import React, { useEffect, useState } from 'react';
-import { listOrders, getOrderPrice, getOrderItems } from '../../services/OrderService';
+import React, { useEffect, useState, useContext } from 'react';
+import { listOrders, getOrderPrice, getOrderItems, getOrderByUserId } from '../../services/OrderService';
 import { getSingleUser } from '../../services/UserService';
 import { getSingleDonut } from '../../services/DonutService';
 import '../../styles/frontend/Order.css'; // Import CSS file
+import { LoginContext } from '../../contexts/LoginContext';
+
 
 const OrderComponent = () => {
   const [orders, setOrders] = useState([]);
   const [userOrderPrice, setUserOrderPrice] = useState({});
   const [donutData, setDonutData] = useState({});
   const [userIds, setUserIds] = useState([]);
+  const [orderId, setOrderId] = useState(null);
+  const { user, SetUser } = useContext(LoginContext);
 
   useEffect(() => {
-    listOrders()
-      .then(response => {
-        const unfilteredOrders = response.data;
-        const userOrders = [];
+    //Gets the token from localStorage
+    const token = localStorage.getItem("token");
+    console.log(token);
+    //if token exist SetUser and then get order by userId
+    if (token) {
+      //passes the token to user. 
+      SetUser(token);
+      //this is an API call to localhost8080/api/order/orderId
+      getOrderByUserId(token).then(response => {
+        console.log('getOrderByUserId', getOrderByUserId)
+        //sets the orderId
+        setOrderId(response.data);
+        console.log('Order ID:', orderId);
+        
+        // Now, fetch orders related to the user directly
+        listOrders(response.data)
+          .then(response => {
+            // Filter orders for the logged-in user
+            const userOrders = response.data;
 
-        for (let i = 0; i < unfilteredOrders.length; i++) {
-          if (unfilteredOrders[i].userId === 1) {
-            userOrders.push(unfilteredOrders[i]);
-            // Fetch the order price
-            getOrderPrice(unfilteredOrders[i].id)
-              .then(priceResponse => {
-                setUserOrderPrice(prevState => ({
-                  ...prevState,
-                  [unfilteredOrders[i].id]: priceResponse.data
-                }));
-              })
-              .catch(error => {
-                console.error('Error fetching order price:', error);
-              });
+            // Fetch order details for each order
+            userOrders.forEach(order => {
+              // Fetch the order price
+              getOrderPrice(order.id)
+                .then(priceResponse => {
+                  setUserOrderPrice(prevState => ({
+                    ...prevState,
+                    [order.id]: priceResponse.data
+                  }));
+                })
+                .catch(error => {
+                  console.error('Error fetching order price:', error);
+                });
 
-            // Fetch order items
-            getOrderItems(unfilteredOrders[i].id)
-              .then(itemsResponse => {
-                console.log('Order Items data:', itemsResponse.data); // Log donutData
-                setDonutData(prevState => ({
-                  ...prevState,
-                  [unfilteredOrders[i].id]: itemsResponse.data
-                }));
-              })
-              .catch(error => {
-                console.error('Error fetching order items:', error);
-              });
-          }
-        }
-        setOrders(userOrders);
+              // Fetch order items
+              getOrderItems(order.id)
+                .then(itemsResponse => {
+                  setDonutData(prevState => ({
+                    ...prevState,
+                    [order.id]: itemsResponse.data
+                  }));
+                })
+                .catch(error => {
+                  console.error('Error fetching order items:', error);
+                });
+            });
 
-        // Extract user IDs from userOrders and store in userIds state
-        const extractedUserIds = userOrders.map(order => order.id);
-        setUserIds(extractedUserIds);
-
-        console.log('User Orders:', userOrders);
-        console.log('User IDs:', extractedUserIds);
-      })
-      .catch(error => {
-        console.error('Error fetching orders:', error);
+            setOrders(userOrders);
+            console.log('User Orders:', userOrders);
+          })
+          .catch(error => {
+            console.error('Error fetching orders:', error);
+          });
+      }).catch(error => {
+        console.error(error);
       });
+    } //follow up with a redirect to Login/SignUp if user token does not exist
   }, []);
 
   return (

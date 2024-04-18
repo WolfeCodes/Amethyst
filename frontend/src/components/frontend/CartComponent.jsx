@@ -44,8 +44,10 @@ const CartComponent = () => {
       //this is an API call to localhost8080/api/cart/cartId
       getCartByUserId(token).then(response => {
         //sets the cartId
+    
+        console.log('CardGetUser', getCartByUserId)
         setCartId(response.data);
-        console.log(cartId);
+        console.log('Cartid:', cartId);
       }).catch(error => {
         console.error(error);
       });
