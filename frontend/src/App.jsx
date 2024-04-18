@@ -48,17 +48,20 @@ function FrontendApp() {
 }
 
 function BackendApp() {
+  const [user, SetUser] = useState(null);
   return (
-    <>
-      <BackSidebar />
-      <BackHeader />
-      <Routes>
-        <Route path="/backhome" element={<BackHome companyName="Home" />} />
-        <Route path="/backdonuts" element={<BackDonuts companyName="DonutHub" />} />
-        <Route path="/ordermanagement" element={<OrderManagement companyName="OrderManagement" />} />
-        <Route path="/usermanagement" element={<UserManagement companyName="UserManagement" />} />
-      </Routes>
-    </>
+    <LoginContext.Provider value={{ user, SetUser }}>
+      <>
+        <BackSidebar />
+        <BackHeader />
+        <Routes>
+          <Route path="/backhome" element={<BackHome companyName="Home" />} />
+          <Route path="/backdonuts" element={<BackDonuts companyName="DonutHub" />} />
+          <Route path="/ordermanagement" element={<OrderManagement companyName="OrderManagement" />} />
+          <Route path="/usermanagement" element={<UserManagement companyName="UserManagement" />} />
+        </Routes>
+      </>
+    </LoginContext.Provider>
   );
 }
 
