@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { checkoutCart, getCartTotal, getUserCart, getCartByUserId } from '../../services/CartService'
 import { getSingleDonut } from '../../services/DonutService';
-import { getCartItemById, updateCartItemQuantity } from '../../services/CartItemService';
+import { getCartItemById, updateCartItemQuantity, deleteCartItemById } from '../../services/CartItemService';
 import map from '../../assets/map.png'
+import deleteIcon from '../../assets/trash-can.svg'
 import '../../styles/frontend/Cart.css'
 import { LoginContext } from '../../contexts/LoginContext';
 
@@ -14,8 +15,8 @@ const CartComponent = () => {
   const [cartItems, setCartItems] = useState([]);
   const [donutData, setDonutData] = useState([])
   const [cartId, setCartId] = useState(null);
-  const {user, SetUser} = useContext(LoginContext);
-  
+  const { user, SetUser } = useContext(LoginContext);
+
   //useEffect to set user state if a token is stored
   // useEffect(() => {
   //   if (localStorage.getItem("token")) {
@@ -58,13 +59,13 @@ const CartComponent = () => {
         setUserCart(response.data);
         const uniqueCartItemIds = [...new Set(response.data.cartItemIds)];
         console.log(uniqueCartItemIds);
-        Promise.all( 
-          uniqueCartItemIds.map((cartItemId) => getCartItemById(cartItemId)) 
+        Promise.all(
+          uniqueCartItemIds.map((cartItemId) => getCartItemById(cartItemId))
         ).then((donutResponses) => {
           setCartItems(donutResponses.map((res) => res.data));
           //Fetch and store donut data for each cart item
-          const donutPromises = donutResponses.map((res) => 
-          getSingleDonut(res.data.donutId)
+          const donutPromises = donutResponses.map((res) =>
+            getSingleDonut(res.data.donutId)
           );
           Promise.all(donutPromises).then((donutData) => {
             setDonutData(donutData);
@@ -76,13 +77,13 @@ const CartComponent = () => {
         console.error(error);
       })
     }
-  }, [cartId]) 
+  }, [cartId])
 
   useEffect(() => {
     console.log(cartItems);
   }, [cartItems]);
 
-  
+
 
   //useEffect hook to get the initial cart price
   useEffect(() => {
@@ -95,29 +96,11 @@ const CartComponent = () => {
     })
   })
 
-  
+
   const increaseQuantity = (index) => {
     const updatedCartItem = [...cartItems];
     updatedCartItem[index].quantity += 1;
     updateCartItemQuantity(updatedCartItem[index].id, updatedCartItem[index].quantity)
-    .then(() => {
-      const id = 1; //hardcoded for now until dynamic routing
-      getCartTotal(id).then((response) => {
-        setTotal(response.data);
-      }).catch(error => {
-        console.error(error);
-      });
-    }).catch(error => {
-      console.error(error);
-    });
-    setCartItems(updatedCartItem);
-  };
-
-  const decreaseQuantity = (index) => {
-    const updatedCartItem = [...cartItems];
-    if (updatedCartItem[index].quantity > 1) {
-      updatedCartItem[index].quantity -= 1;
-      updateCartItemQuantity(updatedCartItem[index].id, updatedCartItem[index].quantity)
       .then(() => {
         const id = 1; //hardcoded for now until dynamic routing
         getCartTotal(id).then((response) => {
@@ -128,18 +111,48 @@ const CartComponent = () => {
       }).catch(error => {
         console.error(error);
       });
+    setCartItems(updatedCartItem);
+  };
+
+  const decreaseQuantity = (index) => {
+    const updatedCartItem = [...cartItems];
+    if (updatedCartItem[index].quantity > 1) {
+      updatedCartItem[index].quantity -= 1;
+      updateCartItemQuantity(updatedCartItem[index].id, updatedCartItem[index].quantity)
+        .then(() => {
+          const id = 1; //hardcoded for now until dynamic routing
+          getCartTotal(id).then((response) => {
+            setTotal(response.data);
+          }).catch(error => {
+            console.error(error);
+          });
+        }).catch(error => {
+          console.error(error);
+        });
     }
     setCartItems(updatedCartItem);
   };
 
   const checkout = () => {
-    console.log('got clicked'); 
+    console.log('got clicked');
     checkoutCart(cartId);
     setCartItems([]);
     setTotal([]);
   }
 
-  
+  //Delete selected item donut
+  const deleteItem = (id) => {
+    const confirmed = window.confirm("Are you sure you want to delete this item?")
+    if (confirmed) {
+      deleteCartItemById(id).then((response) => {
+        window.location.reload(); // Refresh the page after deletion
+      }).catch(error => {
+        console.error(error);
+      })
+    }
+  }
+
+
   return (
     <div>
       <div className='cart-container'>
@@ -162,22 +175,24 @@ const CartComponent = () => {
           <div className="cart-title">
             <h2>Shopping Cart</h2>
           </div>
-          
+
           <div className='items'>
             {cartItems.map((cartItem, index) => (
               <div key={cartItem.id} className='donut-item'>
                 {donutData[index] && (
                   <>
-                  <img src={donutData[index].data.imageUrl} alt={donutData[index].data.name} className='donut-image' />
-                  <div className='donut-content'>
-                    <span className='donut-name'>{donutData[index].data.name}</span>
-                    <span className='donut-price'>${donutData[index].data.price}</span>
-                  </div>
-                  <div className='quantity-container'>
-                    <button className='quantity-bt' onClick={() => decreaseQuantity(index)}>-</button>
-                    <span className='quantity'>{cartItem.quantity}</span>
-                    <button className='quantity-bt' onClick={() => increaseQuantity(index)}>+</button>
-                  </div>
+                    <img src={donutData[index].data.imageUrl} alt={donutData[index].data.name} className='donut-image' />
+                    <div className='donut-content'>
+                      <span className='donut-name'>{donutData[index].data.name}</span>
+                      <span className='donut-price'>${donutData[index].data.price}</span>
+                      <p>{cartItem.id}</p>
+                    </div>
+                    <div className='quantity-container'>
+                      <button className='quantity-bt' onClick={() => decreaseQuantity(index)}>-</button>
+                      <span className='quantity'>{cartItem.quantity}</span>
+                      <button className='quantity-bt' onClick={() => increaseQuantity(index)}>+</button>
+                      <img src={deleteIcon} className='delete-bt' onClick={() => deleteItem(cartItem.id)} />
+                    </div>
                   </>
                 )}
               </div>
