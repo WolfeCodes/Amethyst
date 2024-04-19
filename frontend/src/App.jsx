@@ -59,6 +59,7 @@ function BackendApp() {
           <Route path="/backdonuts" element={<BackDonuts companyName="DonutHub" />} />
           <Route path="/ordermanagement" element={<OrderManagement companyName="OrderManagement" />} />
           <Route path="/usermanagement" element={<UserManagement companyName="UserManagement" />} />
+          <Route path='/user' element={<UserComponent />} />
         </Routes>
       </>
     </LoginContext.Provider>

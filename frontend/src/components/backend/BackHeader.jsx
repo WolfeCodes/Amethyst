@@ -8,6 +8,14 @@ function BackHeader() {
   const { user, SetUser } = useContext(LoginContext);
   const [loginUser, setLoginUser] = useState();
 
+  console.log(localStorage.getItem("token"));
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    SetUser(token);
+  })
+  console.log(user);
+
   const logout = () => {
     console.log('click click');
     localStorage.removeItem("token");
