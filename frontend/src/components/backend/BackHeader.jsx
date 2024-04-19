@@ -8,6 +8,14 @@ function BackHeader() {
   const { user, SetUser } = useContext(LoginContext);
   const [loginUser, setLoginUser] = useState();
 
+  console.log(localStorage.getItem("token"));
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    SetUser(token);
+  })
+  console.log(user);
+
   const logout = () => {
     console.log('click click');
     localStorage.removeItem("token");
@@ -30,10 +38,10 @@ function BackHeader() {
               {user ? (
                 <>
                   {/* <p>{loginUser.username}</p> */}
-                  <Link type="button" className="logout-bt" onClick={logout}>Logout</Link>
+                  <span className="logout-bt" onClick={logout}>Logout</span>
                 </>
               ) : (
-                <button type="button" className="btn btn-success">Log in</button>
+                <Link type="button" className="signup-bt" to="/user">Log In</Link>
               )}
             </div>
           </div>

@@ -102,6 +102,13 @@
   border-radius: 3px;
 }
 
+.delete-bt {
+  margin: 15px;
+  width: 27px;
+  height: 27px;
+  cursor: pointer;
+}
+
 
 .shopping-cart {
   margin-bottom: 82px;
