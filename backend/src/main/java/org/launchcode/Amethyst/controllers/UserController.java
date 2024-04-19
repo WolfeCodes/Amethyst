@@ -11,9 +11,11 @@ import org.launchcode.Amethyst.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 
 @CrossOrigin("*")
@@ -56,7 +58,8 @@ public class UserController {
 
     @GetMapping("/userInfo")
     public ResponseEntity<UserInfoDto> getUserInformation(@AuthenticationPrincipal UserPrincipal userPrincipal) {
-        UserInfoDto userInfo = new UserInfoDto(userPrincipal.getUserId(), cartService.getCartIdByUserId(userPrincipal.getUserId()), "user");
+        Collection<? extends GrantedAuthority> authoritieses = userPrincipal.getAuthorities();
+        UserInfoDto userInfo = new UserInfoDto(userPrincipal.getUserId(), cartService.getCartIdByUserId(userPrincipal.getUserId()), authoritieses.toString());
         return new ResponseEntity<>(userInfo, HttpStatus.CREATED);
     }
 
