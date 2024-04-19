@@ -43,14 +43,25 @@ const OrderComponent = () => {
                     console.error('Error fetching order price:', error);
                   });
 
-                order.orderItemIds.forEach(donutId => {
-                  getOrderItems(donutId) // Fetch order item data based on donut ID
+                order.orderItemIds.forEach(orderItemId => {
+                  getOrderItems(orderItemId) // Fetch order item data based on order item ID
                     .then(itemsResponse => {
-                      console.log("Items response for donut ID", donutId, ":", itemsResponse);
-                      setDonutData(prevState => ({
-                        ...prevState,
-                        [donutId]: itemsResponse.data
-                      }));
+                      console.log("Items response for order item ID", orderItemId, ":", itemsResponse);
+                      const donutId = itemsResponse.data.donutId;
+                      getSingleDonut(donutId)
+                        .then(donutResponse => {
+                          console.log("Donut response for ID", donutId, ":", donutResponse);
+                          setDonutData(prevState => ({
+                            ...prevState,
+                            [orderItemId]: {
+                              donutId: donutId,
+                              name: donutResponse.data.name // Assuming name is a property of the donut object
+                            }
+                          }));
+                        })
+                        .catch(error => {
+                          console.error('Error fetching donut:', error);
+                        });
                     })
                     .catch(error => {
                       console.error('Error fetching order items:', error);
@@ -66,17 +77,6 @@ const OrderComponent = () => {
           console.error(error);
         });
     }
-  }, []);
-
-  // Console log getSingleDonut without implementing it
-  useEffect(() => {
-    getSingleDonut(1) // Assuming the donut ID is 1 for demonstration
-      .then(response => {
-        console.log("Single Donut Response:", response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching single donut:', error);
-      });
   }, []);
 
   return (
@@ -97,7 +97,7 @@ const OrderComponent = () => {
           <thead>
             <tr>
               <th>Order Number</th>
-              <th>Donut IDs</th>
+              <th>Donut Names</th>
               <th>Quantity</th>
               <th>Date</th>
               <th>Price</th>
@@ -109,10 +109,10 @@ const OrderComponent = () => {
                 <td style={{ width: '40px' }}>{order.id}</td>
                 <td>
                   {order.orderItemIds.map((orderItemId, index) => {
-                    const donutId = donutData[orderItemId]?.donutId;
-                    console.log('New Donut ID:', donutId);
+                    const donutName = donutData[orderItemId]?.name;
+                    console.log('New Donut Name:', donutName);
                     return (
-                      <span key={index}>{donutId}</span>
+                      <span key={index}>{index > 0 ? ', ' : ''}{donutName}</span>
                     );
                   })}
                 </td>
