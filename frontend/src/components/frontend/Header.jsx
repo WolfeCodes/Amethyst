@@ -2,11 +2,22 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/frontend/Header.css'
 import { LoginContext } from '../../contexts/LoginContext';
+import { getUserInfo } from '../../services/UserService';
 
 
 const Header = () => {
     const { user, SetUser } = useContext(LoginContext);
     const [loginUser, setLoginUser] = useState();
+    const [userRole, setUserRole] = useState();
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        SetUser(token);
+        getUserInfo(token).then(response => {
+            setUserRole(response.data.role);
+            console.log(userRole);
+        })
+      })
 
     const logout = () => {
         console.log('click click');
@@ -38,8 +49,16 @@ const Header = () => {
                         <div className="navbar-nav ms-auto">
                             <Link to="/order" className='nav-link active' aria-current="page">My Order</Link>
                             <Link to="/cart" className='nav-link active' aria-current="page">Cart</Link>
-                            <Link to="/backstage/backhome" className="nav-link btn btn-outline-primary">BackStage</Link>
-
+                            {/* <Link to="/backstage/backhome" className="nav-link btn btn-outline-primary">BackStage</Link> */}
+                            {user && userRole === "[Admin]" ? (
+                                <>
+                                    {/* <p>{loginUser.username}</p> */}
+                                    <Link to="/backstage/backhome" className="nav-link btn btn-outline-primary">BackStage</Link>
+                                </>
+                            ) : (
+                                <>
+                                </>
+                            )}
                             {user ? (
                                 <>
                                     {/* <p>{loginUser.username}</p> */}
