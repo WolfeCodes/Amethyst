@@ -3,6 +3,7 @@ package org.launchcode.Amethyst.controllers;
 import org.launchcode.Amethyst.dto.CartDto;
 import org.launchcode.Amethyst.dto.DonutDto;
 import org.launchcode.Amethyst.dto.UserDto;
+import org.launchcode.Amethyst.dto.UserInfoDto;
 import org.launchcode.Amethyst.entity.User;
 import org.launchcode.Amethyst.security.UserPrincipal;
 import org.launchcode.Amethyst.services.CartService;
@@ -10,9 +11,11 @@ import org.launchcode.Amethyst.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 
 @CrossOrigin("*")
@@ -54,8 +57,9 @@ public class UserController {
     }
 
     @GetMapping("/userInfo")
-    public ResponseEntity<UserPrincipal> getUserInformation(@AuthenticationPrincipal UserPrincipal userPrincipal) {
-        UserPrincipal userInfo = userPrincipal;
+    public ResponseEntity<UserInfoDto> getUserInformation(@AuthenticationPrincipal UserPrincipal userPrincipal) {
+        Collection<? extends GrantedAuthority> authorities = userPrincipal.getAuthorities();
+        UserInfoDto userInfo = new UserInfoDto(userPrincipal.getUserId(), cartService.getCartIdByUserId(userPrincipal.getUserId()), authorities.toString());
         return new ResponseEntity<>(userInfo, HttpStatus.CREATED);
     }
 

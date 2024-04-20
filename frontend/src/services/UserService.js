@@ -21,3 +21,10 @@ export const updateUser = (userId, user) => axios.put(REST_API_BASE_URL + userId
 
 // Function to delete a single user from the Database based on its ID
 export const deleteUserById = (userId) => axios.delete(REST_API_BASE_URL + userId);
+
+// Function to get user details with stored token
+export const getUserInfo = (token) => axios.get(REST_API_BASE_URL + 'userInfo', {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }); 
