@@ -22,7 +22,7 @@ public class UserMapper {
                 user.getId(),
                 user.getUsername(),
                 user.getPassword(),
-//                user.getRole(),
+                user.getRole(),
                 user.getEmail()
         );
 

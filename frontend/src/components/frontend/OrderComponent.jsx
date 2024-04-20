@@ -4,6 +4,7 @@ import { getSingleDonut } from '../../services/DonutService';
 import '../../styles/frontend/Order.css'; 
 import { LoginContext } from '../../contexts/LoginContext';
 import { getCartByUserId } from '../../services/CartService';
+import { getUserInfo } from '../../services/UserService';
 
 const OrderComponent = () => {
   const [orders, setOrders] = useState([]);
@@ -19,16 +20,16 @@ const OrderComponent = () => {
     console.log("Token:", token);
     if (token) {
       SetUser(token);
-      getCartByUserId(token)
+      getUserInfo(token)
         .then(response => {
           console.log("Cart response:", response);
-          const cartIdFromResponse = response.data;
-          console.log("Cart ID:", cartIdFromResponse);
-          setCartId(cartIdFromResponse);
-          listOrders(cartIdFromResponse)
+          const userIdFromResponse = response.data.userId;
+          console.log("Cart ID:", userIdFromResponse);
+          setCartId(userIdFromResponse);
+          listOrders(userIdFromResponse)
             .then(response => {
               console.log("Orders response:", response);
-              const userOrders = response.data.filter(order => order.userId === cartIdFromResponse);
+              const userOrders = response.data.filter(order => order.userId === userIdFromResponse);
               console.log("User orders:", userOrders);
               setOrders(userOrders);
               userOrders.forEach(order => {
