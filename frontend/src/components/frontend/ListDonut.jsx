@@ -3,6 +3,8 @@ import { listDonuts } from '../../services/DonutService';
 import { addDonutToCart, getCartByUserId } from '../../services/CartService';
 import '../../styles/frontend/ListDonut.css';
 import { LoginContext } from '../../contexts/LoginContext';
+import { useCart } from '../../contexts/CartContext';
+
 
 const ListDonut = ({ numberOfDonuts }) => {
   const [donuts, setDonuts] = useState([]);
@@ -10,6 +12,8 @@ const ListDonut = ({ numberOfDonuts }) => {
   const tallestTextRef = useRef(null);
 
   const { user, SetUser } = useContext(LoginContext);
+
+  const { cartQuantity, updateCartQuantity } = useCart();
 
   //useEffect to set user state if a token is stored
   useEffect(() => {
@@ -43,6 +47,7 @@ const ListDonut = ({ numberOfDonuts }) => {
     // Need static user until authentication is set up
     addDonutToCart(cartId, donutId)
       .then(() => {
+        updateCartQuantity(cartQuantity + 1);
         console.log('Donut added to cart successfully!');
       })
       .catch(error => {
@@ -61,7 +66,7 @@ const ListDonut = ({ numberOfDonuts }) => {
                 <h5 className='card-title'>{donut.name}</h5>
                 <p className='card-text' ref={tallestTextRef}>{donut.description}</p>
                 <p className='price'>Price: ${donut.price.toFixed(2)}</p>
-                <button className='btn btn-outline-primary btn-add-to-cart' onClick={() => handleAddToCart(donut.id)}>Add to Cart</button>
+                <button type="button" className='btn btn-outline-primary btn-add-to-cart' onClick={() => handleAddToCart(donut.id)}>Add to Cart</button>
               </div>
             </div>
           </div>

@@ -21,6 +21,8 @@ export const addDonutToCart = (cartId, donutId) => axios.put(REST_API_BASE_URL +
 
 export const getCartTotal = (cartId) => axios.get(REST_API_BASE_URL + '/' + cartId + '/total');
 
+export const getTotalQuantity = (cartId) => axios.get(REST_API_BASE_URL + '/' + cartId + '/totalQuantity');
+
 export const checkoutCart = (cartId) => axios.get(REST_API_BASE_URL + '/' + cartId + '/checkout');
 
 export const getCartByUserId = (token) => axios.get(REST_API_BASE_URL + '/cartId', {

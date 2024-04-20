@@ -63,6 +63,20 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public int getTotalQuantity(CartDto cartDto) {
+        int totalQuantity = 0; // Initialize total quantity to zero
+        Cart cart = toCart(cartDto); // Convert CartDto to Cart object
+        List<CartItem> cartItems = cart.getCartItems(); // Get list of cart items from Cart object
+
+        // Iterate over each cart item and sum up the quantities
+        for(CartItem cartItem: cartItems) {
+            totalQuantity += cartItem.getQuantity(); // Add quantity of current item to total quantity
+        }
+
+        return totalQuantity; // Return the total quantity
+    }
+
+    @Override
     public CartDto emptyCart(CartDto cartDto) {
         Cart cart = toCart(cartDto);
         List<CartItem> emptyCart = new ArrayList<>();

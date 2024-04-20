@@ -6,6 +6,7 @@ import map from '../../assets/map.png'
 import deleteIcon from '../../assets/trash-can.svg'
 import '../../styles/frontend/Cart.css'
 import { LoginContext } from '../../contexts/LoginContext';
+import { useCart } from '../../contexts/CartContext'
 
 
 const CartComponent = () => {
@@ -16,6 +17,8 @@ const CartComponent = () => {
   const [donutData, setDonutData] = useState([])
   const [cartId, setCartId] = useState(null);
   const { user, SetUser } = useContext(LoginContext);
+  const { cartQuantity, updateCartQuantity } = useCart();
+
 
   //useEffect to set user state if a token is stored
   // useEffect(() => {
@@ -46,7 +49,7 @@ const CartComponent = () => {
       getCartByUserId(token).then(response => {
         //sets the cartId
         setCartId(response.data);
-        console.log(cartId);
+        console.log("cartId in cart", cartId);
       }).catch(error => {
         console.error(error);
       });
@@ -105,6 +108,8 @@ const CartComponent = () => {
         const id = 1; //hardcoded for now until dynamic routing
         getCartTotal(id).then((response) => {
           setTotal(response.data);
+          updateCartQuantity(cartQuantity + 1);
+
         }).catch(error => {
           console.error(error);
         });
@@ -123,6 +128,7 @@ const CartComponent = () => {
           const id = 1; //hardcoded for now until dynamic routing
           getCartTotal(id).then((response) => {
             setTotal(response.data);
+            updateCartQuantity(cartQuantity - 1);
           }).catch(error => {
             console.error(error);
           });
