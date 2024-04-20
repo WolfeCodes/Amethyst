@@ -58,8 +58,8 @@ public class UserController {
 
     @GetMapping("/userInfo")
     public ResponseEntity<UserInfoDto> getUserInformation(@AuthenticationPrincipal UserPrincipal userPrincipal) {
-        Collection<? extends GrantedAuthority> authoritieses = userPrincipal.getAuthorities();
-        UserInfoDto userInfo = new UserInfoDto(userPrincipal.getUserId(), cartService.getCartIdByUserId(userPrincipal.getUserId()), authoritieses.toString());
+        Collection<? extends GrantedAuthority> authorities = userPrincipal.getAuthorities();
+        UserInfoDto userInfo = new UserInfoDto(userPrincipal.getUserId(), cartService.getCartIdByUserId(userPrincipal.getUserId()), authorities.toString());
         return new ResponseEntity<>(userInfo, HttpStatus.CREATED);
     }
 
