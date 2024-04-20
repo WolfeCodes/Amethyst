@@ -12,6 +12,8 @@ public interface CartService {
     CartDto getCartById(int id);
     List<Cart> getAllCarts();
     double getTotal(CartDto cartDto);
+
+    int getTotalQuantity(CartDto cartDto);
     CartDto emptyCart(CartDto cartDto);
     List<CartItem> getCartItems(CartDto cartDto);
     List<CartItem> lookForDonut(int donutId);

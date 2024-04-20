@@ -18,6 +18,7 @@ import Footer from './components/frontend/Footer';
 import Contact from './components/frontend/Contact';
 import OrderManagement from './components/backend/OrderManagement';
 import { LoginContext } from './contexts/LoginContext';
+import { CartProvider } from './contexts/CartContext';
 
 
 function FrontendApp() {
@@ -29,20 +30,22 @@ function FrontendApp() {
 
   return (
     <LoginContext.Provider value={{ user, SetUser }}>
-      <>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/menu" element={<ListDonut />} />
-          <Route path='/cart' element={<CartComponent />} />
-          <Route path='/order' element={<OrderComponent />} />
-          <Route path='/user' element={<UserComponent />} />
-        </Routes>
-        {isHomePage && <Contact />}
-        {/* Render Footer only on Home and ListDonut pages */}
-        {(isHomePage || isListDonutPage) && <Footer />}
+      <CartProvider>
+        <>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/menu" element={<ListDonut />} />
+            <Route path='/cart' element={<CartComponent />} />
+            <Route path='/order' element={<OrderComponent />} />
+            <Route path='/user' element={<UserComponent />} />
+          </Routes>
+          {isHomePage && <Contact />}
+          {/* Render Footer only on Home and ListDonut pages */}
+          {(isHomePage || isListDonutPage) && <Footer />}
 
-      </>
+        </>
+      </CartProvider>
     </LoginContext.Provider>
   );
 }

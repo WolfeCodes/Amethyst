@@ -2,11 +2,13 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/frontend/Header.css'
 import { LoginContext } from '../../contexts/LoginContext';
+import { useCart } from '../../contexts/CartContext';
 
 
 const Header = () => {
     const { user, SetUser } = useContext(LoginContext);
-    const [loginUser, setLoginUser] = useState();
+
+    const { cartQuantity } = useCart();
 
     const logout = () => {
         console.log('click click');
@@ -14,11 +16,6 @@ const Header = () => {
         SetUser(null);
         console.log(user);
     }
-
-    // // Update loginUser state when user changes
-    // useEffect(() => {
-    //     setLoginUser(user);
-    // }, [user]);
 
     return (
         <div className='header'>
@@ -37,7 +34,7 @@ const Header = () => {
                         </div>
                         <div className="navbar-nav ms-auto">
                             <Link to="/order" className='nav-link active' aria-current="page">My Order</Link>
-                            <Link to="/cart" className='nav-link active' aria-current="page">Cart</Link>
+                            <Link to="/cart" className='nav-link active' aria-current="page">Cart({cartQuantity})</Link>
                             <Link to="/backstage/backhome" className="nav-link btn btn-outline-primary">BackStage</Link>
 
                             {user ? (
