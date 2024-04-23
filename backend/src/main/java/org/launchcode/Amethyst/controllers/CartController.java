@@ -106,6 +106,6 @@ public class CartController {
     public ResponseEntity<Integer> getCartIdByUserId(@AuthenticationPrincipal UserPrincipal userPrincipal){
         //takes in the User Information encoded in JWT
         UserDto userDto = userService.getUserById(userPrincipal.getUserId()); //uses userId from JWT to find user by id
-        return new ResponseEntity<>(cartService.getCartIdByUserId(userDto.getId()), HttpStatus.CREATED); //returns cartId 
+        return new ResponseEntity<>(cartService.getCartIdByUserId(userDto.getId()), HttpStatus.CREATED); //returns cartId
     }
 }

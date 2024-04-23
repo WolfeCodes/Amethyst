@@ -26,17 +26,18 @@ public class CartItemController {
 
     @PutMapping("{cartItemId}/quantity/{quantity}")
     public ResponseEntity<CartItemDto> updateQuantity(@PathVariable int cartItemId, @PathVariable int quantity) {
-        CartItemDto cartItemDto = cartItemService.getCartItemById(cartItemId);
-        cartItemDto.setQuantity(quantity);
-        CartItem savedCartItem = cartItemService.toCartItem(cartItemDto);
-        cartItemService.createCartItem(savedCartItem);
-        return new ResponseEntity<>(cartItemDto, HttpStatus.CREATED);
+        CartItemDto cartItemDto = cartItemService.getCartItemById(cartItemId); //initializes a CartItemDto from cartItemId
+        cartItemDto.setQuantity(quantity); //sets the quantity of the CartItemDto
+        CartItem savedCartItem = cartItemService.toCartItem(cartItemDto); //Create CartItem entity from CartItemDto
+        cartItemService.createCartItem(savedCartItem); //Save CartItem entity record
+        return new ResponseEntity<>(cartItemDto, HttpStatus.CREATED); //return updated
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteCartItem(@PathVariable("id") int cartItemId) {
-        cartService.removeSingleItemFromCart(cartItemId);
-        cartItemService.deleteCartItem(cartItemId);
+        //CartItem must be removed from its associated Cart before deletion
+        cartService.removeSingleItemFromCart(cartItemId); //removes the CartItem from Cart
+        cartItemService.deleteCartItem(cartItemId); //deletes the CartItem record
         return ResponseEntity.ok("Cart Item Deleted");
     }
 
