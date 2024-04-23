@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Arrays;
 import java.util.List;
@@ -48,8 +50,9 @@ public class AuthController {
     public List<Object> emailCheck(@RequestParam String email) {
         String url = "https://api.eva.pingutil.com/email";
         RestTemplate restTemplate = new RestTemplate();
+        UriComponents uriComponents = UriComponentsBuilder.newInstance().scheme("https").host("api.eva.pingutil.com").path("/email").query(email).build();
 
-        Object [] emailResponse = restTemplate.getForObject(url, Object[].class);
+        Object [] emailResponse = restTemplate.getForObject(uriComponents.toUri(), Object[].class);
         return Arrays.asList(emailResponse);
     }
 
