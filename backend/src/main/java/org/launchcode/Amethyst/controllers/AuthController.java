@@ -12,7 +12,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
 import java.util.List;
 
 @CrossOrigin("*")
@@ -40,6 +42,15 @@ public class AuthController {
 
         var token = jwtIssuer.issue(principal.getUserId(), principal.getEmail(), roles);
         return new LoginResponse(token);
+    }
+
+    @GetMapping("/emailCheck")
+    public List<Object> emailCheck(@RequestParam String email) {
+        String url = "https://api.eva.pingutil.com/email";
+        RestTemplate restTemplate = new RestTemplate();
+
+        Object [] emailResponse = restTemplate.getForObject(url, Object[].class);
+        return Arrays.asList(emailResponse);
     }
 
     @GetMapping("/test")
