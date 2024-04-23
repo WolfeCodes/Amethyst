@@ -6,6 +6,7 @@ import org.launchcode.Amethyst.entity.User;
 import org.launchcode.Amethyst.mapper.DonutMapper;
 import org.launchcode.Amethyst.mapper.UserMapper;
 import org.launchcode.Amethyst.models.data.UserRepository;
+import org.launchcode.Amethyst.services.CartService;
 import org.launchcode.Amethyst.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,15 +55,13 @@ public class UserServiceImpl implements UserService {
         user.setEmail(updatedUser.getEmail());
         user.setRole(updatedUser.getRole());
         user.setPassword(updatedUser.getPassword());
-
         User updatedUserObj = userRepository.save(user);
-
         return UserMapper.mapToUserDto(updatedUserObj);
     }
 
     @Override
-    public void deleteUserById(int id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User does not exist"));
-        userRepository.deleteById(id);
+    public void deleteUserById(int userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User does not exist"));
+        userRepository.deleteById(userId);
     }
 }
