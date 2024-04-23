@@ -95,17 +95,17 @@ public class CartController {
     public ResponseEntity<CartDto> checkoutCart(@PathVariable int cartId){
         //grab a cart by id
         CartDto cartDto = cartService.getCartById(cartId);
-        //TODO Save to order functionality;
-        //call an OrderService method
+        //call an OrderService method to save the order
         orderService.createOrder(cartDto);
-        //Call cartService
+        //Call cartService method to set List<CartItem> to empty
         cartService.emptyCart(cartDto);
         return new ResponseEntity<>(cartService.emptyCart(cartDto), HttpStatus.CREATED);
     }
 
     @GetMapping("/cartId")
     public ResponseEntity<Integer> getCartIdByUserId(@AuthenticationPrincipal UserPrincipal userPrincipal){
-        UserDto userDto = userService.getUserById(userPrincipal.getUserId());
-        return new ResponseEntity<>(cartService.getCartIdByUserId(userDto.getId()), HttpStatus.CREATED);
+        //takes in the User Information encoded in JWT
+        UserDto userDto = userService.getUserById(userPrincipal.getUserId()); //uses userId from JWT to find user by id
+        return new ResponseEntity<>(cartService.getCartIdByUserId(userDto.getId()), HttpStatus.CREATED); //returns cartId 
     }
 }

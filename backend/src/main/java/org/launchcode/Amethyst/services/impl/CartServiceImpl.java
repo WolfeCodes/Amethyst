@@ -53,11 +53,11 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public double getTotal(CartDto cartDto) {
-        double total = 0;
-        Cart cart = toCart(cartDto);
-        List<CartItem> cartItems = cart.getCartItems();
-        for(CartItem cartItem: cartItems) {
-            total += (cartItem.getDonut().getPrice() * cartItem.getQuantity());
+        double total = 0; //initialize total to 0
+        Cart cart = toCart(cartDto); //covert CartDto to Cart entity
+        List<CartItem> cartItems = cart.getCartItems(); //grabs the list of CartItems from Cart
+        for(CartItem cartItem: cartItems) { //loops over each cart item and calculates the line item total
+            total += (cartItem.getDonut().getPrice() * cartItem.getQuantity()); //update total
         }
         return total;
     }
@@ -78,10 +78,10 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public CartDto emptyCart(CartDto cartDto) {
-        Cart cart = toCart(cartDto);
-        List<CartItem> emptyCart = new ArrayList<>();
-        cart.setCartItems(emptyCart);
-        cartRepository.save(cart);
+        Cart cart = toCart(cartDto); //convert CartDto to Cart entity
+        List<CartItem> emptyCart = new ArrayList<>(); //initialize an empty list of CartItems
+        cart.setCartItems(emptyCart); //set Cart List<CartItems> to the empty list
+        cartRepository.save(cart); //save Cart entity
         return null;
     }
 
@@ -93,14 +93,14 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public List<CartItem> lookForDonut(int donutId) {
-        Donut donut = DonutMapper.mapToDonut(donutService.getDonutById(donutId));
-        List<CartItem> donutsFound = new ArrayList<>();
-        List<Cart> cartsToSearch = getAllCarts();
-        for (Cart cart : cartsToSearch) {
-            List<CartItem> cartItemList = cart.getCartItems();
-            for (CartItem cartItem : cartItemList) {
-                if (cartItem.getDonut().getId() == donutId) {
-                    donutsFound.add(cartItem);
+        Donut donut = DonutMapper.mapToDonut(donutService.getDonutById(donutId)); //set Donut entity from donutId
+        List<CartItem> donutsFound = new ArrayList<>(); //initialize an empty list of CartItems
+        List<Cart> cartsToSearch = getAllCarts(); //grabs a list of all Cart entities
+        for (Cart cart : cartsToSearch) { //loops over each Cart entity
+            List<CartItem> cartItemList = cart.getCartItems(); //grabs the List<CartItem> from Cart
+            for (CartItem cartItem : cartItemList) { //loops over the cartItemList
+                if (cartItem.getDonut().getId() == donutId) { //check each CartItem for matching donutId
+                    donutsFound.add(cartItem); //if matching add to donutsFound
                 }
             }
         }
@@ -110,24 +110,27 @@ public class CartServiceImpl implements CartService {
     @Override
     public void removeFromCart(List<CartItem> cartItemsToRemove) {
         List<CartItem> cartItems = cartItemsToRemove;
-        for (CartItem cartItem : cartItems) {
-            for (Cart cart : cartItem.getCarts()) {
-                cart.getCartItems().remove(cartItem);
+        for (CartItem cartItem : cartItems) { //loops over the list of cartItemsToRemove
+            for (Cart cart : cartItem.getCarts()) { //grabs the Cart Entity that the CartItem is stored in
+                cart.getCartItems().remove(cartItem); //removes CartItem from Cart Entity
             }
         }
     }
 
     @Override
     public void removeSingleItemFromCart(int cartItemId) {
+        //Grabbing the CartItem entity by cartItemId
         CartItem cartItemToRemove = cartItemService.toCartItem(cartItemService.getCartItemById(cartItemId));
-        List<Cart> cartList = getAllCarts();
-        for (Cart cart : cartList) {
-            List<CartItem> cartItems = cart.getCartItems();
-            for (CartItem cartItem : cartItems) {
-                if (cartItem.getId() == cartItemToRemove.getId()) {
-                    cart.getCartItems().remove(cartItem);
-                    cartRepository.save(cart);
-                    return;
+        List<Cart> cartList = getAllCarts(); //grab a list of all the Cart entities
+        for (Cart cart : cartList) { //loop over Cart entities
+            List<CartItem> cartItems = cart.getCartItems(); //Grab CartItem List from Cart entity
+            for (CartItem cartItem : cartItems) { //loop over CartItem List
+                if (cartItem.getId() == cartItemToRemove.getId()) { //checking for matching cartItemId from input
+                    cart.getCartItems().remove(cartItem); //removes matching CartItem from list
+                    cartRepository.save(cart); //saves Cart entity
+                    //this return must be here if the Cart only has 1 CartItem
+                    return; //once cartItems is empty, the for loop will try and run again
+                    //this results in an error attempting to loop through the empty list.
                 }
             }
         }
@@ -135,23 +138,24 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public int getCartIdByUserId(int userId) {
-        List<Cart> carts = new ArrayList<>();
-        cartRepository.findAll().forEach(carts::add);
-        int cartId = 0;
-        for(Cart cart: carts){
-            if (cart.getUser().getId() == userId) {
-                return cartId = cart.getId();
+        List<Cart> carts = new ArrayList<>(); //initialize an empty list of Cart entities
+        cartRepository.findAll().forEach(carts::add); //populate list with all Cart entity records
+        int cartId = 0; //initializing cartId
+        for(Cart cart: carts){ //loops through list of all Cart entities
+            if (cart.getUser().getId() == userId) { //if userId input equals the Cart entities' associated UserId
+                return cartId = cart.getId(); //set cartId and end loop
             }
         }
         return cartId;
     }
 
-
+    //toDto converts a Cart entity to a CartDto
     CartDto toDto(Cart cart) {
         List<Integer> cartItemIds = cart.getCartItems().stream().map(CartItem::getId).toList();
         return new CartDto(cart.getId(), cart.getUser().getId(), cart.getTotal(), cartItemIds);
     }
 
+    //toCart coverts a CartDto to a Cart entity
     Cart toCart(CartDto cartDto) {
         User user = UserMapper.mapToUser(userService.getUserById(cartDto.getUserId()));
         List<CartItem> cartItems = cartItemService.findByIds(cartDto.getCartItemIds());
