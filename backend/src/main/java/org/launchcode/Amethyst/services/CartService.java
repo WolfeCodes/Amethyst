@@ -20,4 +20,6 @@ public interface CartService {
     void removeFromCart(List<CartItem> cartItemsToRemove);
     void removeSingleItemFromCart(int cartItemId);
     int getCartIdByUserId(int userId);
+    void deleteCartByUserId(int userId);
+
 }
