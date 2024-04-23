@@ -1,5 +1,6 @@
 package org.launchcode.Amethyst.controllers;
 
+import org.launchcode.Amethyst.dto.IsTempMailResponse; // New import statement
 import org.launchcode.Amethyst.models.LoginRequest;
 import org.launchcode.Amethyst.models.LoginResponse;
 import org.launchcode.Amethyst.security.JwtIssuer;
@@ -18,6 +19,8 @@ import org.springframework.http.MediaType;
 
 import java.util.Collections;
 
+
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -27,28 +30,6 @@ public class AuthController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
-
-    // Nested class for isTempMail API response
-    private static class IsTempMailResponse {
-        private String name;
-        private boolean blocked;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public boolean isBlocked() {
-            return blocked;
-        }
-
-        public void setBlocked(boolean blocked) {
-            this.blocked = blocked;
-        }
-    }
 
     @PostMapping("/login")
     public LoginResponse login(@RequestBody @Validated LoginRequest request){
