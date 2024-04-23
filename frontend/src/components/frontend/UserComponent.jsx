@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { createUser, listUsers } from '../../services/UserService'; // Import createUser and listUsers functions from UserService
-import { logIn } from '../../services/AuthenticationService';
+import { emailCheck, logIn } from '../../services/AuthenticationService';
 import { LoginContext } from '../../contexts/LoginContext';
 import Home from './Home';
 import LoginForm from './LoginForm';
@@ -80,6 +80,8 @@ const UserComponent = () => {
         const users = response.data;
         // Check if the entered email already exists
         const existingUser = users.find((user) => user.email === email);
+        const emailCheck = await emailCheck(email);
+        console.log(emailCheck);
         if (existingUser) {
           setError('An account with this email already exists. Please log in.');
           setShowPopup(true); // Show the error popup
