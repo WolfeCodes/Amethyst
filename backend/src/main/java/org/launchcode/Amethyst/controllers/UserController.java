@@ -29,6 +29,7 @@ public class UserController {
     @Autowired
     private CartService cartService;
 
+    // Add a new user
     @PostMapping("/")
     public ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto){
         UserDto createdUser = userService.createUser(userDto);
