@@ -3,6 +3,7 @@ package org.launchcode.Amethyst.controllers;
 import org.launchcode.Amethyst.dto.IsTempMailResponse; // New import statement
 import org.launchcode.Amethyst.models.LoginRequest;
 import org.launchcode.Amethyst.models.LoginResponse;
+import org.launchcode.Amethyst.security.ApiProperties;
 import org.launchcode.Amethyst.security.JwtIssuer;
 import org.launchcode.Amethyst.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class AuthController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private ApiProperties apiProperties;
+
     @PostMapping("/login")
     public LoginResponse login(@RequestBody @Validated LoginRequest request){
         var authentication = authenticationManager.authenticate(
@@ -50,7 +54,7 @@ public class AuthController {
     @GetMapping("/emailCheck")
     public IsTempMailResponse emailCheck(@RequestParam String email) {
         // Replace API_TOKEN with your actual API token
-        String apiToken = "EAutuyZ3VUgUd16N6XNQitN1h3cF19Si";
+        String apiToken = apiProperties.getApiKey();
         String apiUrl = "https://istempmail.com/api/check/" + apiToken + "/";
         String fullUrl = apiUrl + email; // Construct the full URL with email address
         RestTemplate restTemplate = new RestTemplate();
