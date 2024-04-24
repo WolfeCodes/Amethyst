@@ -3,7 +3,7 @@ import { createUser, listUsers } from '../../services/UserService'; // Import cr
 import { logIn } from '../../services/AuthenticationService';
 import { LoginContext } from '../../contexts/LoginContext';
 import '../../styles/frontend/User.css'; // Import CSS file
-
+import ApiService from '../../services/ApiService'; // Import ApiService
 
 const LoginForm = () => {
 
@@ -32,29 +32,21 @@ const LoginForm = () => {
     try {
       // Perform login or registration based on the selected mode (isLogin)
       if (isLogin) {
-        //sends a POST request to LogIn API with email and password. 
-        logIn(email, password).then((response) => {
+        try {
+          const response = await logIn(email, password);
           console.log(response.data);
           const realToken = response.data;
-          //Storing token to get user information later. 
           localStorage.setItem("token", realToken.accessToken);
           SetUser(localStorage.getItem('token'));
-        }).catch(error => {
-          console.error(error);
-        });
-        if (user) {
-          console.log('Login successful:', user);
           setLoggedIn(true);
           setShowPopup(false); // Hide the error popup
           setShowSignUpPopup(false); // Hide the sign up popup
           setShowPasswordPopup(false); // Hide the password popup
           setShowLoginSuccessPopup(true); // Show login success popup
-        } else {
-          setError('Invalid email or password.');
-          setShowPopup(true);
-          setShowSignUpPopup(false); // Hide the sign up popup
-          setShowPasswordPopup(false); // Hide the password popup
-          setShowLoginSuccessPopup(false); // Hide login success popup
+        } catch (error) {
+          console.error(error);
+          setError(error.response.data.message || 'Login failed. Please try again.'); // Set a default error message
+          setShowPopup(true); // Show the error popup
         }
       } else {
         // Validate password length for sign-up only
@@ -63,27 +55,52 @@ const LoginForm = () => {
           setShowPasswordPopup(true); // Show the password popup
           return; // Exit the function
         }
-
-        // Call listUsers function to get all users
-        const response = await listUsers();
-        const users = response.data;
-        // Check if the entered email already exists
-        const existingUser = users.find((user) => user.email === email);
-        if (existingUser) {
-          setError('An account with this email already exists. Please log in.');
+  
+        // Check email validity using ApiService
+        try {
+          const isValid = await ApiService.checkEmail(email);
+          if (!isValid) {
+            setError('Email might be from a temporary domain. Please use a valid email address.');
+            setShowPopup(true); // Show the error popup
+            return; // Exit the function if email is invalid
+          } else if (isValid.unresolvable) {
+            // New check for unresolvable domain
+            setError('Email domain cannot be resolved. Please use a valid email address.');
+            setShowPopup(true); // Show the error popup
+            return; // Exit the function if domain is unresolvable
+          }
+        } catch (error) {
+          console.error('Error during email check:', error);
+          setError(error.message); // Use the custom error message from ApiService
           setShowPopup(true); // Show the error popup
-          setShowSignUpPopup(false); // Hide the sign up popup
-          setShowPasswordPopup(false); // Hide the password popup
-          setShowLoginSuccessPopup(false); // Hide login success popup
-        } else {
-          // Call the createUser function from the UserService
-          const response = await createUser({ email, password }); // Pass user data to createUser function
-          console.log('Sign up submitted:', response.data);
-          setLoggedIn(true);
-          setShowSignUpPopup(true); // Show the sign up popup
-          setShowPopup(false); // Hide the error popup
-          setShowPasswordPopup(false); // Hide the password popup
-          setShowLoginSuccessPopup(false); // Hide login success popup
+          return; // Exit the function if email check fails
+        }
+
+        try {
+          const userListResponse = await listUsers(); // Potential CORS issue here
+          const users = userListResponse.data;
+          const existingUser = users.find((user) => user.email === email);
+          if (existingUser) {
+            setError('An account with this email already exists. Please log in.');
+            setShowPopup(true); // Show the error popup
+            setShowSignUpPopup(false); // Hide the sign up popup
+            setShowPasswordPopup(false); // Hide the password popup
+            setShowLoginSuccessPopup(false); // Hide login success popup
+          } else {
+            // Call the createUser function from the UserService
+            const response = await createUser({ email, password }); // Pass user data to createUser function
+            console.log('Sign up submitted:', response.data);
+            setLoggedIn(true);
+            setShowSignUpPopup(true); // Show the sign up popup
+            setShowPopup(false); // Hide the error popup
+            setShowPasswordPopup(false); // Hide the password popup
+            setShowLoginSuccessPopup(false); // Hide login success popup
+          }
+        } catch (error) {
+          console.error('Error fetching user list:', error);
+          // Handle errors while fetching the user list (optional)
+          setError('An error occurred while checking users. Please try again later.');
+          setShowPopup(true); // Show the error popup
         }
       }
     } catch (error) {
@@ -93,6 +110,7 @@ const LoginForm = () => {
       setShowPasswordPopup(false); // Hide the password popup
       setShowLoginSuccessPopup(false); // Hide login success popup
     }
+  
 
   };
 
