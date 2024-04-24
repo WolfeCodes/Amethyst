@@ -13,21 +13,17 @@ import org.launchcode.Amethyst.services.CartItemService;
 import org.launchcode.Amethyst.services.CartService;
 import org.launchcode.Amethyst.services.DonutService;
 import org.launchcode.Amethyst.services.UserService;
-import org.launchcode.Amethyst.models.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CartServiceImpl implements CartService {
 
     @Autowired
     private CartRepository cartRepository;
-    @Autowired
-    private UserRepository userRepository;
     @Autowired
     private DonutService donutService;
     @Autowired

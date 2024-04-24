@@ -29,7 +29,6 @@ public class UserController {
     @Autowired
     private CartService cartService;
 
-    // Add a new user
     @PostMapping("/")
     public ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto){
         UserDto createdUser = userService.createUser(userDto);
@@ -45,16 +44,12 @@ public class UserController {
         UserDto userDto = userService.getUserById(id);
         return ResponseEntity.ok(userDto);
     }
-
-    //Get all users
     @GetMapping("/")
     public ResponseEntity<List<UserDto>> getAllUsers(@RequestParam(required = false) String username){
         List<UserDto> users = userService.getAllUsers(username);
         return ResponseEntity.ok(users);
     }
 
-
-    //Update user information
     @PutMapping("/{id}")
     public ResponseEntity<UserDto> updateUser(@PathVariable("id") int id, @RequestBody UserDto updatedUser) {
         UserDto userDto = userService.updateUser(id, updatedUser);
@@ -68,11 +63,9 @@ public class UserController {
         return new ResponseEntity<>(userInfo, HttpStatus.CREATED);
     }
 
-    //DELETE user
+    //DELETE Mapping to remove user
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable("id") int userId) {
-        // Delete the cart associated with the user
-        cartService.deleteCartByUserId(userId);
         userService.deleteUserById(userId);
         return ResponseEntity.ok("User Deleted");
     }

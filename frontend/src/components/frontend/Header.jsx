@@ -17,9 +17,9 @@ const Header = () => {
         SetUser(token);
         getUserInfo(token).then(response => {
             setUserRole(response.data.role);
-            console.log("Role", userRole);
+            console.log(userRole);
         })
-    })
+      })
 
 
     const logout = () => {
