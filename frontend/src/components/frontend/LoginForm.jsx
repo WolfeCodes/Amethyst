@@ -18,7 +18,6 @@ const LoginForm = () => {
   const [showLoginSuccessPopup, setShowLoginSuccessPopup] = useState(false); // State for login success popup
   const { user, SetUser } = useContext(LoginContext);
 
-  
   // Event handlers for input changes
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -57,51 +56,26 @@ const LoginForm = () => {
           return; // Exit the function
         }
   
-        event.preventDefault();
+        // Check email validity using ApiService
         try {
-          // ... existing code for login or signup logic ...
-      
-          // Check if email is undefined
-          if (!email) {
-            setError('Please enter your email address.');
-            setShowPopup(true);
-            return; // Exit the function if email is undefined
+          const isValid = await ApiService.checkEmail(email);
+          if (!isValid) {
+            setError('Email might be from a temporary domain. Please use a valid email address.');
+            setShowPopup(true); // Show the error popup
+            return; // Exit the function if email is invalid
+          } else if (isValid.unresolvable) {
+            // New check for unresolvable domain
+            setError('Email domain cannot be resolved. Please use a valid email address.');
+            setShowPopup(true); // Show the error popup
+            return; // Exit the function if domain is unresolvable
           }
-      
-          // Client-side validation (optional)
-          if (!isValidEmail) {
-            setError('Invalid email format.'); // Adjust error message as needed
-            setShowPopup(true);
-            return;
-          }
-      
-          try {
-            const isValid = await ApiService.checkEmail(email);
-            if (!isValid) {
-              setError('Email might be from a temporary domain. Please use a valid email address.');
-              setShowPopup(true);
-              // Set a flag indicating failed API call
-              const apiCallFailed = true;
-              return; // Exit the function
-            }
-          } catch (error) {
-            console.error('Error during email check:', error);
-            setError(error.message); // Use the custom error message from ApiService (if applicable)
-            setShowPopup(true);
-            // Set a flag indicating failed API call
-            const apiCallFailed = true;
-            return; // Exit the function
-          }
-          
-      
-          // Rest of your signup logic (e.g., create user on backend)
         } catch (error) {
-          // Handle other errors
-          console.error(error);
-          setError('An error occurred during signup. Please try again later.');
-          setShowPopup(true);
+          console.error('Error during email check:', error);
+          setError(error.message); // Use the custom error message from ApiService
+          setShowPopup(true); // Show the error popup
+          return; // Exit the function if email check fails
         }
-        // Check if the entered email already exists (handle potential CORS)
+
         try {
           const userListResponse = await listUsers(); // Potential CORS issue here
           const users = userListResponse.data;
@@ -114,20 +88,7 @@ const LoginForm = () => {
             setShowLoginSuccessPopup(false); // Hide login success popup
           } else {
             // Call the createUser function from the UserService
-            if (!apiCallFailed) {
-              try {
-                const response = await createUser({ email, password });
-                console.log('Sign up submitted:', response.data);
-                // ... (handle successful signup) ...
-              } catch (error) {
-                console.error('Error creating user:', error);
-                // ... (handle signup errors) ...
-              }
-            } else {
-              // API call failed, prevent account creation
-              setError('An error occurred while verifying your email. Please try again later.');
-              setShowPopup(true);
-            } // Pass user data to createUser function
+            const response = await createUser({ email, password }); // Pass user data to createUser function
             console.log('Sign up submitted:', response.data);
             setLoggedIn(true);
             setShowSignUpPopup(true); // Show the sign up popup

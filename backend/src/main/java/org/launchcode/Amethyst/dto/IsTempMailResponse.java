@@ -4,6 +4,7 @@ public class IsTempMailResponse {
 
     private String name;
     private boolean blocked;
+    private boolean unresolvable; // New field for unresolvable domain
 
     public String getName() {
         return name;
@@ -19,5 +20,13 @@ public class IsTempMailResponse {
 
     public void setBlocked(boolean blocked) {
         this.blocked = blocked;
+    }
+
+    public boolean isUnresolvable() { // Getter for unresolvable field
+        return unresolvable;
+    }
+
+    public void setUnresolvable(boolean unresolvable) { // Setter for unresolvable field (optional)
+        this.unresolvable = unresolvable;
     }
 }

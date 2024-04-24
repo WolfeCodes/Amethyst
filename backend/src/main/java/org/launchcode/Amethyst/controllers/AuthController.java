@@ -48,7 +48,7 @@ public class AuthController {
     }
 
     @GetMapping("/emailCheck")
-    public boolean emailCheck(@RequestParam String email) {
+    public IsTempMailResponse emailCheck(@RequestParam String email) {
         // Replace API_TOKEN with your actual API token
         String apiToken = "EAutuyZ3VUgUd16N6XNQitN1h3cF19Si";
         String apiUrl = "https://istempmail.com/api/check/" + apiToken + "/";
@@ -59,16 +59,17 @@ public class AuthController {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 
-        // Make GET request to the isTempMail API
+        // Check if the email is valid and not from a temporary domain
         IsTempMailResponse response = restTemplate.getForObject(fullUrl, IsTempMailResponse.class);
 
-        // Check if the email is valid and not from a temporary domain
-        if (response != null && !response.isBlocked()) {
-            return true; // Email is valid and not from a temporary domain
-        } else {
-            return false; // Email is from a temporary domain or blocked
+        // If IsTempMail API considers unresolvable as blocked, use the existing logic:
+        if (response != null && response.isBlocked()) {
+            // Email is blocked (or potentially unresolvable), handle it
         }
+
+        return response;
     }
+
 
     @GetMapping("/test")
     public String testingSecurity(@AuthenticationPrincipal UserPrincipal userPrincipal){
