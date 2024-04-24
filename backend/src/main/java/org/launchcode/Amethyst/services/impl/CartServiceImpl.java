@@ -153,6 +153,14 @@ public class CartServiceImpl implements CartService {
         return cartId;
     }
 
+    @Override
+    public void deleteCartByUserId(int userId) {
+        int cartId = getCartIdByUserId(userId);
+        if (cartId != 0) {
+            cartRepository.deleteById(cartId);
+        }
+    }
+
     //toDto converts a Cart entity to a CartDto
     CartDto toDto(Cart cart) {
         List<Integer> cartItemIds = cart.getCartItems().stream().map(CartItem::getId).toList();
