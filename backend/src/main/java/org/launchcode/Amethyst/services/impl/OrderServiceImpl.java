@@ -32,6 +32,7 @@ public class OrderServiceImpl implements OrderService {
     private DonutService donutService;
 
 
+    //takes in a cartDto and converts the cartItems to an order
     @Override
     public OrderDto createOrder(CartDto cartDto) {
         Orders orders = new Orders();
