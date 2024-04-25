@@ -10,12 +10,14 @@ function BackHeader() {
 
   console.log(localStorage.getItem("token"));
 
+  // Effect to set user state when component mounts
   useEffect(() => {
     const token = localStorage.getItem("token");
     SetUser(token);
   })
   console.log(user);
 
+  // Function to handle logout
   const logout = () => {
     console.log('click click');
     localStorage.removeItem("token");

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { createUser, getSingleUser, updateUser } from '../../services/UserService';
 
 const UsersModal = ({ closeModal, id }) => {
+  // State variables for managing user input and errors
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -13,8 +14,10 @@ const UsersModal = ({ closeModal, id }) => {
     email: ''
   })
 
+  // React Router hook for navigation
   const navigator = useNavigate();
 
+  // Effect to fetch user data when id changes
   useEffect(() => {
     if (id != null) {
       getSingleUser(id).then((response) => {
@@ -28,12 +31,15 @@ const UsersModal = ({ closeModal, id }) => {
     }
   }, [id])
 
+
+  // Function to handle form submission
   function saveOrUpdateUser(e) {
     e.preventDefault();
     if (validateForm()) {
       const user = { username, password, email, role };
       console.log(user);
       if (id != null) {
+        // Update user if id exists
         updateUser(id, user).then((response) => {
           closeModal(false); // Close the modal after creating the donuts
           navigator('/backstage/UserManagement');
@@ -43,6 +49,7 @@ const UsersModal = ({ closeModal, id }) => {
           console.error(error);
         })
       } else {
+        // Create new user if id is null
         createUser(user).then((response) => {
           closeModal(false); // Close the modal after creating the donuts
           navigator('/backstage/UserManagement');
@@ -54,6 +61,7 @@ const UsersModal = ({ closeModal, id }) => {
     }
   }
 
+  // Function to determine the page title based on id
   function pageTitle() {
     if (id != null) {
       return <h1 className="modal-title fs-5" >Update User</h1>
@@ -63,6 +71,7 @@ const UsersModal = ({ closeModal, id }) => {
     }
   }
 
+  // Function to validate form input
   function validateForm() {
     let valid = true;
     const errorsCopy = { ...errors };
