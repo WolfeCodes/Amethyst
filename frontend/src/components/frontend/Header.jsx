@@ -8,7 +8,7 @@ import { getUserInfo } from '../../services/UserService';
 
 const Header = () => {
     const { user, SetUser } = useContext(LoginContext);
-    const { cartQuantity } = useCart();
+    const { cartQuantity, clearCartQuantity } = useCart();
     const [loginUser, setLoginUser] = useState();
     const [userRole, setUserRole] = useState();
 
@@ -26,6 +26,7 @@ const Header = () => {
         console.log('click click');
         localStorage.removeItem("token");
         SetUser(null);
+        clearCartQuantity();
         console.log(user);
     }
 

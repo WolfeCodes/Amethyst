@@ -17,7 +17,7 @@ const CartComponent = () => {
   const [donutData, setDonutData] = useState([])
   const [cartId, setCartId] = useState(null);
   const { user, SetUser } = useContext(LoginContext);
-  const { cartQuantity, updateCartQuantity } = useCart();
+  const { cartQuantity, updateCartQuantity, clearCartQuantity } = useCart();
 
 
   //useEffect to set user state if a token is stored
@@ -144,6 +144,7 @@ const CartComponent = () => {
     checkoutCart(cartId);
     setCartItems([]);
     setTotal([]);
+    clearCartQuantity();
   }
 
   //Delete selected item donut
@@ -191,7 +192,7 @@ const CartComponent = () => {
                     <div className='donut-content'>
                       <span className='donut-name'>{donutData[index].data.name}</span>
                       <span className='donut-price'>${donutData[index].data.price}</span>
-                      <p>{cartItem.id}</p>
+                      {/* <p>{cartItem.id}</p> */}
                     </div>
                     <div className='quantity-container'>
                       <button className='quantity-bt' onClick={() => decreaseQuantity(index)}>-</button>

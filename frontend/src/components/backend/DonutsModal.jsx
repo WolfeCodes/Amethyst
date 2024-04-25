@@ -4,6 +4,7 @@ import { createDonuts, getSingleDonut, updateDonut } from '../../services/DonutS
 import { useNavigate } from 'react-router-dom';
 
 const DonutsModal = ({ closeModal, id }) => {
+  // State variables for managing form input and errors
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [imageUrl, setImageUrl] = useState('');
@@ -17,8 +18,10 @@ const DonutsModal = ({ closeModal, id }) => {
     description: ''
   })
 
+  // React Router hook for navigation
   const navigator = useNavigate();
 
+  // Effect to fetch data when id changes
   useEffect(() => {
     if (id != null) {
       getSingleDonut(id).then((response) => {
@@ -34,12 +37,14 @@ const DonutsModal = ({ closeModal, id }) => {
     }
   }, [id])
 
+  // Function to handle form submission
   function saveOrUpdateDonut(e) {
     e.preventDefault();
     if (validateForm()) {
       const donut = { name, price, imageUrl, description, rating, createTime };
       console.log(donut);
       if (id != null) {
+        // Update donut if id exists
         updateDonut(id, donut).then((response) => {
           closeModal(false); // Close the modal after creating the donuts
           navigator('/backstage/backdonuts');
@@ -48,6 +53,7 @@ const DonutsModal = ({ closeModal, id }) => {
           console.error(error);
         })
       } else {
+        // Create new donut if id is null
         createDonuts(donut).then((response) => {
           closeModal(false); // Close the modal after creating the donuts
           navigator('/backstage/backdonuts');
@@ -59,6 +65,7 @@ const DonutsModal = ({ closeModal, id }) => {
     }
   }
 
+  // Function to determine the page title based on id
   function pageTitle() {
     if (id != null) {
       return <h1 className="modal-title fs-5" >Update Donut</h1>
@@ -68,6 +75,7 @@ const DonutsModal = ({ closeModal, id }) => {
     }
   }
 
+  // Function to validate form input
   function validateForm() {
     let valid = true;
     const errorsCopy = { ...errors };

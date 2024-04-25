@@ -52,9 +52,15 @@ export const CartProvider = ({ children }) => {
     setCartQuantity(quantity);
   };
 
+
+  // Function to clear cart quantity
+  const clearCartQuantity = () => {
+    setCartQuantity(0);
+  };
+
   // Provide cart state and functionality to child components
   return (
-    <CartContext.Provider value={{ cartQuantity, updateCartQuantity }}>
+    <CartContext.Provider value={{ cartQuantity, updateCartQuantity, clearCartQuantity }}>
       {children}
     </CartContext.Provider>
   );
