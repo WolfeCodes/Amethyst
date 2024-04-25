@@ -43,9 +43,11 @@ public class UserServiceImpl implements UserService {
         // Set default password if none provided
         if (user.getPassword() == null || user.getPassword().isEmpty()) {
             user.setPassword("password"); // Set default password
-        }else{
+        }
+        else{
             user.setPassword(user.getPassword());
         }
+
         User savedUser = userRepository.save(user);
         return UserMapper.mapToUserDto(savedUser);
     }
