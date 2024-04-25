@@ -45,8 +45,14 @@ const LoginForm = () => {
           setShowLoginSuccessPopup(true); // Show login success popup
         } catch (error) {
           console.error(error);
-          setError(error.response.data.message || 'Login failed. Please try again.'); // Set a default error message
-          setShowPopup(true); // Show the error popup
+          // Handle login errors with specific messages
+          //401: Unauthorized (the request requires user authentication)
+          if (error.response.status === 401) {
+            setError('Invalid email or password. Please try again.');
+          } else {
+            setError('Invalid email or password. Please try again.');
+          }
+          setShowPopup(true);
         }
       } else {
         // Validate password length for sign-up only
@@ -58,16 +64,20 @@ const LoginForm = () => {
   
         // Check email validity using ApiService
         try {
+          // Check email validity using ApiService
           const isValid = await ApiService.checkEmail(email);
-          if (!isValid) {
-            setError('Email might be from a temporary domain. Please use a valid email address.');
-            setShowPopup(true); // Show the error popup
-            return; // Exit the function if email is invalid
-          } else if (isValid.unresolvable) {
-            // New check for unresolvable domain
-            setError('Email domain cannot be resolved. Please use a valid email address.');
-            setShowPopup(true); // Show the error popup
-            return; // Exit the function if domain is unresolvable
+    
+          // Handle blocked or unresolvable domains
+          if (isValid.blocked || isValid.unresolvable) {
+            let errorMessage;
+            if (isValid.blocked) {
+              errorMessage = 'Email is from a blocked domain. Please use a valid email address.';
+            } else {
+              errorMessage = 'Email domain cannot be resolved. Please use a valid email address.';
+            }
+            setError(errorMessage);
+            setShowPopup(true);
+            return;
           }
         } catch (error) {
           console.error('Error during email check:', error);
