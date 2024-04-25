@@ -141,9 +141,12 @@ const CartComponent = () => {
 
   const checkout = () => {
     console.log('got clicked');
-    checkoutCart(cartId);
-    setCartItems([]);
-    setTotal([]);
+    checkoutCart(cartId).then(() => {
+      setCartItems([]);
+      setTotal([]);
+      updateCartQuantity(0);
+    });
+    
   }
 
   //Delete selected item donut
