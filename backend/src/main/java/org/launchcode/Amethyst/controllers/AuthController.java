@@ -66,9 +66,10 @@ public class AuthController {
         // Check if the email is valid and not from a temporary domain
         IsTempMailResponse response = restTemplate.getForObject(fullUrl, IsTempMailResponse.class);
 
-        // If IsTempMail API considers unresolvable as blocked, use the existing logic:
-        if (response != null && response.isBlocked()) {
-            // Email is blocked (or potentially unresolvable), handle it
+        // Check if the email is blocked or unresolvable
+        if (response != null && (response.isBlocked() || response.isUnresolvable())) {
+            // Email is blocked or unresolvable, handle it
+            return response; // You can return a custom response indicating the issue
         }
 
         return response;
