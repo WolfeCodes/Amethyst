@@ -55,7 +55,6 @@ public class AuthController {
     public IsTempMailResponse emailCheck(@RequestParam String email) {
         // Replace API_TOKEN with your actual API token
         String apiToken = apiProperties.getApiKey();
-
         String apiUrl = "https://istempmail.com/api/check/" + apiToken + "/";
         String fullUrl = apiUrl + email; // Construct the full URL with email address
         RestTemplate restTemplate = new RestTemplate();
