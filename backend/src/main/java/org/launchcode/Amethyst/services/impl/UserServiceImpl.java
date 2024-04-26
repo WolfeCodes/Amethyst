@@ -24,30 +24,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto createUser(UserDto userDto) {
         User user = UserMapper.mapToUser(userDto);
-        // Set email as username if no username provided
-        if (user.getUsername() == null || user.getUsername().isEmpty()) {
-            user.setUsername(user.getEmail());
-        }else{
-            user.setUsername(user.getUsername());
-        }
-
-        user.setEmail(user.getEmail());
-
-        // Set user as role if no role provided
-        if (user.getRole() == null || user.getRole().isEmpty()) {
-            user.setRole("user");
-        }else{
-            user.setRole(user.getRole());
-        }
-
-        // Set default password if none provided
-        if (user.getPassword() == null || user.getPassword().isEmpty()) {
-            user.setPassword("password"); // Set default password
-        }
-        else{
-            user.setPassword(user.getPassword());
-        }
-
+        user.setUsername(user.getEmail());
+        user.setRole("User");
         User savedUser = userRepository.save(user);
         return UserMapper.mapToUserDto(savedUser);
     }
