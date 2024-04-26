@@ -46,7 +46,7 @@ To run the project locally, follow these steps:
    INSERT INTO users (username, email, password, role) VALUES ('admin', 'admin@example.com' 'adminhashpassword', 'ADMIN');
    ```
 
-   4. Replace `'adminhashpassword'` with the hashed password for the admin user. You can generate a hashed password using a tool like [bcrypt-generator.com](https://bcrypt-generator.com/).
+   Replace `'adminhashpassword'` with the hashed password for the admin user. You can generate a hashed password using a tool like [bcrypt-generator.com](https://bcrypt-generator.com/).
 
 4. Once the default admin user is added, you can log in to the backstage management system using the credentials.
 
