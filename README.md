@@ -81,6 +81,3 @@ Our future plans for the project include:
 
 For questions, feedback, or support, please contact us at [gongymsilvia@gmail.com]().
 
-
-    The frontend and backend folders are designed to work together to create a cohesive web application. Changes to the frontend or backend may require corresponding changes in the other to maintain compatibility and functionality.
-
