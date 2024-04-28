@@ -23,6 +23,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto createUser(UserDto userDto) {
+        if(userDto.getPassword()==null||userDto.getPassword().isEmpty()){
+            userDto.setPassword("password");
+        }
+
         User user = UserMapper.mapToUser(userDto);
         // Set email as username if no username provided
         if (user.getUsername() == null || user.getUsername().isEmpty()) {
@@ -31,23 +35,14 @@ public class UserServiceImpl implements UserService {
             user.setUsername(user.getUsername());
         }
 
-        user.setEmail(user.getEmail());
+//        user.setEmail(user.getEmail());
 
         // Set user as role if no role provided
         if (user.getRole() == null || user.getRole().isEmpty()) {
-            user.setRole("user");
+            user.setRole("User");
         }else{
             user.setRole(user.getRole());
         }
-
-        // Set default password if none provided
-        if (user.getPassword() == null || user.getPassword().isEmpty()) {
-            user.setPassword("password"); // Set default password
-        }
-        else{
-            user.setPassword(user.getPassword());
-        }
-
         User savedUser = userRepository.save(user);
         return UserMapper.mapToUserDto(savedUser);
     }
