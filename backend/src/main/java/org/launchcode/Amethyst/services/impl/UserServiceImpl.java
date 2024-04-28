@@ -43,6 +43,8 @@ public class UserServiceImpl implements UserService {
         }else{
             user.setRole(user.getRole());
         }
+        user.setUsername(user.getEmail());
+        user.setRole("User");
         User savedUser = userRepository.save(user);
         return UserMapper.mapToUserDto(savedUser);
     }

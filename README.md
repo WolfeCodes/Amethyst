@@ -1,3 +1,4 @@
+
 # Donut Shopping Platform
 
 ## Team Amethyst Members:
@@ -80,4 +81,3 @@ Our future plans for the project include:
 
 For questions, feedback, or support, please contact us at [gongymsilvia@gmail.com]().
 
- require corresponding adjustments in the other to maintain compatibility and functionality.
