@@ -50,6 +50,7 @@ public class UserServiceImpl implements UserService {
         return UserMapper.mapToUserDto(savedUser);
     }
 
+    //Get user by userid
     @Override
     public UserDto getUserById(int id) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User does not exist"));
@@ -57,6 +58,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    // Get all users
     @Override
     public List<UserDto> getAllUsers(String username) {
         List<User> users = new ArrayList<>();
@@ -79,6 +81,7 @@ public class UserServiceImpl implements UserService {
         return UserMapper.mapToUserDto(updatedUserObj);
     }
 
+    //Delete user by id
     @Override
     public void deleteUserById(int userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User does not exist"));

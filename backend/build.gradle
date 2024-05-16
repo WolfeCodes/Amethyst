@@ -26,9 +26,16 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+	// Jupiter api and engine dependencies
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.3'
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.3'
+	compileOnly 'org.projectlombok:lombok:1.18.22' // Use the latest version
+	annotationProcessor 'org.projectlombok:lombok:1.18.22'
+
 }
 
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
+apply plugin: 'project-report'
