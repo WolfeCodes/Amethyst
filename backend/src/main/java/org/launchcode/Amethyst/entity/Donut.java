@@ -1,17 +1,17 @@
 package org.launchcode.Amethyst.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
+
 @Entity
 public class Donut {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private double price;
@@ -37,6 +37,10 @@ public class Donut {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -112,4 +116,5 @@ public class Donut {
     public int hashCode() {
         return Objects.hash(getId());
     }
+
 }
